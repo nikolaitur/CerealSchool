@@ -5,6 +5,10 @@
   {% assign is_free_gift_template = true %}
 {% endif %}
 
+{% if template.suffix contains 'alt1' %}
+  {% assign displayPricesInBag = true %}
+{% endif %}
+
 <div class="product-container container">
   <div class="product-container__side product-container__side--left">
     <div class="product__part product__part--gallery">

@@ -7,16 +7,35 @@
     </div>
     <button class="btn btn--block" disabled>Sold Out</button>
   {% else %}
-    <div class="product-option-row product-option-row--bundle">
+    <div class="product-option-row product-option-row--bundle{% if displayPricesInBag %} product-option-row--alternate{% endif %}">
       <div class="option-name">{{ section.settings.bundle_label }}</div>
       <div class="product-options product-options--bundles">
+
+        <div style="display: none">
+          {% for variant in product.variants %}
+            {% assign once_price =  variant.price %}
+            {% assign subs_price =  variant.metafields.subscriptions.discount_variant_price | replace: ".", "" %}
+            "{{ variant.id }}"
+            "once":	"<span>Only</span> <span>{{ once_price | money }}</span> per bag",
+            "subs":	"<span>Only</span> <span>{{ subs_price | money }}</span> per bag"
+          {% endfor %}
+        </div>
+        
         {% for block in section.blocks %}
           {% if block.type == 'bundle' %}
             <div class="product-option product-option--bundle{% if block.settings.default == true %} product-option--selected{% endif %}{% if block.settings.sold_out %} product-option--sold-out{% endif %}">
               <div class="product-option__wrapper">
                 <input type="radio" name="single-option-select-bundle" id="swatch-1-{{ block.settings.value }}" value="{{ block.settings.value }}" class="single-option-select visually-hidden" data-type="bundle" data-flavor-limit="{{ block.settings.flavor_limit }}"{% if block.settings.default == true %} checked{% endif %}{% if block.settings.sold_out %} disabled{% endif %} />
                 <label for="swatch-1-{{ block.settings.value }}" class="product-option__label">
-                  {{ block.settings.title }}
+                  {% if displayPricesInBag %}
+                    <div class="bundleMeta">
+                      <div class="bundleTitle">{{ block.settings.title }}</div>
+                      <div class="bundlePrice"><span class="per-bag--once"></span></div>
+                      <div class="bundlePrice"><span class="per-bag--subs"></span></div>
+                    </div>
+                  {% else %}
+                    {{ block.settings.title }}
+                  {% endif %}
                   <span class="product-option__label-icon"></span>
                 </label>
               </div>

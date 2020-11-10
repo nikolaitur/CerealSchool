@@ -1,0 +1,65 @@
+{% assign current_variant = product.selected_or_first_available_variant %}
+
+<main class="content content--no-sidebar" role="main">
+  {% assign product_handle = product.handle | downcase %}
+  {% if product_handle contains 'cereal' %}
+    {% section 'product-upper-cereal' %}
+    {% section 'product-icons-highlights-cereal' %}
+    {% section 'product-nutritional-cereal' %}
+    {% section 'product-faq-cereal' %}
+    {% section 'product-icons-seen-cereal' %}
+    {% section 'product-social-cereal' %}
+    {% include 'product-reviews' %}
+  {% endif %}
+
+  {% if product_handle contains 'puffs' %}
+    {% section 'product-upper-puffs' %}
+    {% section 'product-icons-highlights-puffs' %}
+    {% section 'product-nutritional-puffs' %}
+    {% section 'product-faq-puffs' %}
+    {% section 'product-icons-seen-puffs' %}
+    {% section 'product-social-puffs' %}
+    {% include 'product-reviews' %}
+  {% endif %}
+
+  <style>
+    .rc_block .per-bag {
+      display: none !important;
+    }
+  </style>
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org/",
+      "@type": "Product",
+      "brand": "{{ product.vendor }}",
+      "name": "{{ product.title }}",
+      "mainEntityOfPage": "{{ canonical_url }}",
+      "url": "{{ canonical_url }}",
+      "image": "https:{{ product.featured_image.src | img_url:'2000x' }}",
+      "description": "{{ product.description | escape | strip_html | strip_newlines }}",
+      "offers": [
+        {% for variant in product.variants %}
+        {
+          "@type": "Offer",
+          "priceCurrency": "{{ shop.currency }}",
+          "price": "{{ variant.price | money_without_currency }}",{% if variant.available %}
+          "availability": "http://schema.org/InStock",{% else %}
+          "availability": "http://schema.org/OutOfStock",{% endif %}
+          "sku": "{{ variant.sku }}",
+          "seller": {
+            "@type": "Organization",
+            "name": "{{ shop.name }}"
+          }
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ]
+    }
+  </script>
+
+  {% unless product == empty %}
+    <script type="application/json" id="product__json">{{ product | json }}</script>
+    <script type="application/json" id="current_variant__json">{{ product.selected_variant | json }}</script>
+  {% endunless %}
+</main>
+{% include 'klaviyo-viewed-product' %}
