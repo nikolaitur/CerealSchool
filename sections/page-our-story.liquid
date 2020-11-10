@@ -1,0 +1,293 @@
+{% for block in section.blocks %}
+  {% case block.type %}
+    {% when 'intro' %}
+      <section class="section section--intro intro intro--{{ block.id }}" {{ block.shopify_attribtues }}>
+        <div class="container intro__container">
+          <div class="intro__image">
+            <img class="lazy" src="{{ block.settings.image | img_url: '1600x' }}" alt="{{ block.settings.title }}" />
+          </div>
+          <div class="intro__content">
+            <h1 class="visually-hidden">{{ page.title }}</h1>
+            <h4 class="center">{{ block.settings.title }}</h4>
+            <img class="lazy" data-src="{{ block.settings.right_image | img_url: '1600x' }}" alt="{% if block.settings.right_image.alt != blank %}{{ block.settings.right_image.alt }}{% else %}{{ block.settings.title }}{% endif %}" />
+            <img class="lazy intro__accent-image" data-src="{{ block.settings.accent_image | img_url: '240x' }}" alt="{{ block.settings.right_image.alt }}" />
+          </div>
+        </div>
+      </section>
+    {% when 'text-content' %}
+      <section class="section section--text-content text-content text-content--{{ block.id }}" {{ block.shopify_attribtues }}>
+        <style>.text-content--{{ block.id }} { background-color: {{ block.settings.bg_color }};}</style>
+        <div class="text-content__title">
+          <h2 class="h1">{{ block.settings.title | replace: '|', '<br>' }}</h2>
+        </div>
+        <div class="text-content__text">
+          {{ block.settings.content }}
+          <p class="text-content__text--footer">{{ block.settings.footer_text | replace: '[', '<span>' | replace: ']', '</span>' | replace: '|', '<br>' }}<p>
+        </div>
+        <img class="text-content__accent-left lazy" data-src="{{ block.settings.left_image | img_url: '400x' }}" alt="{{ block.settings.left_image.alt }}" />
+        <img class="text-content__accent-right lazy" data-src="{{ block.settings.right_image | img_url: '400x' }}" alt="{{ block.settings.right_image.alt }}" />
+      </section>
+    {% when 'image-text' %}
+      <section class="section section--image-text image-text image-text--{{ block.id }}" {{ block.shopify_attribtues }}>
+        <style>.image-text--{{ block.id }} { background-color: {{ block.settings.bg_color }};}</style>
+        <div class="container image-text__container">
+          <div class="image-text__image">
+            <img class="lazy image-text__image" data-src="{{ block.settings.image | img_url: '1200x' }}" alt="{% if block.settings.image.alt %}{{ block.settings.image.alt }}{% else %}{{ block.settings.title | strip_html }}{% endif %}" />
+          </div>
+          <div class="image-text__text">
+            {{ block.settings.title }}
+            <p class="image-text__text--footer">{{ block.settings.footer_text | replace: '[', '<span>' | replace: ']', '</span>'  }}</p>
+          </div>
+        </div>
+      </section>
+    {% when 'paper-text' %}
+      <section class="section section--paper-text paper-text paper-text--{{ block.id }}" {{ block.shopify_attribtues }}>
+        <style>
+          .paper-text--{{ block.id }} {
+            background-color: {{ block.settings.bg_color }};
+            background-image: url("{{ block.settings.image | img_url: '3000x' }}");
+          }
+        </style>
+        <div class="paper-text__container">{{ block.settings.title }}</div>
+
+        <div class="paper-text__items">
+          <div class="paper-text__item">{{ block.settings.line_1 }}</div>
+          <div class="paper-text__item">{{ block.settings.line_2 }}</div>
+          <div class="paper-text__item">{{ block.settings.line_3 }}</div>
+        </div>
+
+        <img class="lazy paper-text__accent-image-top" data-src="{{ block.settings.accent_image_1 | img_url: '800x' }}" alt="{{ block.settings.accent_image_1.alt }}" />
+        <img class="lazy paper-text__accent-image-bottom" data-src="{{ block.settings.accent_image_2 | img_url: '160x' }}" alt="{{ block.settings.accent_image_2.alt }}" />
+      </section>
+    {% when 'call-to-action' %}
+      <section class="section section--call-to-action call-to-action call-to-action--{{ block.id }}" {{ block.shopify_attribtues }}>
+        <style>.call-to-action--{{ block.id }} { background-color: {{ block.settings.bg_color }};}</style>
+        <div class="call-to-action__text">
+          {{ block.settings.title }}
+          {% if block.settings.signatures %}
+            <img class="lazy call-to-action__text--image" data-src="{{ block.settings.signatures | img_url: '640x' }}" alt="{{ block.settings.signatures.alt }}" />
+          {% endif %}
+        </div>
+        <img class="lazy call-to-action__image-left" data-src="{{ block.settings.image | img_url: '1600x' }}" alt="{{ block.settings.image.alt }}" />
+        <img class="lazy call-to-action__image-right" data-src="{{ block.settings.image_2 | img_url: '1600x' }}" alt="{{ block.settings.image_2.alt }}" />
+
+        <img class="lazy call-to-action__image-mobile" data-src="{{ block.settings.mobile_image | img_url: '800x' }}" alt="{{ block.settings.mobile_image.alt }}" />
+
+        <div class="call-to-action__buttons">
+          {% if block.settings.button_url_1 %}
+            <a href="{{ block.settings.button_url_1 }}" class="btn btn--block">{{ block.settings.button_text_1 }}</a>
+          {% endif %}
+          {% if block.settings.button_url_2 %}
+            <a href="{{ block.settings.button_url_2 }}" class="btn btn--block">{{ block.settings.button_text_2 }}</a>
+          {% endif %}
+        </div>
+      </section>
+  {% endcase %}
+{% endfor %}
+
+{% schema %}
+{
+  "name": "Our Story",
+  "blocks": [
+    {
+      "name":"Intro",
+      "type":"intro",
+      "settings":[
+        {
+          "type":"image_picker",
+          "id":"image",
+          "label":"Left Image"
+        },
+        {
+          "type":"image_picker",
+          "id":"right_image",
+          "label":"Right Image"
+        },
+        {
+          "type":"image_picker",
+          "id":"accent_image",
+          "label":"Accent Image"
+        },
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Text"
+        }
+      ]
+    },
+    {
+      "name":"Text Content",
+      "type":"text-content",
+      "settings":[
+        {
+          "type":"color",
+          "id":"bg_color",
+          "label":"Background Color",
+          "default":"#ffedd2"
+        },
+        {
+          "type":"image_picker",
+          "id":"left_image",
+          "label":"Left Image"
+        },
+        {
+          "type":"image_picker",
+          "id":"right_image",
+          "label":"Right Image"
+        },
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Heading",
+          "info":"Use pipe character ( | ) to insert desktop line break"
+        },
+        {
+          "type":"richtext",
+          "id":"content",
+          "label":"Content"
+        },
+        {
+          "type":"text",
+          "id":"footer_text",
+          "label":"Footer Text",
+          "info":"Wrap in brackets [ ] to underline."
+        }
+      ]
+    },
+    {
+      "name":"Image & Text",
+      "type":"image-text",
+      "settings":[
+        {
+          "type":"color",
+          "id":"bg_color",
+          "label":"Background Color",
+          "default":"#79dad3"
+        },
+        {
+          "type":"image_picker",
+          "id":"image",
+          "label":"Image"
+        },
+        {
+          "type":"richtext",
+          "id":"title",
+          "label":"Content"
+        },
+        {
+          "type":"text",
+          "id":"footer_text",
+          "label":"Footer Text",
+          "info":"Wrap in brackets [ ] to underline."
+        }
+      ]
+    },
+    {
+      "name":"Paper Text",
+      "type":"paper-text",
+      "settings":[
+        {
+          "type":"color",
+          "id":"bg_color",
+          "label":"Background Color",
+          "default":"#f8cccd"
+        },
+        {
+          "type":"image_picker",
+          "id":"image",
+          "label":"Image"
+        },
+        {
+          "type":"image_picker",
+          "id":"accent_image_1",
+          "label":"Accent Image #1"
+        },
+        {
+          "type":"image_picker",
+          "id":"accent_image_2",
+          "label":"Accent Image #2"
+        },
+        {
+          "type":"richtext",
+          "id":"title",
+          "label":"Content"
+        },
+        {
+          "type":"richtext",
+          "id":"line_1",
+          "label":"Line #1"
+        },
+        {
+          "type":"richtext",
+          "id":"line_2",
+          "label":"Line #2"
+        },
+        {
+          "type":"richtext",
+          "id":"line_3",
+          "label":"Line #3"
+        }
+      ]
+    },
+    {
+      "name":"Call to Action",
+      "type":"call-to-action",
+      "settings":[
+        {
+          "type":"color",
+          "id":"bg_color",
+          "label":"Background Color",
+          "default":"#ffedd2"
+        },
+        {
+          "type":"image_picker",
+          "id":"image",
+          "label":"Image #1"
+        },
+        {
+          "type":"image_picker",
+          "id":"image_2",
+          "label":"Image #2"
+        },
+        {
+          "type":"image_picker",
+          "id":"mobile_image",
+          "label":"Mobile Image"
+        },
+        {
+          "type":"richtext",
+          "id":"title",
+          "label":"Content"
+        },
+        {
+          "type":"image_picker",
+          "id":"signatures",
+          "label":"Signatures"
+        },
+        {
+          "type":"url",
+          "id":"button_url_1",
+          "label":"Button #1 URL",
+          "info":"Leave blank to hide"
+        },
+        {
+          "type":"text",
+          "id":"button_text_1",
+          "label":"Button #1 Text"
+        },
+        {
+          "type":"url",
+          "id":"button_url_2",
+          "label":"Button #2 URL",
+          "info":"Leave blank to hide"
+        },
+        {
+          "type":"text",
+          "id":"button_text_2",
+          "label":"Button #2 Text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,70 @@
+{% if section.settings.show_article_footer %}
+<div class="container page">
+    <div class="page-footer">
+    {% for block in section.blocks %}
+    {% if forloop.first == true %}
+        <div class="article__footer">
+        <div class="article__footer-image">
+            <img class="lazy" data-src="{{ block.settings.image | img_url: '800x' }}" alt="{% if block.settings.image.alt %}{{block.settings.image.alt}}{% else %}{{block.settings.title}}{% endif %}"/>
+        </div>
+        <div class="article__footer-text">
+            <h2 class="h3">{{ block.settings.title }}</h2>
+            {{ block.settings.content }}
+        </div>
+        <div class="article__footer-action center">
+            <a class="btn" href="{{ block.settings.button_url }}">{{ block.settings.button_text }}</a>
+        </div>
+        </div>
+    {% endif %}
+    {% endfor %}
+    </div>
+</div>
+
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Article Footer",
+    "settings": [
+        {
+            "type":"checkbox",
+            "label":"Show Article Footer?",
+            "id":"show_article_footer",
+            "default":false
+        }
+    ],
+    "blocks":[
+      {
+        "type":"article_footer",
+        "name":"Article Footer Item",
+        "settings":[
+          {
+            "type":"textarea",
+            "id":"title",
+            "label":"Title"
+          },
+          {
+            "type":"image_picker",
+            "id":"image",
+            "label":"Image"
+          },
+          {
+            "type":"richtext",
+            "id":"content",
+            "label":"Content"
+          },
+          {
+            "type":"url",
+            "id":"button_url",
+            "label":"Button URL"
+          },
+          {
+            "type":"text",
+            "id":"button_text",
+            "label":"Button Text"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

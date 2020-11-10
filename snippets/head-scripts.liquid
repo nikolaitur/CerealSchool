@@ -1,0 +1,87 @@
+<script>
+  window.lazySizesConfig = window.lazySizesConfig || {};
+  window.lazySizesConfig.lazyClass = 'lazy';
+</script>
+
+<script src="{{ 'theme-libs.js' | asset_url }}" defer></script>
+<script src="{{ 'theme-custom.min.js' | asset_url }}" defer></script>
+<script src="{{ 'swiper.min.js' | asset_url }}" defer></script>
+
+{% if template contains 'product' %}
+  <script src="{{ 'bundle.product.min.js' | asset_url }}" defer></script>
+{% endif %}
+
+{% if template contains 'collection' %}
+  <script src="{{ 'bundle.product.min.js' | asset_url }}" defer></script>
+  <script src="{{ 'bundle.collection.min.js' | asset_url }}" defer></script>
+{% endif %}
+
+{% if template contains 'cart' %}
+  <script src="{{ 'bundle.cart.min.js' | asset_url }}" defer></script>
+{% endif %}
+
+<script src="{{ 'api.jquery.js' | shopify_asset_url }}" defer></script>
+
+{% if template contains 'gift_card' %}
+  <script src="{{ 'modernizr.gift-card.js' | shopify_asset_url }}" defer></script>
+  <script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}" defer></script>
+  <script type='text/javascript'>
+    function selectText(element) {
+      var doc = document;
+      var text = doc.getElementById(element);
+
+      if (doc.body.createTextRange) { // ms
+        var range = doc.body.createTextRange();
+        range.moveToElementText(text);
+        range.select();
+      } else if (window.getSelection) { // moz, opera, webkit
+        var selection = window.getSelection();
+        var range = doc.createRange();
+        range.selectNodeContents(text);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+    }
+  </script>
+{% endif %}
+
+{% if template contains 'customers' %}
+  <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
+  <script src="{{ 'customer_area.js' | shopify_asset_url }}" defer></script>
+{% endif %}
+
+
+
+{% comment %}
+Scripts from old theme
+{% endcomment %}
+
+<script type="text/javascript">
+  !function(e){
+    if(!window.pintrk){window.pintrk=function()
+    {window.pintrk.queue.push(Array.prototype.slice.call(arguments))};var
+    n=window.pintrk;n.queue=[],n.version="3.0";var
+    t=document.createElement("script");t.async=!0,t.src=e;var
+    r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r)}
+  }("https://s.pinimg.com/ct/core.js");
+
+  pintrk('load','2613290288333', { em: '{{ customer.email }}', });
+  pintrk('page');
+</script>
+<noscript><img height="1" width="1" style="display:none;" alt="" src="https://ct.pinterest.com/v3/?tid=2613290288333&noscript=1" /></noscript>
+
+<script>var shareasaleShopifySSCID=shareasaleShopifyGetParameterByName("sscid");function shareasaleShopifySetCookie(e,a,o,i,r){if(e&&a){var s,S=i?"; path="+i:"",h=r?"; domain="+r:"",t="";o&&((s=new Date).setTime(s.getTime()+o),t="; expires="+s.toUTCString()),document.cookie=e+"="+a+t+S+h}}function shareasaleShopifyGetParameterByName(e,a){a||(a=window.location.href),e=e.replace(/[\[\]]/g,"\\$&");var o=new RegExp("[?&]"+e+"(=([^&#]*)|&|#|$)").exec(a);return o?o[2]?decodeURIComponent(o[2].replace(/\+/g," ")):"":null}shareasaleShopifySSCID&&shareasaleShopifySetCookie("shareasaleShopifySSCID",shareasaleShopifySSCID,94670778e4,"/");</script>
+
+{%- include 'HotjarTrackingCode' -%}
+{%- include 'AddTaboolaPixel' -%}
+
+<!-- Twitter universal website tag code -->
+<script>
+!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',
+a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+// Insert Twitter Pixel ID and Standard Event data below
+twq('init','o4out');
+twq('track','PageView');
+</script>
+<!-- End Twitter universal website tag code -->

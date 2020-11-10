@@ -1,0 +1,524 @@
+{% assign cart_has_subscription = false %}
+{% for item in cart.items %}
+  {% if item.properties.subscription_id != blank %}
+    {% assign cart_has_subscription = true %}
+  {% endif %}
+{% endfor %}
+{% assign hide_express_checkout_handles = section.settings.hide_express_checkout | split: "|" %}
+{%- unless hide_express_checkout_handles == blank -%}
+{%- capture hide_express_checkout_elements -%}
+  {%- for handle in hide_express_checkout_handles -%}
+  ,body.{{ handle }} .cart-drawer__dynamic-checkout-buttons
+  {%- endfor -%}
+{%- endcapture -%}
+<style>
+{{ hide_express_checkout_elements | remove_first: ',' }} {
+  display: none;
+}
+</style>
+{%- endunless -%}
+
+<div class="cart-drawer">
+  <div class="cart-drawer__header">
+    <h3 class="cart-drawer__title">{{ section.settings.title }}</h3>
+    <div class="cart-drawer__close cart-drawer-toggle">{% include 'icon', handle: 'close' %}</div>
+  </div>
+  <div class="cart-drawer__subheader {% if section.settings.show_upsell_gauge %}cart-drawer__subheader--upsell{% endif %}">
+    {%- if section.settings.show_upsell_gauge and cart_has_subscription == false -%}
+    {%- assign mystery_gift_inprogress = false -%}
+    {%- assign upsell_amount = section.settings.upsell_amount -%}
+    {%- assign upsell_amount = upsell_amount | plus: 0 | times: 100 -%}
+    <!-- {{ cart.total_price }} -->
+    <!-- {{ upsell_amount }} -->
+    {%- assign upsell_message = section.settings.upsell_message -%}
+      {%- if cart.total_price > 0 -%}
+        {%- assign mystery_gift_inprogress = true -%}
+        <!-- in progress {{mystery_gift_inprogress}} -->
+      {%- endif -%}
+      <div id="cart-drawer__subheader--upsell" class="visually-hidden">
+      {%- if mystery_gift_inprogress -%}
+        {%- assign mystery_gift_unlocked = false -%}
+        {%- if cart.total_price >= upsell_amount -%}
+          {%- assign mystery_gift_unlocked = true -%}
+          {%- assign upsell_message = section.settings.upsell_congratulations_message -%}
+          {%- assign upsell_image = "complete" -%}
+        {%- else -%}
+          {%- assign upsell_image = "in_progress" -%}
+        {%- endif -%}
+        <p id="upsell-message">{{ upsell_message }}</p>
+        <span id="upsell-gauge-in-progress" {% if upsell_image != "in_progress" %}class="visually-hidden"{% endif %}>{{ "in_progress_bar.png" | asset_url | img_tag }}</span>
+        <span id="upsell-gauge-complete" {% if upsell_image != "complete" %}class="visually-hidden"{% endif %}>{{ "complete_progress_bar.png" | asset_url | img_tag }}</span>
+        <div id="upsell-milestones">
+          <div id="upsell-milestone-1"><div class="checkmark"></div>{{ section.settings.upsell_milestone_1 }}</div>
+          <div id="upsell-milestone-2"><div class="checkmark {% unless mystery_gift_unlocked %}locked{% endunless %}"></div>{{ section.settings.upsell_milestone_2 }}</div>
+        </div>
+      {%- else -%}
+        <p id="upsell-message">{{ upsell_message }}</p>
+      {%- endif -%}
+      </div>
+    {%- endif -%}
+    <div id="cart-drawer__subheader--subheading">
+      <p>{{ section.settings.subheading }}</p>
+    </div>
+  </div>
+  <div class="cart-drawer__body">
+    {% if cart.items.size > 0 %}
+      <div class="cart-drawer__items">
+        {% for item in cart.items %}
+          {% assign item_has_subscription = item.properties.subscription_id %}
+          <div class="cart-drawer__item">
+            <div class="cart-drawer__item-remove" data-cart-item-price="{{ item.final_price }}" data-cart-current-quantity="{{ item.quantity }}"  data-cart-remove="{{ forloop.index }}">{% include 'icon', handle: 'close' %}</div>
+            <div class="cart-drawer__item-image">
+              <img class="lazy" data-src="{{ item.image | img_url: '320x' }}" alt="{{ item.variant_title }}" />
+            </div>
+            <div class="cart-drawer__item-info">
+              <h2 class="cart-drawer__item-title">
+                {% if item_has_subscription != blank  %}
+                  {{ item.product.title }}
+                {% else %}
+                  {% assign line_title = item.product.title %}
+                  {% case item.variant.options[2] %}
+                    {% when 'single-sm' %}
+                      {% assign line_title = 'Single Flavor - 12 Bags' %}
+                    {% when 'single' %}
+                      {% assign line_title = 'Single Flavor - 24 Bags' %}
+                    {% when 'bundle' %}
+                      {% assign line_title = '2 Flavors Bundle - 24 Bags' %}
+                    {% when 'variety' %}
+                      {% assign line_title = '4 Flavors Bundle - 48 Bags' %}
+                    {% else %}
+                  {% endcase %}
+                  {{ line_title }}
+                {% endif %}
+              </h2>
+              {% if item_has_subscription %}
+                <div class="cart-drawer__item-meta">
+                  <small>Subscription - Every {{ item.properties.shipping_interval_frequency }} {{ item.properties.shipping_interval_unit_type }}</small>
+                </div>
+              {% endif %}
+              {% unless item.product.handle contains "mystery" %}
+              <div class="cart-drawer__item-meta">
+                <small>Flavor: {{ item.variant.options[0] }}</small>
+              </div>
+              {% endunless %}
+              <div class="cart-drawer__item-lower">
+                <div class="cart-drawer__item-price">
+                  <div class="cart-drawer__item-price--original {% unless item.variant.compare_at_price > item.variant.price %}visually-hidden{% endunless %}">
+                    {%- comment -%}
+                    {%- if item_has_subscription -%}
+                      {%- case item.variant.options[2] -%}
+                        {%- when 'single-sm' -%}$29.99
+                        {%- when 'single' -%}$59.98
+                        {%- when 'bundle' -%}$59.98
+                        {%- when 'variety' -%}$119.99
+                      {%- endcase -%}
+                    {%- else -%}
+                      {%- case item.variant.options[2] -%}
+                        {%- when 'single' -%}$59.98
+                        {%- when 'bundle' -%}$59.98
+                        {%- when 'variety' -%}$119.99
+                      {%- endcase -%}
+                    {%- endif -%}
+                    {%- endcomment -%}
+                    {% if item.variant.compare_at_price > item.variant.price %}
+                      {{ item.variant.compare_at_price | money }}
+                    {% endif %}
+                  </div>
+                  <div class="cart-drawer__item-price--final">
+                    {{ item.final_price | money }}
+                  </div>
+                </div>
+                {% if item.variant.options[0] != "Default Title" %}
+                <div class="cart-drawer__item-qty">
+                  <a href="#" class="cart-drawer__item-qty-minus" data-cart-update="{{ forloop.index }}" data-cart-item-price="{{ item.final_price }}" data-cart-current-quantity="{{ item.quantity }}" data-cart-quantity="{{ item.quantity | minus: 1 }}">{% include 'icon', handle: 'minus' %}</a>
+                  <span class="cart-drawer__item-qty-label">{{ item.quantity }}</span>
+                  <a href="#" class="cart-drawer__item-qty-plus" data-cart-update="{{ forloop.index }}" data-cart-item-price="{{ item.final_price }}" data-cart-current-quantity="{{ item.quantity }}" data-cart-quantity="{{ item.quantity | plus: 1 }}">{% include 'icon', handle: 'plus' %}</a>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="cart-drawer__no-items">{{ section.settings.no_items_message }}</p>
+    {% endif %}
+  </div>
+  {% if cart.items.size > 0 %}
+    <div class="cart-drawer__footer">
+      <div class="cart-drawer__footer--upper">
+        <div class="cart-drawer__subtotal"><span>Subtotal:</span><span>{{ cart.total_price | money }}</span></div>
+        <div class="cart-drawer__action">
+          {% if cart_has_subscription %}
+            <a href="#" class="btn btn--block js-cart-checkout-recharge-btn ab-test-track-btn">Secure Checkout</a>
+          {% else %}
+            <form action="/cart" method="post">
+              <input type="submit" id="checkout" class="btn btn--block js-cart-checkout-btn ab-test-track-btn" name="checkout" value="Secure Checkout" />
+            </form>
+          {% endif %}
+        </div>
+      </div>
+
+      {% if additional_checkout_buttons and cart_has_subscription != true %}
+        <div class="cart-drawer__footer--lower">
+          <div class="cart-drawer__dynamic-checkout-buttons">
+            <p>or buy with</p>
+            {{ content_for_additional_checkout_buttons }}
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="cart-drawer__footer--lower">
+        <div class="title">Guaranteed <strong>Safe</strong> Checkout</div>
+        <img src="{{ 'secure.png' | asset_url }}" alt="Secure Checkout">
+      </div>
+    </div>
+  {% endif %}
+</div>
+<div class="cart-drawer-bg cart-drawer-toggle"></div>
+
+<script>
+  var promoEnabled = {{ section.settings.show_upsell_gauge }};
+  var promoAmount = {{ section.settings.upsell_amount | plus: 0 | times: 100 }};
+  var promoProduct = {{ all_products[section.settings.upsell_gift_product] | json }};
+  (function() {
+    const flashSaleCookieName = 'sys_recharge_flashsale_july_2020';
+    const promoCookieName = 'sys_recharge_freegift_gauge';
+
+    function checkFlashSale() {
+      return "{{ section.settings.flash_sale_timer }}" === "true";
+    }
+
+    function setFlashSaleCookie() {
+      var endDate = new Date();
+      endDate.setMinutes(endDate.getMinutes() + 10);
+      document.cookie = flashSaleCookieName + "=" + endDate;
+    }
+
+    function getFlashSaleCookieDate() {
+      var flashSaleCookie = getCookie(flashSaleCookieName);
+      if (!flashSaleCookie) {
+        setFlashSaleCookie()
+        flashSaleCookie = getCookie(flashSaleCookieName);
+      }
+      var endDate = new Date(flashSaleCookie);
+      return endDate;
+    }
+    
+    function getCookie(name){
+      return( document.cookie.match('(^|; )'+name+'=([^;]*)')||0 )[2]
+    }
+
+    function generateCheckoutUrl() {
+      var token = getCookie('cart'),
+        myshopify_domain='{{ shop.permanent_domain }}',
+        customer_param = '{% if customer %}customer_id={{customer.id}}&customer_email={{customer.email}}{% endif %}',
+        checkout_url = '';
+
+        try {
+          var ga_linker = ga.getAll()[0].get('linkerParam');
+        } catch(err) {
+          var ga_linker ='';
+        }
+
+        checkout_url = "https://checkout.schoolyardsnacks.com/r/checkout?myshopify_domain="+myshopify_domain+"&cart_token="+token+"&"+ga_linker+"&"+customer_param;
+        if (checkFlashSale) {
+          var urlBase = checkout_url.split('?')[0];
+          var urlParams = checkout_url.split('?')[1];
+          var params = new URLSearchParams(urlParams)
+          var flashSaleCookieDate = getFlashSaleCookieDate();
+          var flashSaleParam = btoa(flashSaleCookieDate.toISOString())
+          params.set('flashSale',flashSaleParam)
+          checkout_url = urlBase + "?" + params.toString()
+        }
+        return checkout_url;
+    }
+
+    function reChargeProcessCart() {
+      var checkout_url = generateCheckoutUrl();
+      $('.js-cart-checkout-recharge-btn').attr('href' , checkout_url);
+    }
+
+    function setPromoCookie() {
+      var aquiredDate = new Date();
+      var expireDate = new Date();
+      expireDate.setMonth(expireDate.getMonth() + 1);
+      document.cookie = promoCookieName + "=" + aquiredDate +'; expires='+expireDate.toGMTString() +'; path=/';
+    }
+
+    function checkPromoCookie() {
+      return getCookie(promoCookieName);
+    }
+
+    function handleUpsellAdd(e) {
+        // plus button
+      // var cartDoesNotHaveUpsellGift = CartJS.cart.items.filter(function(item) { return item.id == promoProduct.variants[0].id }).length == 0;
+      var cartDoesNotHaveUpsellGift = !cartHasItem(promoProduct.variants[0]);
+      var cartHasNoSubscriptions = CartJS.cart.items.filter(function(item) { return item.properties.hasOwnProperty("subscription_id"); }).length == 0;
+      if (cartDoesNotHaveUpsellGift && cartHasNoSubscriptions && CartJS.cart.total_price + $(e.currentTarget).data('cartItemPrice') >= promoAmount && promoEnabled && checkPromoCookie()) {
+        addUpsellItem(); 
+      }
+    }
+    function handleUpsellRemoval(e) {
+      // var cartHasUpsellGift = CartJS.cart.items.filter(function(item) { return item.id == promoProduct.variants[0].id }).length > 0;
+      var cartHasUpsellGift = cartHasItem(promoProduct.variants[0]);
+      if ($(e.currentTarget).hasClass('cart-drawer__item-qty-minus')) {
+        // minus button
+        if (cartHasUpsellGift && CartJS.cart.total_price - $(e.currentTarget).data('cartItemPrice') - promoProduct.price < promoAmount) {
+          removeUpsellItem(); 
+        }
+      } else {
+        // remove button
+        if (cartHasUpsellGift && CartJS.cart.total_price - ($(e.currentTarget).data('cartItemPrice') * $(e.currentTarget).data('cartCurrentQuantity')) - promoProduct.price < promoAmount) {
+          removeUpsellItem(); 
+        }
+      }
+    }
+
+    function addUpsellItem() {
+      CartJS.addItem(promoProduct.variants[0].id, 1, {}, {
+        "success": function(data, textStatus, jqXHR) {
+            console.log('added!');
+            updateCartDrawerUI();
+        },
+        "error": function(jqXHR, textStatus, errorThrown) {
+          console.log('Error: ' + errorThrown + '!');
+        }
+      });
+    }
+
+    function removeUpsellItem() {
+      CartJS.removeItemById(promoProduct.variants[0].id, {
+        "success": function(data, textStatus, jqXHR) {
+            console.log('removed!');
+            updateCartDrawerUI();
+        },
+        "error": function(jqXHR, textStatus, errorThrown) {
+          console.log('Error: ' + errorThrown + '!');
+        }
+      });
+    }
+
+    function handleItemAddedToCart(event, cart) {
+      updateCartCount(event, cart);
+      if (shouldSkipCart(event, cart)) {
+        redirectToRechargeCheckout();
+      } else {
+        updateCartDrawerUI();
+      }
+    }
+
+    function redirectToRechargeCheckout() {
+      setFlashSaleCookie();
+      window.location.replace(generateCheckoutUrl());
+    }
+
+    function updateCartDrawerUI() {
+      $('body').addClass('cart-loading');
+      $.get( "/cart?view=drawer", function( data ) {
+        $('body').removeClass('cart-loading');
+        $('body').addClass('cart-drawer-open');
+
+        var newCartEl = $(data);
+        $('#shopify-section-cart-drawer').replaceWith(newCartEl);
+        $('.cart-drawer').addClass('cart-drawer--visible');
+        $('.cart-drawer-bg').addClass('cart-drawer-bg--visible');
+        reChargeProcessCart();
+        $('#add-to-cart').removeClass('disabled');
+        updateMysteryGiftUI();
+        
+        if (localStorage.getItem("utmDiscountCode")) {
+          setTimeout(function() {
+            rechargeCheckoutLink = $(".cart-drawer__action .js-cart-checkout-recharge-btn").attr('href');
+            var remove_after= rechargeCheckoutLink.indexOf('&flashSale=');
+            var rechargeCheckoutLinkWithoutSales =  rechargeCheckoutLink.substring(0, remove_after);
+            $(".cart-drawer__action .js-cart-checkout-recharge-btn").hide();
+            $(".cart-drawer__action").append("<a href='' class='btn btn--second btn--block'>Secure Checkout</a>");
+            $(".btn--second").attr('href', `${rechargeCheckoutLinkWithoutSales.replace("&flashSale=", "")}&discount=${localStorage.getItem("utmDiscountCode")}`);
+          }, 100);
+        }
+      });
+    }
+
+    function cartHasItem(item) {
+      return findItemInCart(item).length > 0;
+    }
+
+    function findItemInCart(item) {
+      return CartJS.cart.items.filter(function(cartItem) { return cartItem.id == item.id });
+    }
+    function updateMysteryGiftUI() {
+      var cartHasPromoGift = cartHasItem(promoProduct.variants[0]);
+      if(checkPromoCookie() && $('#cart-drawer__subheader--upsell').length > 0) {
+        if(cartHasPromoGift) {
+          var cartPromoGift = findItemInCart(promoProduct.variants[0])[0];
+          $('.checkmark.locked').removeClass('locked');
+          $('#upsell-gauge-in-progress').addClass('visually-hidden');
+          // if ("true" == cartPromoGift.properties.free_gift) {
+          //   // Promo gift added by checkbox, we can adjust the UI further if needed.
+          // }
+          $('#upsell-gauge-complete').removeClass('visually-hidden');
+        }
+        // show the mystery gift stuff
+        $('#cart-drawer__subheader--subheading').remove();
+        $('#cart-drawer__subheader--upsell').removeClass('visually-hidden');
+      } else {
+        $('#cart-drawer__subheader--upsell').remove();
+      }
+    }
+
+    function updateCartCount(event, cart) {
+      $('.cart-count').text(cart.item_count ? cart.item_count : '');
+    }
+
+    function shouldSkipCart(_, cart) {
+      if (cart.item_count === 1) {
+        var skip_cart_items = cart.items.filter(function(item) { 
+          return ("skip_cart" in item.properties && item.properties.skip_cart === "true");
+        });
+
+        return skip_cart_items.length > 0;
+      }
+    }
+
+    function shouldAddFreeGift(_, cart) {
+      if (typeof(promoProduct) === 'undefined') {
+        return false;
+      }
+      var items_with_free_gift_property = cart.items.filter(function(item) { 
+        return ("free_gift" in item.properties && item.properties.free_gift === "true");
+      });
+      var free_gift_item = cart.items.filter(function(item) { 
+        return ( item.sku === promoProduct.variants[0].sku);
+      });
+
+      return items_with_free_gift_property.length > 0 && free_gift_item.length === 0;
+    }
+
+    function toggleCartDrawer(e) {
+      e.preventDefault();
+      $('body').toggleClass('cart-drawer-open');
+      $('.cart-drawer').toggleClass('cart-drawer--visible');
+      $('.cart-drawer-bg').toggleClass('cart-drawer-bg--visible');
+    }
+
+    function setRequestStarted(e, c) {
+      $('body').addClass('cart-loading');
+      $('#add-to-cart').addClass('disabled');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      CartJS.init({{ cart | json }}); // init CartJS
+      reChargeProcessCart(); // initial process of cart for ReCharge
+
+      // Setup all of our CartJS Listeners
+      $(document).on('click', '.cart-drawer-toggle', toggleCartDrawer);
+      $(document).on('cart.requestComplete', handleItemAddedToCart);
+      $(document).on('cart.requestStarted', setRequestStarted);
+      $(document).on('click', '.cart-drawer__item-remove', handleUpsellRemoval);
+      $(document).on('click', '.cart-drawer__item-qty-minus', handleUpsellRemoval);
+      $(document).on('click', '.cart-drawer__item-qty-plus', handleUpsellAdd);
+
+      if((/free-gift/.test(window.location.href) || /freegift/.test(window.location.href)) && promoEnabled) {
+        setPromoCookie();
+      }
+
+      console.log(checkPromoCookie());
+      if(checkPromoCookie() && $('#cart-drawer__subheader--upsell').length > 0) {
+        // show the mystery gift stuff
+        $('#cart-drawer__subheader--subheading').remove();
+        $('#cart-drawer__subheader--upsell').removeClass('visually-hidden');
+      } else {
+        $('#cart-drawer__subheader--upsell').remove();
+      }
+
+      // Extra protection to ensure a cart with ReCharge only ever goes to the Recharge checkout
+      $(document).on('click', '.js-cart-checkout-recharge-btn', function(e) {
+        e.preventDefault();
+        setFlashSaleCookie();
+        $(this).attr('href', generateCheckoutUrl());
+        window.location = $(this).attr('href');
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Cart Drawer",
+  "settings": [
+    {
+      "type":"text",
+      "id":"title",
+      "label":"Heading",
+      "default":"Your Cart"
+    },
+    {
+      "type":"text",
+      "id":"subheading",
+      "label":"Subheading",
+      "default":"FREE Shipping + 30 Day Money Back Guarantee"
+    },
+    {
+      "type":"text",
+      "id":"no_items_message",
+      "label":"No Items Message",
+      "default":"You have no items in your shopping bag."
+    },
+    {
+      "type":"checkbox",
+      "id":"flash_sale_timer",
+      "label":"Enable Flash Sale?",
+      "default": false
+    },
+    {
+      "type":"text",
+      "id":"hide_express_checkout",
+      "label":"Hide Express Checkout",
+      "info":"Add handles seperated by a pipe to hide express checkout on those PDP."
+    },
+    {
+      "type":"checkbox",
+      "id":"show_upsell_gauge",
+      "label":"Enable In Cart Promo?",
+      "default": true
+    },
+    {
+      "type":"text",
+      "id":"upsell_message",
+      "label":"Promo Heading",
+      "default":"Spend $50 to unlock a mystery gift"
+    },
+    {
+      "type": "number",
+      "id":"upsell_amount",
+      "label":"Promo Threshold Amount",
+      "default": 50
+    },
+    {
+      "type":"text",
+      "id":"upsell_congratulations_message",
+      "label":"Promo Congrats Heading",
+      "default":"Congrats! You've unlocked a mystery gift"
+    },
+    {
+      "type":"text",
+      "id":"upsell_milestone_1",
+      "label":"Promo Milestone 1",
+      "default":"Free Shipping"
+    },
+    {
+      "type":"text",
+      "id":"upsell_milestone_2",
+      "label":"Promo Milestone 2",
+      "default":"Mystery Gift"
+    },
+    {
+      "type":"product",
+      "id":"upsell_gift_product",
+      "label":"Promo Gift Item"
+    }
+  ]
+}
+{% endschema %}
+

@@ -1,0 +1,157 @@
+{% assign product = all_products[settings.product_id] %}
+{% assign current_variant = product.selected_or_first_available_variant %}
+
+<div class="tagline">
+	<div class="enclose">
+		<h1>{{ section.settings.tag_line }}</h1>
+	</div>
+</div>
+
+<div class="hero_sec">
+	<div class="enclose">
+		<div class="inn">
+			<div class="pro-slider">
+				<div class="pro-items">
+                  {% for block in section.blocks %}
+                  {% if block.type == 'block-1' %}
+					<div class="item"><img src="{{ block.settings.slide_img | img_url : 'master' }}" alt="image"></div>
+                  {% endif %}
+                  {% endfor %}
+				</div>
+				<div class="pro-nav">
+				  {% for block in section.blocks %}
+                  {% if block.type == 'block-1' %}
+					<div class="item"><img src="{{ block.settings.slide_img | img_url : 'master' }}" alt="image"></div>
+                  {% endif %}
+                  {% endfor %}
+				</div>
+			</div>
+			<div class="pro-info">
+				<div class="review">{% include 'judgeme_widgets', widget_type: 'judgeme_preview_badge' %} &nbsp; | &nbsp; <span class="sold-in-emoji">🔥</span> &nbsp;&nbsp; <span class="sold-in-number">...</span> &nbsp;sold in the last 22 hours</div>
+				<h2>{{ section.settings.heading }}</h2>
+				<div class="price">
+					<span class="actual">Was ${{ section.settings.price_was }}</span>
+					<span class="discount">From ${{ section.settings.price_now }}/bag</span>
+					<span class="save">{{ section.settings.save }}</span>
+				</div>
+				<div class="desc">
+					<p>{{ section.settings.list_text }}</p>
+					<ul>
+                      	{% for block in section.blocks %}
+                      		<li>{{ block.settings.list }}</li>
+                      	{% endfor %}
+					</ul>
+				</div>
+				<div class="btns">
+					<a href="#" class="buybtn big">{{ settings.sales-btn-text2 }} <img src="{{ 'icon-hand.png' | asset_url }}" alt="image"></a>
+					<img src="{{ section.settings.card_img | img_url:'master'  }}" alt="image">
+				</div>
+				<div class="testi">
+					<div class="figure">
+						<img src="{{ section.settings.testi_img | img_url:'master'  }}" alt="image">
+					</div>
+					<div class="content">
+						<p>{{ section.settings.testi_text }}</p>
+						<h4>{{ section.settings.testi_name }}</h4>
+						<div class="stars"><img src="{{ section.settings.testi_stars | img_url:'master'  }}" alt="image"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% schema %}
+  {
+    "name": "Sales Hero",
+    "settings": [
+  {
+   	"type": "text",
+  	"id":"tag_line",
+	"label":"Tagline"
+  },
+  {
+   	"type": "text",
+  	"id":"heading",
+	"label":"Heading"
+  },
+  {
+   	"type": "text",
+  	"id":"price_was",
+	"label":"Price was"
+  },
+  {
+   	"type": "text",
+  	"id":"price_now",
+	"label":"Price now"
+  },
+  {
+   	"type": "text",
+  	"id":"save",
+	"label":"Save"
+  },
+  {
+   	"type": "text",
+  	"id":"list_text",
+	"label":"List Text"
+  },
+  {
+   	"type": "image_picker",
+  	"id":"card_img",
+	"label":"Card Image"
+  },
+  {
+   	"type": "text",
+  	"id":"testi_name",
+	"label":"Testimonial Name"
+  },
+  {
+   	"type": "text",
+  	"id":"testi_text",
+	"label":"Testimonial text"
+  },
+  {
+   	"type": "image_picker",
+  	"id":"testi_img",
+	"label":"Testimonial image"
+  },
+  {
+   	"type": "image_picker",
+  	"id":"testi_stars",
+	"label":"Testimonial Stars"
+  }
+],
+
+    "blocks":[
+      {
+        "type": "block-1",
+        "name": "Slider Images",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "slide_img",
+            "label": "Slider Image"
+          }
+        ]
+      },
+      {
+        "type": "block-2",
+        "name": "List Points",
+        "settings": [
+          {
+            "type": "text",
+            "id": "list",
+            "label": "Lists"
+          }
+        ]
+      }
+    ]
+  
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

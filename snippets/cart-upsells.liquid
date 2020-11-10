@@ -1,0 +1,77 @@
+{% assign upsell_handles = upsell_handles | split: ',' | uniq %}
+<div class="cart-upsell-container">
+  <h4>Don't forget these items</h4>
+  <div class="cart-upsells">
+    {% for upsell_handle in upsell_handles %}
+      {% unless forloop.index > upsell_limit %}
+        {% assign upsell_product = all_products[upsell_handle] %}
+        {% assign upsell_first_avail_variant = upsell_product.first_available_variant %}
+        {% if upsell_product.available %}
+          <div class="cart-upsell cart-upsell__{{ forloop.index }}">
+            <div class="cart-upsell__image">
+              <img src="{{ upsell_first_avail_variant.image | img_url: '300x' }}" alt="{{ upsell_first_avail_variant.image.alt }}"/>
+            </div>
+            <div class="cart-upsell__content">
+              <h3 class="cart-upsell__title">{{ upsell_product.title }} <span class="cart-upsell__title-price">&mdash; {{upsell_first_avail_variant.price | money_without_trailing_zeros}}</span></h3>
+              <div class="cart-upsell__actions">
+                <div class="form__field--select {% if upsell_product.has_only_default_variant %}visually-hidden{% endif %}">
+                  <select class="cart-upsell-variant-select">
+                    {% for variant in upsell_product.variants %}
+                      {% if variant.available %}
+                        <option value="{{ variant.id }}">{{ variant.title }}</option>
+                      {% else %}
+                        <option disabled="disabled">{{ variant.title }} - Sold Out</option>
+                      {% endif %}
+                    {% endfor %}
+                  </select>
+                  {% include 'icon', handle: 'chevron-down' %}
+                </div>
+                {% assign current_upsell_variant = upsell_product.selected_or_first_available_variant %}
+                <button class="btn btn--large minicart-quick-add-to-cart-btn" data-id="{{current_upsell_variant.id}}" data-quantity="1" data-properties='{"_upsell":true}' data-show="false" data-addingText="Adding...">Add To Cart</button>
+              </div>
+            </div>
+
+            <script type="application/json" id="upsell-product-json__{{forloop.index}}">{{ upsell_product | json }}</script>
+
+            <script type="text/javascript">
+              document.addEventListener('DOMContentLoaded', function() {
+                (function() {
+                  var upsell_product_data = JSON.parse($('#upsell-product-json__{{forloop.index}}').html()),
+                    container = $('.cart-upsell__{{ forloop.index }}');
+
+                  container.find('.cart-upsell-variant-select').on('change', function(e) {
+                    var _this = $(this),
+                      selected_variant_data = upsell_product_data.variants.filter(function(variant) {
+                        return variant.id === parseInt(_this.val());
+                      })[0];
+
+                    console.log(selected_variant_data);
+                    // Update image if needed
+                    if (selected_variant_data.featured_image && selected_variant_data.featured_image.src) {
+                      container.find('.cart-upsell__image img').attr('src', REBASE.theme.appendToFilename(selected_variant_data.featured_image.src, '_200x'));
+                    }
+
+                    // Update price if needed
+                    container.find('.cart-upsell__title-price').html('&mdash; ' + Shopify.formatMoney(selected_variant_data.price, Shopify.money_format).replace('.00', ''))
+
+                    // Update Add To Cart button data attributes
+                    $(this).parents('.cart-upsell__actions').find('.minicart-quick-add-to-cart-btn').attr('data-id', selected_variant_data.id);
+                  });
+                })();
+              });
+            </script>
+          </div>
+        {% endif %}
+      {% endunless %}
+    {% endfor %}
+  </div>
+</div>
+
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('cartItemAdded.miniCart', function(){
+      location.reload();
+    });
+  });
+
+</script>

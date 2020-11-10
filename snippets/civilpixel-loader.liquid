@@ -1,0 +1,28 @@
+
+var parser = new DOMParser;
+var $ShopVariables = window.$ShopVariables || {};
+$ShopVariables.currency = {{ shop.currency | json }};
+$ShopVariables.cart = {
+    variant_ids: [ {% for item in cart.items %} {{ item.id | json }}, {% endfor %} ],
+    product_ids: [ {% for item in cart.items %} {{ item.product_id | json }}, {% endfor %} ],
+    item_count: {{ cart.item_count | json }},
+    total_price: {{ cart.total_price | money_without_currency | remove: ',' }},
+    items: [
+        {% for item in cart.items %}
+            {
+                id: {{ item.id | json }},
+                product_id: {{ item.product_id | json }},
+                title: parser.parseFromString("{{ item.title }}", "text/html").body.textContent,
+                product_type: {{ item.product.type | json }},
+                price: {{ item.price | money_without_currency | remove: ',' }},
+                quantity: {{ item.quantity | json }}
+            },
+        {% endfor %}
+    ]
+};
+$ShopVariables.email = {{ customer.email | json }};
+$ShopVariables.text = {checkout: {{ 'cart.general.checkout' | t | json }}};
+
+(function(w,d,s,v){var f=d.getElementsByTagName(s)[0],j=d.createElement(s);
+    j.async=true;j.src='https://tags.rvere.com/tags/tagmanager.the-cereal-school.myshopify.com.js?v='+v;f.parentNode.insertBefore(j,f);
+})(window,document,'script','1')

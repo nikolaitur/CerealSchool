@@ -1,0 +1,17 @@
+<div class="collection-header{% if heading == 'dark' %} collection-header--dark{% endif %}">
+  <div class="collection-header__image">
+    {% if collection.image != blank %}
+      <figure class="lazy" data-bg="{{ collection.image | img_url: '3000x', format: 'pjpg'}}">
+        <figcaption class="visually-hidden">{% if collection.image.alt != blank%}{{ collection.image.alt }}{% else %}{{ collection.title }}{% endif %}</figcaption>
+      </figure>
+    {% endif %}
+    <div class="collection-header__title{% if collection.image != blank %} collection-header__title--has-image{% endif %}">
+      <h1>{{ collection.title }}</h1>
+    </div>
+   </div>
+  <div class="collection-header__actions">
+    <div class="collection-header__filtering-toggle">
+      <span>Filter</span>{% include 'icon', handle: 'chevron-down' %}
+    </div>
+  </div>
+</div>

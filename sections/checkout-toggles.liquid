@@ -1,0 +1,14 @@
+<div id="checkout-toggles" data-flash-sale-enabled="{{ section.settings.flash_sale_timer }}" style="display: none;" ></div>
+{% schema %}
+{
+  "name": "Checkout Toggles",
+  "settings": [
+    {
+      "type":"checkbox",
+      "id":"flash_sale_timer",
+      "label":"Enable Flash Sale?",
+      "default": false
+    }
+  ]
+}
+{% endschema %}

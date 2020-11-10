@@ -1,0 +1,28 @@
+{% layout none %}
+
+{% assign upsell_limit = 3 %}
+
+{% capture cart_handles %}{% for item in cart.items %}{{item.product.handle}}{%unless forloop.last%},{%endunless%}{% endfor %}{% endcapture %}
+{% assign cart_handles = cart_handles | split: ',' | uniq | join: ',' %}
+{% assign upsell_handles = '' %}
+
+{% for item in cart.items %}
+  {% if item.product.metafields.schoolyard.upsell != blank %}
+    {% assign item_upsell_handles = item.product.metafields.schoolyard.upsell | split: '|' | uniq %}
+    {% for upsell in item_upsell_handles %}
+      {% unless cart_handles contains upsell %}
+        {% capture upsell_handles %}{% unless upsell_handles == blank %}{{upsell_handles}},{% endunless %}{{upsell}}{%endcapture%}
+      {% endunless %}
+    {% endfor %}
+  {% else %}
+    {% assign item_upsell_handles = ''%}
+  {% endif %}
+{% endfor %}
+
+{% assign upsell_handle_array = upsell_handles | split: ',' %}
+{% assign upsell_product_json = '' %}
+{% for handle in upsell_handle_array limit: upsell_limit %}
+  {% capture upsell_product_json %}{{upsell_product_json}}{% assign upsell_product = all_products[handle] %}{% if upsell_product.available %}::{{upsell_product | json}}{% endif %}{% endcapture %}
+{% endfor %}
+
+{{ upsell_product_json | remove_first: '::' | split: '::' | json }}

@@ -1,0 +1,159 @@
+{% for block in section.blocks %}
+  {% if collection.handle == block.settings.collection %}
+    <script type="text/template" class="grid-promo-template grid-promo--{{ block.id }}">
+      <a href="{{ block.settings.link_url }}" class="section section--grid-promo grid-promo grid-promo--{{ block.id }} column {{ block.settings.width }}" data-position="{{ block.settings.position_index }}" data-src="{{ block.settings.link_url }}">
+        <figure class="lazy grid-promo__image" data-bg="{{ block.settings.image | img_url: '3000x' }}">
+          <figcaption class="grid-promo__content">
+            {% if block.settings.title != blank %}<h3 class="grid-promo__heading {{ block.settings.title_size }}" {% if block.settings.title_color != blank %}style="color: {{ block.settings.title_color }}"{% endif %}>{{ block.settings.title }}</h3>{% endif %}
+            {% if block.settings.link_text != blank %}
+              <div class="{{ block.settings.link_size }} {{ block.settings.link_color }}">
+                {{ block.settings.link_text }}
+              </div>
+            {% endif %}
+          </figcaption>
+        </figure>
+      </a>
+    </script>
+  {% endif %}
+{% endfor %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    (function($){
+      function insertPromoBlocks() {
+        var promo_templates = $('.grid-promo-template');
+
+        promo_templates.each(function(indx, val) {
+          var html = $(val).html(),
+            $el = $(html),
+            position = $el.data('position');
+
+          $el.insertAfter( $( '.products .product:nth-child('+position+')' ) );
+        });
+      }
+
+      function removePromoBlocks() {
+        $('.grid-promo').remove();
+      }
+
+      {% if section.blocks %}
+        insertPromoBlocks();
+        document.addEventListener('shopify:section:load', function() {
+          removePromoBlocks();
+          insertPromoBlocks();
+        })
+      {% endif %}
+    })(jQuery);
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Collection Grid Feature",
+    "blocks": [
+      {
+        "type": "promo",
+        "name": "Collection Grid Feature",
+        "settings": [
+          {
+            "type":"collection",
+            "id":"collection",
+            "label":"Collection"
+          },
+          {
+            "type":"text",
+            "id":"position_index",
+            "label":"Position of Feature in collection",
+            "info": "Feature will be inserted immediately after this position",
+            "default":"4"
+          },
+          {
+            "type":"select",
+            "id":"width",
+            "label":"Feature Width",
+            "options":[
+              {"label":"1 Column", "value":"column--xs-6 column--md-4"},
+              {"label":"2 Columns", "value":"column--xs-12 column--md-8"},
+              {"label":"3 Columns", "value":"column--xs-12 column--md-12"}
+            ],
+            "default":"column--xs-12 column--md-8"
+          },
+          {
+            "type":"text",
+            "id":"title",
+            "label":"Heading"
+          },
+          {
+            "type":"select",
+            "id":"title_size",
+            "label":"Heading Size",
+            "options":[
+              {"label":"H1", "value":"h1"},
+              {"label":"H2", "value":"h2"},
+              {"label":"H3", "value":"h3"},
+              {"label":"H4", "value":"h4"},
+              {"label":"H5", "value":"h5"},
+              {"label":"H6", "value":"h6"}
+            ],
+            "default":"h4"
+          },
+          {
+            "type":"color",
+            "id":"title_color",
+            "label":"Heading Color",
+            "default":"#01123F"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Background Image"
+          },
+          {
+            "type":"paragraph",
+            "content":"1 column – 1000x1430"
+          },
+          {
+            "type":"paragraph",
+            "content":"2 column – 2000x1334"
+          },
+          {
+            "type":"paragraph",
+            "content":"3 column – 2800x1400"
+          },
+          {
+            "type": "url",
+            "id": "link_url",
+            "label": "Link URL"
+          },
+          {
+            "type": "text",
+            "id": "link_text",
+            "label": "Link Text"
+          },
+          {
+            "type":"select",
+            "id":"link_size",
+            "label":"Link Size",
+            "options":[
+              {"label":"Small", "value":"btn btn--small"},
+              {"label":"Default", "value":"btn"},
+              {"label":"Large", "value":"btn btn--large"}
+            ],
+            "default":"btn"
+          },
+          {
+            "type":"select",
+            "id":"link_color",
+            "label":"Button Style",
+            "options":[
+              {"label":"Default", "value":"btn"},
+              {"label":"White", "value":"btn btn--white"},
+              {"label":"Text Only", "value":"btn btn--no-style"}
+            ],
+            "default":"btn"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,46 @@
+<div class="situation">
+    <h3>{{ section.settings.situation-heading}}</h3>
+    {{ section.settings.situtation-content-1}}
+    <figure><img src="{{ section.settings.situtation-content-image-1 | img_url:'master' }}" alt="image" /></figure>
+    {{ section.settings.situtation-content-2}}
+    <figure><img src="{{ section.settings.situtation-content-image-2 | img_url:'master' }}" alt="image" /></figure>
+</div>
+
+{% schema %}
+  {
+    "name": "Advertorial Situation",
+    "settings": [
+  {
+   		"type": "text",
+   		"id":"situation-heading",
+		"label":"Situatation Heading"
+	},
+      {
+   		"type": "textarea",
+   		"id":"situtation-content-1",
+		"label":"Situatation Content"
+	},
+             {
+   		"type": "textarea",
+   		"id":"situtation-content-2",
+		"label":"Situatation Content 2"
+	},
+        {
+   		"type": "image_picker",
+   		"id":"situtation-content-image-1",
+		"label":"Situatation Image 1"
+	},
+       {
+   		"type": "image_picker",
+   		"id":"situtation-content-image-2",
+		"label":"Situatation Image 2"
+	}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

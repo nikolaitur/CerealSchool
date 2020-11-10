@@ -1,0 +1,61 @@
+<div class="works-sec" id="benefits">
+	<div class="enclose">
+		<h2>{{ section.settings.heading }}</h2>
+		<div class="work-items">
+          {% for block in section.blocks %}
+          	<div class="item">
+              <div class="figure">
+					<img src="{{ block.settings.fea_img | img_url:'master'  }}" alt="image">
+				</div>
+				<div class="content">
+					<h4>{{ block.settings.heading1 }}</h4>
+					<p>{{ block.settings.content }}</p>
+				</div>
+          	</div>
+          {% endfor %}
+		</div>
+		<div class="btns"><a href="#" class="buybtn big">{{ settings.sales-btn-text2 }} <img src="{{ 'icon-hand.png' | asset_url }}" alt="image"></a></div>
+	</div>
+</div>
+
+{% schema %}
+  {
+    "name": "Sales How it works",
+    "settings": [
+  {
+   	"type": "text",
+  	"id":"heading",
+	"label":"Heading"
+  }
+],
+"blocks":[
+{
+"type":"Featured",
+"name":"Featured",
+"settings":[
+{
+"type":"image_picker",
+"id":"fea_img",
+"label":"Featured Image"
+},
+{
+   	"type": "text",
+  	"id":"heading1",
+	"label":"Heading"
+},
+{
+   	"type": "text",
+  	"id":"content",
+	"label":"Content"
+}
+]
+}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

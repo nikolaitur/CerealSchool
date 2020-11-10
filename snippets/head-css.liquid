@@ -1,0 +1,89 @@
+<style>
+  @font-face {
+    font-family: 'GT-Walsheim';
+    font-display: swap;
+    src: url("{{ 'GT-Walsheim-Condensed-Regular.eot' | asset_url }}") format('eot'),
+         url("{{ 'GT-Walsheim-Condensed-Regular.woff2' | asset_url }}") format('woff2'),
+         url("{{ 'GT-Walsheim-Condensed-Regular.woff' | asset_url }}") format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'GT-Walsheim';
+    font-display: swap;
+    src: url("{{ 'GT-Walsheim-Condensed-Regular-Oblique.eot' | asset_url }}") format('eot'),
+         url("{{ 'GT-Walsheim-Condensed-Regular-Oblique.woff2' | asset_url }}") format('woff2'),
+         url("{{ 'GT-Walsheim-Condensed-Regular-Oblique.woff' | asset_url }}") format('woff');
+    font-weight: normal;
+    font-style: italic;
+  }
+
+  @font-face {
+    font-family: 'GT-Walsheim';
+    font-display: swap;
+    src: url("{{ 'GT-Walsheim-Condensed-Bold.eot' | asset_url }}") format('eot'),
+         url("{{ 'GT-Walsheim-Condensed-Bold.woff2' | asset_url }}") format('woff2'),
+         url("{{ 'GT-Walsheim-Condensed-Bold.woff' | asset_url }}") format('woff');
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'GT-Walsheim';
+    font-display: swap;
+    src: url("{{ 'GT-Walsheim-Condensed-Bold-Oblique.eot' | asset_url }}") format('eot'),
+         url("{{ 'GT-Walsheim-Condensed-Bold-Oblique.woff2' | asset_url }}") format('woff2'),
+         url("{{ 'GT-Walsheim-Condensed-Bold-Oblique.woff' | asset_url }}") format('woff');
+    font-weight: 700;
+    font-style: italic;
+  }
+  .ju_controls_btn,
+  #preview-bar-iframe {display: none !important}
+</style>
+
+<link rel="stylesheet" href="https://use.typekit.net/lnr8xty.css">
+
+<script>
+  /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+  (function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){function e(){t.media=a}var a=t.media||"all";t.addEventListener?t.addEventListener("load",e):t.attachEvent&&t.attachEvent("onload",e),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(e,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS})("undefined"!=typeof global?global:this);
+</script>
+
+{% include 'critical-css'%}
+{% comment %} {{ 'bundle.critical.css' | asset_url | stylesheet_tag }} {% endcomment %}
+
+{% if template contains 'product' or template contains 'collection' %}
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="{{ 'bundle.product.css' | asset_url }}">
+  <noscript><link rel="stylesheet" href="{{ 'bundle.product.css' | asset_url }}"></noscript>
+{% endif %}
+
+{% if template contains 'cart' %}
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="{{ 'bundle.cart.css' | asset_url }}">
+  <noscript><link rel="stylesheet" href="{{ 'bundle.cart.css' | asset_url }}"></noscript>
+{% endif %}
+
+{% if template contains 'blog' or template contains 'article' %}
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="{{ 'bundle.blog.css' | asset_url }}">
+  <noscript><link rel="stylesheet" href="{{ 'bundle.blog.css' | asset_url }}"></noscript>
+{% endif %}
+
+{% if page.handle == 'compression-socks-for-nurses' or page.handle == 'compression-socks-for-flying' %}
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="{{ 'old-landing-split.scss.css' | asset_url }}">
+  <noscript><link rel="stylesheet" href="{{ 'old-landing-split.scss.css' | asset_url }}"></noscript>
+{% endif %}
+
+{% if page.handle == 'refer' or page.handle == 'rewards' %}
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="{{ 'swell-rewards.scss.css' | asset_url }}">
+  <noscript><link rel="stylesheet" href="{{ 'swell-rewards.scss.css' | asset_url }}"></noscript>
+{% endif %}
+
+{% comment %}Main Theme CSS{% endcomment %}
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="{{ 'bundle.theme.css' | asset_url }}">
+<noscript><link rel="stylesheet" href="{{ 'bundle.theme.css' | asset_url }}"></noscript>
+
+{% comment %}Gift Card Order CSS{% endcomment %}
+{% if template contains 'gift_card' %}
+  {{ 'gift-card.css' | shopify_asset_url | stylesheet_tag }}
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="{{ 'gift-card.css' | asset_url }}">
+  <noscript><link rel="stylesheet" href="{{ 'gift-card.css' | asset_url }}"></noscript>
+{% endif %}

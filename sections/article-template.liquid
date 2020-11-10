@@ -1,0 +1,99 @@
+{% assign force_subscription_mode = false %}
+{% for tag in article.tags %}
+  {% assign tag_name = tag | downcase %}
+  {% if tag_name == "sub" %}
+    {% assign force_subscription_mode = true %}
+  {% endif %}
+{% endfor %}
+<main class="content content--no-sidebar" role="main">
+  <div class="article">
+    <div class="container--slim">
+      <div class="article__header">
+        <h1 class="article__title">{{ article.title }}</h1>
+        <div class="article__byline ">By {{ article.author }} | {{ article.published_at | date: '%B %d, %Y' }}</div>
+      </div>
+    </div>
+
+    <div class="article__content">
+      <div class="container--slim">
+        {{ article.content }}
+      </div>
+    </div>
+
+    {% if blog.handle == 'recipes' %}
+      {% for block in section.blocks %}
+        {% if article.tags contains block.settings.tag %}
+          <div class="article__footer">
+            <div class="article__footer-image">
+              <img class="lazy" data-src="{{ block.settings.image | img_url: '800x' }}" alt="{% if block.settings.image.alt %}{{block.settings.image.alt}}{% else %}{{block.settings.title}}{% endif %}"/>
+            </div>
+            <div class="article__footer-text">
+              <h2 class="h3">{{ block.settings.title }}</h2>
+              {{ block.settings.content }}
+            </div>
+            <div class="article__footer-action center">
+              <a class="btn" href="{{ block.settings.button_url }}">{{ block.settings.button_text }}</a>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+    {% endif %}
+  </div>
+
+  {% include 'article-comments' %}
+
+  <div class="article__back">
+    <a href="{{ blog.url }}" class="btn btn--no-style">{% include 'icon', handle: 'arrow-left' %}Back to {{ blog.title }}</a>
+  </div>
+</main>
+<script>
+  if ({{ force_subscription_mode }}) {
+    localStorage.setItem('subscriptionMode', true);
+  }
+</script>
+{% schema %}
+  {
+    "name": "Article",
+    "blocks":[
+      {
+        "type":"recipe_footer",
+        "name":"Recipe Footer",
+        "settings":[
+          {
+            "type":"text",
+            "id":"tag",
+            "label":"Tag",
+            "info":"This content will only show on articles with this tag applied"
+          },
+          {
+            "type":"textarea",
+            "id":"title",
+            "label":"Title"
+          },
+          {
+            "type":"image_picker",
+            "id":"image",
+            "label":"Image"
+          },
+          {
+            "type":"richtext",
+            "id":"content",
+            "label":"Content"
+          },
+          {
+            "type":"url",
+            "id":"button_url",
+            "label":"Button URL"
+          },
+          {
+            "type":"text",
+            "id":"button_text",
+            "label":"Button Text"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+

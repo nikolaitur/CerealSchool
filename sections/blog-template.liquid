@@ -1,0 +1,74 @@
+<div class="blog">
+  <div class="blog-header">
+      <h1>{{ blog.title }}</h1>
+  </div>
+
+  {% comment %} <div class="container">
+    {% include 'page-utility' %}
+  </div> {% endcomment %}
+
+  {%- paginate blog.articles by 15 -%}
+    <div class="container--slim row blog-articles">
+      {% for article in blog.articles %}
+        <div class="blog-article column column--xs-12 column--md-4">
+          <a href="{{ article.url }}" title="{{ article.title }}">
+            <figure class="lazy blog-article__image" {% if article.image != blank %}data-bg="{% if forloop.index == 1 %}{{ article.image | img_url: '2000x' }}{% else %}{{ article.image | img_url: '1200x' }}{% endif %}"{% endif %}>
+              <figcaption class="visually-hidden">{% if article.image.alt != blank %}{{ article.image.alt }}{% else %}{{ article.title }}{% endif %}</figcaption>
+            </figure>
+          </a>
+          <div class="blog-article__content">
+            <h2 class="blog-article__title h5">
+              <a href="{{ article.url }}" title="{{ article.title }}">
+                {{ article.title }}
+                <span class="blog-article__date">{{ article.published_at | date: '%B %d, %Y' }}</span>
+              </a>
+            </h2>
+            <div class="blog-article__excerpt">
+              {% if article.excerpt.size > 0 %}
+                {{ article.excerpt }}
+              {% else %}
+                {{ article.content | strip_html | truncate: 150 }}
+              {% endif %}
+            </div>
+            <a class="btn btn--small btn--no-style" href="{{ article.url }}" title="View More - {{ article.title }}">Read More</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if paginate.pages > 1 %}
+      <div class="container--slim">
+        <div class="blog-pagination">
+          {% if paginate.previous.is_link %}
+            <a class="blog-pagination__item blog-pagination__item--prev" href="{{ paginate.previous.url }}">
+              <span class="visually-hidden">Previous Page</span>
+              {% include 'icon', handle: 'arrow-left' %}
+            </a>
+          {% else %}
+            <div class="blog-pagination__item blog-pagination__item--disabled">{% include 'icon', handle: 'arrow-left' %}</div>
+          {% endif %}
+
+          <div class="blog-pagination__item blog-pagination__item--current">Page {{ paginate.current_page }} of {{ paginate.pages }}</div>
+
+          {% if paginate.next.is_link %}
+            <a class="blog-pagination__item blog-pagination__item--next" href="{{ paginate.next.url }}">
+              <span class="visually-hidden">Next Page</span>
+              {% include 'icon', handle: 'arrow-right' %}</a>
+          {% else %}
+            <div class="blog-pagination__item blog-pagination__item--disabled">
+              {% include 'icon', handle: 'arrow-right' %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+  {%- endpaginate -%}
+</div>
+
+{% schema %}
+  {
+    "name": "Blog",
+    "settings": [
+    ]
+  }
+{% endschema %}

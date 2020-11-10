@@ -1,0 +1,32 @@
+<header class="main-header">
+	<div class="enclose">
+		<div class="inner-head">
+			<div class="mn-logo">
+				<figure><img src="{{ section.settings.logo | img_url:'master' }}" alt="image" /></figure>
+			</div>
+			<div class="head-butn">
+				<a href="{{settings.sales-page-link}}">{{settings.sales-btn-text}}</a>
+			</div>
+		</div>
+	</div>
+</header>
+
+
+
+
+{% schema %}
+  {
+    "name": "Advertorial Header",
+    "settings": [{
+   		"type": "image_picker",
+   		"id":"logo",
+		"label":"Logo"
+	}]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

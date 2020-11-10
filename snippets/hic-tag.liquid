@@ -1,0 +1,166 @@
+<script>
+  (function() {
+    var script = document.createElement("script");
+    script.id = "hiconversion_30";
+    script.async = "async";
+    script.type = "text/javascript";
+    script.src = "//h30-deploy.hiconversion.com/origin/tag/BJTD7wMU";
+    var nodes = document.getElementsByTagName("script");
+    nodes[0].parentNode.insertBefore(script, nodes[0]);
+
+    var __hic = window.__hic = {};
+    __hic.version = '1.0.0';
+    __hic.data = {};
+    __hic.data.platform = 'shopify';
+    __hic.data.cu = {{ shop.currency | json }};
+    __hic.data.loc = {{ shop.locale | json }};
+    __hic.data.page = {};
+    __hic.data.page.bc = [];
+
+    {%- unless template == 'index' or template == 'cart' or template == 'list-collections' -%}
+      {%- if template contains 'page' -%}
+        __hic.data.page.bc.push({{page.title | json }});
+      {%- elsif template contains 'product' -%}
+        {%- if collection.url -%}
+          __hic.data.page.bc.push({{ collection.title | json }});
+        {%- endif -%}
+        __hic.data.page.bc.push({{ product.title | json }});
+      {%- elsif template contains 'collection' and collection.handle -%}
+        __hic.data.page.bc.push({{ collection.title | json }});
+        {%- if current_tags -%}
+          __hic.data.page.bc.push({{ current_tags | join: " + " | json }});
+        {%- endif -%}
+      {%- elsif template == 'blog' -%}
+        __hic.data.page.bc.push({{ blog.title | json }});
+        {%- if current_tags -%}
+          __hic.data.page.bc.push({{ current_tags | join: " + " | json }});
+        {%- endif -%}
+      {%- elsif template == 'article' -%}
+        __hic.data.page.bc.push({{ blog.title | json }});
+        __hic.data.page.bc.push({{ article.title | json }});
+      {%- elsif page_title -%}
+        __hic.data.page.bc.push({{ page_title | json }});
+      {%- endif -%}
+    {%- endunless -%}
+
+    {%- if cart -%}
+      __hic.data.cart = {
+        tt: {{ cart.total_price | money_without_currency | remove: ','}},
+        qt: {{ cart.item_count}},
+        li: []
+      };
+      {%- for item in cart.items -%}
+        __hic.data.cart.li.push({
+          tt: {{ item.line_price | money_without_currency | remove: ',' }},
+          pr: {{ item.price | money_without_currency | remove: ',' }},
+          qt: {{ item.quantity }},
+          {%- if item.variant.inventory_quantity -%}
+          iq: {{ item.variant.inventory_quantity }},
+          {%- endif -%}
+          ds: {{ item.total_discount | money_without_currency | remove: ',' }},
+          opr: {{ item.original_price | money_without_currency | remove: ',' }},
+          id: {{ item.product_id | json }},
+          url: {{ item.url | json }},
+          img: {{ item| img_url: '240x' | json }},
+          nm: {{ item.product.title | json }},
+          desc: {{ item.product.description | json }},
+          sku: {{ item.sku | json }},
+          cat: []
+        });
+
+        {%- unless item.variant.title contains 'Default' -%}
+          var opts = {};
+          {%- for option in item.product.options -%}
+            opts[{{ option | json}}] = {{ item.variant.options[forloop.index0] | json }};
+
+          {%- endfor -%}
+
+          __hic.data.cart.li[__hic.data.cart.li.length-1].opts = opts;
+        {%- endunless -%}
+
+
+        {%- for category in item.product.collections -%}
+          __hic.data.cart.li[__hic.data.cart.li.length-1].cat.push({{ category.title | json }});
+        {%- endfor -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- if product -%}
+      __hic.data.product = {
+        id: {{ product.id | json }},
+        nm: {{ product.title | json }},
+        url: {{ product.url | json }},
+        img: {{ product.featured_image | json }},
+        desc: {{ product.description | json }},
+        pr: {{ product.price | money_without_currency | remove: ',' }},
+        cat: []
+      };
+      {%- for category in product.collections -%}
+        __hic.data.product.cat.push({{ category.title | json }});
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- if customer -%}
+      __hic.data.user = {
+        id: {{ customer.id | json }},
+        tr: {{ customer.orders_count }},
+        email: {{ customer.email | json }},
+        nm: {{ customer.name | json }},
+        ts: {{ customer.total_spent | money_without_currency | remove: ',' }},
+        auth: true
+      };
+    {%- endif -%}
+    {%- if checkout.order_id or checkout.order_number -%}
+
+      __hic.data.tr = {
+        id: {{ checkout.order_id | json }},
+        num: {{ checkout.order_number | json }},
+        nm: {{ checkout.order_name | json }},
+        st: {{ checkout.subtotal_price | money_without_currency | remove: ',' }},
+        tx: {{ checkout.tax_price | money_without_currency | remove: ',' }},
+        tt: {{ checkout.total_price | money_without_currency | remove: ',' }},
+        ds: {{ checkout.discounts_amount | money_without_currency | remove: ',' }},
+        sh: {{ checkout.shipping_price | money_without_currency | remove: ',' }},
+        shm: {{ checkout.shipping_method.title | json }},
+        li: []
+      };
+
+      __hic.data.tr.gw = {{ checkout.transactions.first.gateway | json }};
+      __hic.data.tr.ct = {{ checkout.transactions.first.payment_details.credit_card_company | json }};
+
+      {%- for item in checkout.line_items -%}
+        __hic.data.tr.li.push({
+          tt: {{ item.line_price | money_without_currency | remove: ',' }},
+          pr: {{ item.price | money_without_currency | remove: ',' }},
+          qt: {{ item.quantity }},
+          {%- if item.variant.inventory_quantity -%}
+          iq: {{ item.variant.inventory_quantity }},
+          {%- endif -%}
+          opr: {{ item.original_price | money_without_currency | remove: ',' }},
+          ds: {{ item.total_discount | money_without_currency | remove: ','}},
+          id: {{ item.product_id | json }},
+          url: {{ item.url | json }},
+          img: {{ item| img_url: '240x' | json }},
+          nm: {{ item.product.title | json }},
+          desc: {{ item.product.description | json }},
+          sku: {{ item.sku | json }},
+          cat: []
+        });
+
+        {%- unless item.variant.title contains 'Default' -%}
+         var opts = {};
+         {%- for option in item.product.options -%}
+           opts[{{ option | json }}] = {{ item.variant.options[forloop.index0] | json }};
+         {%- endfor -%}
+
+          __hic.data.tr.li[__hic.data.tr.li.length-1].opts = opts;
+        {%- endunless -%}
+
+
+        {%- for category in item.product.collections -%}
+          __hic.data.tr.li[__hic.data.tr.li.length-1].cat.push({{ category.title | json }});
+        {%- endfor -%}
+      {%- endfor -%}
+    {%- endif -%}
+  })();
+</script>

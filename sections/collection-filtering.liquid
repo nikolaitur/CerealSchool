@@ -1,0 +1,126 @@
+<div class="collection-filters">
+  <div class="container">
+    {% include 'breadcrumbs' %}
+
+    {% assign current_handle = collection.handle %}
+
+    <div class="widget widget--filtering">
+      {% for block in section.blocks %}
+        {% if block.type == 'facet' %}
+
+          {% assign all_filter_tags = '' %}
+          {% assign show_filters = true %}
+          {%- assign allowed = block.settings.allowed_collections -%}
+          {%- assign disallowed = block.settings.disallowed_collections -%}
+          {%- assign filters = block.settings.filters | replace: ' ,', ',' | replace: ', ', ',' | split: ',' | uniq -%}
+          {% assign group = block.settings.title %}
+
+          {% if allowed != blank %}
+            {% assign show_filters = false %}
+            {% if allowed contains current_handle %}
+              {% assign show_filters = true %}
+            {% endif %}
+          {% endif %}
+
+          {% if disallowed contains current_handle %}
+            {% assign show_filters = false %}
+          {% endif %}
+
+          {% for filter in filters %}
+            {% for tag in collection.tags %}
+              {% assign full_filter = filter | prepend: ':' | prepend: group %}
+              {% if tag == full_filter %}
+                {% capture all_filter_tags %}{{ all_filter_tags }},{{ filter }}{% endcapture %}
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+
+          {% if show_filters %}
+            <div class="filtering-group">
+              <h3 class="filtering-group__title" data-original-text="{{ block.settings.title }}">
+                <span>{{ block.settings.title }}</span>
+                {% include 'icon', handle: 'chevron-down' %}
+              </h3>
+              <ul class="filtering-list filtering-list-items">
+                {% assign all_filter_tags = all_filter_tags | remove_first: ',' | split: ',' %}
+                {% for filter in all_filter_tags %}
+                  {% assign full_filter = filter | handleize | prepend: ':' | prepend: group %}
+                  <li class="filtering-list-item{% if current_tags contains full_filter %} filtering-list-item--selected{% endif %}" data-group="{{ group }}" data-value="{{ full_filter }}" data-label="{{ filter }}"><span>{{ filter }}</span>{% include 'icon', handle: 'checkmark' %}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          {%endif %}
+        {%endif %}
+      {% endfor  %}
+
+      <div class="filtering-group">
+        <h3 class="filtering-group__title" data-original-text="Sort">
+          <span>Sort</span>
+          {% include 'icon', handle: 'chevron-down' %}
+        </h3>
+        <ul class="filtering-list filtering-list-items">
+          <li class="filtering-list-item" data-group="sort_by" data-value="sort_by:price-ascending"><span>Price: Low to High</span>{% include 'icon', handle: 'checkmark' %}</li>
+          <li class="filtering-list-item" data-group="sort_by" data-value="sort_by:price-descending"><span>Price: High to Low</span>{% include 'icon', handle: 'checkmark' %}</li>
+          <li class="filtering-list-item" data-group="sort_by" data-value="sort_by:title-ascending"><span>A-Z</span>{% include 'icon', handle: 'checkmark' %}</li>
+          <li class="filtering-list-item" data-group="sort_by" data-value="sort_by:title-descending"><span>Z-A</span>{% include 'icon', handle: 'checkmark' %}</li>
+          <li class="filtering-list-item" data-group="sort_by" data-value="sort_by:created-ascending"><span>Oldest to Newest</span>{% include 'icon', handle: 'checkmark' %}</li>
+          <li class="filtering-list-item" data-group="sort_by" data-value="sort_by:created-descending"><span>Newest to Oldest</span>{% include 'icon', handle: 'checkmark' %}</li>
+          <li class="filtering-list-item" data-group="sort_by" data-value="sort_by:best-selling"><span>Best Selling</span>{% include 'icon', handle: 'checkmark' %}</li>
+        </ul>
+      </div>
+      <div class="filtering-group filtering-group--clear"{% unless current_tags.size %} style="display: none;"{% endunless %}>
+        <h3 class="filtering-group__title">Clear Filters</h3>
+      </div>
+      <div class="filtering-group filtering-group--apply">
+        <h3 class="filtering-group__title">Apply Filters</h3>
+      </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          window.REBASE = window.REBASE || {};
+          REBASE.theme = REBASE.theme || {};
+          REBASE.theme.collection = REBASE.theme.collection || {};
+          REBASE.theme.collection.url = "{{ collection.url }}";
+          REBASE.theme.collection.initialTags = {{ current_tags | json }};
+        })
+      </script>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Collection Filtering",
+    "settings":[],
+    "blocks": [
+      {
+        "type":"facet",
+        "name":"Filtering Facets",
+        "settings":[
+          {
+            "type":"text",
+            "id":"title",
+            "label":"Facet Title"
+          },
+          {
+            "type":"textarea",
+            "id":"filters",
+            "label":"Facet Filters"
+          },
+          {
+            "type":"textarea",
+            "id":"allowed_collections",
+            "label":"Allowed Collection handles",
+            "info":"Comma separated list of collection handles to show this facet on. Leave blank to show on all."
+          },
+          {
+            "type":"textarea",
+            "id":"disallowed_collections",
+            "label":"Disallowed Collection handles",
+            "info":"Comma separated list of collection handles to hide this facet on. Leave blank to show on all."
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

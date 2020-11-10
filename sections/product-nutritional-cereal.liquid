@@ -1,0 +1,165 @@
+<style>
+  .slider--{{ section.id }} { background-color: {{ section.settings.bg_color }}; }
+  {% assign accent_image_pos = section.settings.accent_image_position | split: '-' %}
+  {% if accent_image_pos[0] == 'top' %}
+    .slider--{{ section.id }} .slider__accent-image { top: {{ section.settings.accent_image_offset }};}
+  {% endif %}
+  {% if accent_image_pos[0] == 'bottom' %}
+    .slider--{{ section.id }} .slider__accent-image { bottom: {{ section.settings.accent_image_offset }};}
+  {% endif %}
+  {% if accent_image_pos[1] == 'left' %}
+  .slider--{{ section.id }} .slider__accent-image { left: 0; }
+  {% endif %}
+  {% if accent_image_pos[1] == 'right' %}
+  .slider--{{ section.id }} .slider__accent-image { right: 0; }
+  {% endif %}
+</style>
+
+<section class="section section--slider slider slider--{{ section.id }} nutritional lazy" {{ section.shopify_attributes }} >
+  <div class="sliders section__content">
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="slider__item swiper-slide slider__item--{{ block.id }} nutritional__item" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+            <div class="nutritional__item-container">
+              <div class="nutritional__item-column">
+                <h2 class="nutritional__item-heading">{{ section.settings.title | replace: ' ', ' <br>' }}</h2>
+                <div class="nutritional__item-image-wrapper">
+                  <img class="lazy nutritional__item-image" data-src="{{ block.settings.image | img_url: '1000x' }}" alt="{{ block.settings.title }}" />
+                  {% if block.settings.accent_image != blank %}
+                    <img class="lazy nutritional__item-accent-image" data-src="{{ block.settings.accent_image | img_url: '200x' }}" alt="{{ block.settings.title }}" />
+                  {% endif %}
+                </div>
+                <h3 class="nutritional__item-title" style="color: {{ block.settings.color }};">{{ block.settings.title }}</h3>
+                <p class="nutritional__item-content"><span>Ingredients: </span>{{ block.settings.content }}</p>
+
+              </div>
+              <div class="nutritional__item-column">
+                <img class="lazy nutritional__item-secondary-image" data-src="{{ block.settings.secondary_image | img_url: '800x' }}" alt="{{ block.settings.title }} Nutritional Facts" />
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="swiper__button swiper__button--next swiper__button-next--{{ section.id }}{% if desktop_no_sliding == true %} swiper-button--mobile-only{% endif %}">{% include 'icon', handle: 'next' %}</div>
+      <div class="swiper__button swiper__button--prev swiper__button-prev--{{ section.id }}{% if desktop_no_sliding == true %} swiper-button--mobile-only{% endif %}">{% include 'icon', handle: 'prev' %}</div>
+    </div>
+  </div>
+
+  {% if section.settings.accent_image != blank %}
+    <img class="lazy slider__accent-image" data-src="{{ section.settings.accent_image | img_url: '1000x' }}" alt="{% if section.settings.accent_image.alt != blank %}{{ section.settings.accent_image.alt }}{% else %}{{ section.settings.title }}{% endif %}" />
+  {% endif %}
+
+  <script>
+    var swiper_nutritional,
+      swiper_nutritional_options = {
+        effect: 'slide',
+        loop: true,
+        threshold: 10,
+        navigation: {
+          nextEl: '.swiper__button-next--{{ section.id }}',
+          prevEl: '.swiper__button-prev--{{ section.id }}',
+        }
+      };
+
+    document.addEventListener('DOMContentLoaded', function() {
+      swiper_nutritional = new Swiper('.slider--{{ section.id }} .swiper-container', swiper_nutritional_options)
+    });
+
+    document.addEventListener('shopify:block:select', function(e) {
+      var targetSlide = $('.slider__item--' + e.detail.blockId);
+      swiper_nutritional.slideToLoop( targetSlide.data('index') );
+    });
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Nutritional",
+  "settings": [
+    {
+      "type":"header",
+      "content":"Design Settings"
+    },
+    {
+      "type":"color",
+      "id":"bg_color",
+      "label":"Container Background Color",
+      "default":"#fff"
+    },
+    {
+      "type":"color",
+      "id":"text_color",
+      "label":"Text Color",
+      "default":"#252525"
+    },
+    {
+      "type":"select",
+      "id":"accent_image_position",
+      "label":"Accent Image Position",
+      "options":[
+        {"label":"Top Left","value":"top-left"},
+        {"label":"Top Right","value":"top-right"},
+        {"label":"Bottom Left","value":"bottom-left"},
+        {"label":"Bottom Right","value":"bottom-right"}
+      ]
+    },
+    {
+      "type":"text",
+      "id":"accent_image_offset",
+      "label":"Accent Image Offset",
+      "info":"Value in px to pull offset. Ex: '-20px'"
+    },
+    {
+      "type":"header",
+      "content":"Content Settings"
+    },
+    {
+      "type":"text",
+      "id":"title",
+      "label":"Heading",
+      "default":"Nutritional Facts"
+    },
+    {
+      "type":"image_picker",
+      "id":"accent_image",
+      "label":"Accent Image"
+    }
+  ],
+  "blocks":[
+    {
+      "type":"slider_item",
+      "name":"Slider item",
+      "settings":[
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Title"
+        },
+        {
+          "type":"textarea",
+          "id":"content",
+          "label":"Content"
+        },
+        {
+          "type":"image_picker",
+          "id":"image",
+          "label":"Main Image"
+        },
+        {
+          "type":"image_picker",
+          "id":"secondary_image",
+          "label":"Secondary Image"
+        },
+        {
+          "type":"image_picker",
+          "id":"accent_image",
+          "label":"Accent Image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

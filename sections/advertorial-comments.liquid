@@ -1,0 +1,28 @@
+<div class="feel-comments">
+  <h4>{{ section.settings.cant-express-heading}}</h4>
+    {{ section.settings.cant-express-text}}						
+</div>
+
+{% schema %}
+  {
+    "name": "Advertorial Comments",
+    "settings": [
+  {
+   		"type": "text",
+   		"id":"cant-express-heading",
+		"label":"Cant Express Heaading"
+	},
+  {
+   		"type": "textarea",
+   		"id":"cant-express-text",
+		"label":"Cant Express Text"
+	}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

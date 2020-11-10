@@ -1,0 +1,244 @@
+<div class="main-content">
+	<div class="enclose">
+	<h1>{{section.settings.selling-header}}</h1>
+	<h6>{{section.settings.selling-date}}</h6>
+	<h6></h6>
+      <div class="inner-content">
+			<div class="main-contentlf">
+				<div class="content-sec1">
+					<div class="logos">
+						<h5>{{ section.settings.featured-on}}</h5>
+						<figure><img src="{{ section.settings.featured-logo | img_url:'master' }}" alt="image" /></figure>
+					</div>
+					<div class="customer-review1">
+						<figure><img src="{{ section.settings.customer-image | img_url:'master' }}" alt="image" /></figure>
+					</div>
+					<div class="feel-comments">
+                      <h4>{{ section.settings.cant-express-heading}}</h4>
+						{{ section.settings.cant-express-text}}
+
+						
+					</div>
+				</div>
+				<div class="last-batch">
+                  <h2>{{ section.settings.last-bacth-heading}}</h2>
+					<div class="last-butn">
+						<a href="{{settings.sales-page-link}}">{{settings.sales-btn-text}}</a>
+					</div>
+				</div>
+			<div class="situation">
+					<h3>{{ section.settings.situation-heading}}</h3>
+					{{ section.settings.situtation-content-1}}
+					<figure><img src="{{ section.settings.situtation-content-image-1 | img_url:'master' }}" alt="image" /></figure>
+					{{ section.settings.situtation-content-2}}
+					<figure><img src="{{ section.settings.situtation-content-image-2 | img_url:'master' }}" alt="image" /></figure>
+				</div>
+				<div class="last-batch">
+					<h2>{{ section.settings.last-batch-s2}}</h2>
+					<div class="last-butn">
+						<a href="{{settings.sales-page-link}}">{{settings.sales-btn-text}}</a>
+					</div>
+				</div>
+				<div class="situation">
+					<h3>{{ section.settings.last-batch-section-2}} </h3>
+				
+
+				<figure><img src="{{ section.settings.about-image | img_url:'master' }}" alt="image" /></figure>
+				<div class="founder-block">
+					<ul>
+						<li><img src="{{ section.settings.co-founder-image | img_url:'master' }}" alt="image" /></li>
+						<li>{{ section.settings.co-founder-name}} </li>
+					</ul>
+				</div>
+				</div>
+			</div>
+			<div class="main-contentrt">
+				<div class="hurry-sec">
+					<h4>{{ section.settings.side-bar-hurrytext}}</h4>
+					<figure><img src="{{ section.settings.side-bar-hurryimg | img_url:'master' }}" alt="image" /></figure>
+					<div class="hurry-butn">
+						<a href="{{settings.sales-page-link}}">{{settings.sales-btn-text}}</a>
+					</div>
+				</div>
+				<div class="reviews-num">
+					<h2>{{ section.settings.side-bar-reviews}}</h2>
+					<h3>{{ section.settings.side-bar-reportcard}}</h3>
+				</div>
+				<div class="customer-mnreview">
+					
+                      {% for block in section.blocks %}
+							{% if block.type == 'AllReviews' %}
+                  			<div class="custm-block1">
+                              <div class="cus-star"><figure><img src="{{ block.settings.side-review-star | img_url:'master' }}" alt="image" /></figure></div>
+						<p>{{ block.settings.side-review-text-1}}</p>
+						<div class="cus-img"><figure><img src="{{ block.settings.side-review-review-p | img_url:'master' }}" alt="image" /></figure></div>
+						<h6>KI MOORE</h6>
+                              </div>
+                        {% endif %}
+                        {% endfor %}
+
+                      
+						
+					
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+		
+
+{% schema %}
+  {
+    "name": "Selling Quickly",
+    "settings": [
+      {
+   		"type": "text",
+   		"id":"selling-header",
+		"label":"Quickly header"
+	},
+      {
+   		"type": "text",
+   		"id":"selling-date",
+		"label":"Selling Date"
+	},
+ {
+   		"type": "text",
+   		"id":"featured-on",
+		"label":"Featured On Text"
+	},
+
+ {
+   		"type": "image_picker",
+   		"id":"featured-logo",
+		"label":"Featured On Text"
+	},
+{
+   		"type": "image_picker",
+   		"id":"customer-image",
+		"label":"Customer Image"
+	},
+{
+   		"type": "text",
+   		"id":"cant-express-heading",
+		"label":"Cant Express Heaading"
+	},
+{
+   		"type": "textarea",
+   		"id":"cant-express-text",
+		"label":"Cant Express Text"
+	},
+      {
+   		"type": "text",
+   		"id":"last-bacth-heading",
+		"label":"Last Batch Heading"
+	} ,
+      {
+   		"type": "text",
+   		"id":"situation-heading",
+		"label":"Situatation Heading"
+	},
+      {
+   		"type": "textarea",
+   		"id":"situtation-content-1",
+		"label":"Situatation Content"
+	},
+             {
+   		"type": "textarea",
+   		"id":"situtation-content-2",
+		"label":"Situatation Content 2"
+	},
+        {
+   		"type": "image_picker",
+   		"id":"situtation-content-image-1",
+		"label":"Situatation Image 1"
+	},
+       {
+   		"type": "image_picker",
+   		"id":"situtation-content-image-2",
+		"label":"Situatation Image 2"
+	},
+     {
+   		"type": "textarea",
+   		"id":"last-batch-s2",
+		"label":"Last Batch 2"
+	},
+      {
+   		"type": "textarea",
+   		"id":"last-batch-section-2",
+		"label":"Last Batch Section Text"
+	},
+       {
+   		"type": "image_picker",
+   		"id":"about-image",
+		"label":"About Image"
+	},{
+   		"type": "image_picker",
+   		"id":"co-founder-image",
+		"label":"CoFounder Image"
+	},
+      {
+   		"type": "text",
+   		"id":"co-founder-name",
+		"label":"Co Founder Name"
+	},
+      
+      {
+   		"type": "text",
+   		"id":"side-bar-hurrytext",
+		"label":"Side Bar Hurry Text"
+	},
+      
+        {
+   		"type": "image_picker",
+   		"id":"side-bar-hurryimg",
+		"label":"Side Bar Hurry Image"
+	},
+        {
+   		"type": "text",
+   		"id":"side-bar-reviews",
+		"label":"Side Bar Reviews"
+	},
+        {
+   		"type": "text",
+   		"id":"side-bar-reportcard",
+		"label":"Side Bar Report Card"
+	}
+                  
+                  
+      
+     
+      
+      ],
+      "blocks":[
+{
+"type":"AllReviews",
+"name":"AllReviews",
+"settings":[
+{
+"type":"image_picker",
+"id":"side-review-star",
+"label":"Stars Image"
+},
+{
+"type":"textarea",
+"id":"side-review-text-1",
+"label":"Review Text"
+},
+      {
+"type":"image_picker",
+"id":"side-review-review-p",
+"label":"Person Image"
+}
+]
+}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

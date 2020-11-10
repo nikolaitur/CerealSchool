@@ -1,0 +1,72 @@
+<section class="section section--icons icons icons--with-mobile icons--{{ section.id }}" {{ section.shopify_attributes }} >
+  <style>.icons--{{ section.id }} { background-color: {{ section.settings.bg_color }}; }</style>
+  {% if section.settings.title != blank %}
+    <div class="section__header">
+      <h2 class="center regular h6">{{ section.settings.title }}</h2>
+    </div>
+  {% endif %}
+  <div class="section__content icons__items icons__items--five {{ section.settings.container_width }}">
+    {% for block in section.blocks %}
+      <div class="icon__item{% if block.settings.mobile_image %} is-mobile-image{% else %} is-desktop-image{% endif %}" {{ block.shopify_attributes }}>
+        <img class="lazy" data-src="{{ block.settings.image | img_url: '2000x' }}" alt="{% if block.settings.image.alt != blank %}{{ block.settings.image.alt }}{% else %}{{ block.settings.title }}{% endif %}"/>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "As seen in",
+  "settings": [
+    {
+      "type":"header",
+      "content":"Design Settings"
+    },
+    {
+      "type":"color",
+      "id":"bg_color",
+      "label":"Container Background Color",
+      "default":"#fff"
+    },
+    {
+      "type":"select",
+      "id":"container_width",
+      "label":"Container Width",
+      "options":[
+        {"value":"container--full", "label":"Full Width"},
+        {"value":"container", "label":"Contained"}
+      ],
+      "default":"container"
+    },
+    {
+      "type":"header",
+      "content":"Content Settings"
+    },
+    {
+      "type":"text",
+      "id":"title",
+      "label":"Heading"
+    }
+  ],
+  "blocks": [
+    {
+      "type":"icon",
+      "name":"Icons",
+      "settings":[
+        {
+          "type":"image_picker",
+          "id":"image",
+          "label":"Image"
+        },
+        {
+          "type":"checkbox",
+          "label":"Mobile Image?",
+          "id":"mobile_image",
+          "default":false
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

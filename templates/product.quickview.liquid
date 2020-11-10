@@ -1,0 +1,6 @@
+{% layout none %}
+{% assign current_variant = product.selected_or_first_available_variant %}
+{% section 'product-template' %}
+{% unless product == empty %}
+  <script type="application/json" id="product__json">{{ product | json }}</script>
+{% endunless %}

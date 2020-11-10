@@ -1,0 +1,43 @@
+<nav id="mobile-navigation-wrapper">
+  <ul class="mobile-navigation-items">
+    {% for link in linklists[section.settings.main_linklist].links %}
+      <li class="mobile-navigation-item mobile-navigation-item--{{ link.title | handleize }}">
+        <a href="{{ link.url }}" title="{{ link.title | escape }}">
+          {{ link.title | escape }}
+          {% if link.links.size > 0 %}
+            <div class="mobile-navigation-item__toggle">{% include 'icon', handle: 'chevron-down' %}</div>
+          {% endif %}
+        </a>
+
+        {% if link.links.size > 0  %}
+          <ul class="mobile-dropdown mobile-dropdown-level-2">
+            {% for sub_link in link.links %}
+              <li>
+                {% if link.url != '#heading' %}<a href="{{ sub_link.url }}" title="{{ sub_link.title | escape }}">{% else %}<h4>{% endif %}
+                  {{ sub_link.title }}
+                {% if link.url != '#heading' %}</a>{% else %}</h4>{% endif %}
+
+                {% if link.links.size > 0  %}
+                  <ul class="mobile-dropdown mobile-dropdown-level-3">
+                    {% for sub_sub_link in sub_link.links %}
+                      <li><a href="{{ sub_sub_link.url }}" title="{{ sub_sub_link.title | escape }}">{{ sub_sub_link.title }}</a></li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+    {% if customer %}
+      <li class="mobile-navigation-item mobile-navigation-item--account">
+        <a href="{{ routes.account_url }}" title="Account">My Account</a>
+      </li>
+    {% else %}
+      <li class="mobile-navigation-item mobile-navigation-item--login">
+        <a href="{{ routes.account_login_url }}" title="Login">Login</a>
+      </li>
+    {% endif %}
+  </ul>
+</nav>

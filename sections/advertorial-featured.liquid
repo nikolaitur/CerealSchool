@@ -1,0 +1,37 @@
+<div class="logos">
+    <h5>{{ section.settings.featured-on}}</h5>
+    <figure><img src="{{ section.settings.featured-logo | img_url:'master' }}" alt="image" /></figure>
+</div>
+<div class="customer-review1">
+    <figure><img src="{{ section.settings.customer-image | img_url:'master' }}" alt="image" /></figure>
+</div>
+
+{% schema %}
+  {
+    "name": "Advertorial Featured",
+    "settings": [
+   {
+   		"type": "text",
+   		"id":"featured-on",
+		"label":"Featured On Text"
+	},
+
+   {
+   		"type": "image_picker",
+   		"id":"featured-logo",
+		"label":"Featured On Text"
+	},
+   {
+   		"type": "image_picker",
+   		"id":"customer-image",
+		"label":"Customer Image"
+	}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

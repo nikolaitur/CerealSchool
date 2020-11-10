@@ -1,0 +1,42 @@
+<main class="content content--has-sidebar content--sidebar-left">
+  <div class="container--slim">
+    <div class="row row--gutters row--reversed">
+      <section class="page-main column column--xs-12 column--md-9">
+        <header class="page-header">
+          <h1>Your Orders</h1>
+        </header>
+        <div class="page-content" id="customer_orders">
+          {% if customer.orders.size != 0 %}
+          <table>
+            <thead>
+              <tr>
+                <th class="order_number">Order</th>
+                <th class="date">Date</th>
+                <th class="payment_status">Payment</th>
+                <th class="fulfillment_status">Fulfillment</th>
+                <th class="total">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for order in customer.orders %}
+              <tr class="{% cycle 'odd', 'even' %} {% if order.cancelled %}cancelled_order{% endif %}">
+                <td>{{ order.name | link_to: order.customer_url }}</td>
+                <td><span class="note">{{ order.created_at | date: "%m/%d/%y" }}</span></td>
+                <td><span class="status--{{ order.financial_status }}">{{ order.financial_status }}</span></td>
+                <td><span class="status--{{ order.fulfillment_status }}">{{ order.fulfillment_status }}</span></td>
+                <td><span class="total money">{{ order.total_price | money | replace: '$ ','$' }}</span></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
+            <p>You haven't placed any orders yet. <a href="/collections/all" title="Start Shopping">Start Shopping</a>.</p>
+          {% endif %}
+        </div>
+      </section>
+      <div class="page-sidebar column column--xs-12 column--md-3">
+        {% include 'customer-sidebar-nav' %}
+      </div>
+    </div>
+  </div>
+</main>

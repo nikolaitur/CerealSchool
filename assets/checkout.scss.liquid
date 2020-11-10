@@ -1,0 +1,669 @@
+// Fonts
+
+@font-face {
+  font-family: Futura;
+  font-weight: 500;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/futura/futura_n5.5632c6d8a6da9141ef40e51d14264a007bcae7e5.woff2") format("woff")
+}
+
+@font-face {
+  font-family: Futura;
+  font-weight: 400;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/futura/futura_n4.df36ce3d9db534a4d7947f4aa825495ed740e410.woff2") format("woff2"),url("https://fonts.shopifycdn.com/futura/futura_n4.6bce24beb4ba1ff4ddeb20f7cd6e2fa513a3d6ec.woff") format("woff")
+}
+
+@font-face {
+  font-family: Futura;
+  font-weight: 700;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/futura/futura_n7.153f8fffad8e901382179997bbb87aa7a5ff33b3.woff2") format("woff2"),url("https://fonts.shopifycdn.com/futura/futura_n7.711e9243b3eccc2745ecf4731eba61651a122376.woff") format("woff")
+}
+
+@font-face {
+  font-family: Futura;
+  font-weight: 700;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/futura/futura_n7.153f8fffad8e901382179997bbb87aa7a5ff33b3.woff2") format("woff2"),url("https://fonts.shopifycdn.com/futura/futura_n7.711e9243b3eccc2745ecf4731eba61651a122376.woff") format("woff")
+}
+
+@font-face {
+  font-family: Futura;
+  font-weight: 400;
+  font-style: oblique;
+  src: url("https://fonts.shopifycdn.com/futura/futura_o4.9747e2e6ed2f11b894984527c927b42234e48815.woff2") format("woff2"),url("https://fonts.shopifycdn.com/futura/futura_o4.d5edc6b1d9a050bbe0beb9093d73b883bf18c6c1.woff") format("woff")
+}
+
+@font-face {
+  font-family: Futura;
+  font-weight: 700;
+  font-style: oblique;
+  src: url("https://fonts.shopifycdn.com/futura/futura_o7.ece1472e1fefbb598873ba72dc2bfa2e050347c1.woff2") format("woff2"),url("https://fonts.shopifycdn.com/futura/futura_o7.7028291332320745f0217c346c800da7522a22b2.woff") format("woff")
+}
+
+/*================ GLOBAL ================*/
+/*============================================================================
+  #Normalize
+  Based on normalize.css v3.0.2 | MIT License | git.io/normalize
+==============================================================================*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+body,
+input,
+textarea,
+button,
+select {
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  background-color: transparent;
+}
+
+b,
+strong {
+  font-weight: 700;
+}
+
+em {
+  font-style: italic;
+}
+
+
+small {
+  font-size: 80%;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+img {
+  max-width: 100%;
+  border: 0;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+button[disabled],
+html input[disabled] {  
+    cursor: default;
+}
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+input[type="search"],
+input[type="number"],
+input[type="email"],
+input[type="password"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+textarea {
+  overflow: auto;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/*============================================================================
+  Fast Tap
+  enables no-delay taps (FastClick-esque) on supporting browsers
+==============================================================================*/
+a,
+button,
+[role="button"],
+input,
+label,
+select,
+textarea {
+  touch-action: manipulation;
+}
+
+/*================ Custom ================*/
+
+body {
+  font-family:  'Futura', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; 
+  color: #3D3D38;
+  font-size: 16px;
+  line-height: 26px;  
+  font-weight: 400;
+}
+
+// Layout
+.wrap {
+  padding: 0 2%;
+  width: 90%;      
+}
+
+@media (min-width: 1000px) {
+  .wrap {
+    padding: 0 2%;
+    width: 90%;      
+  }  
+  .main {
+    width: 57%;
+    padding-right: 7%;
+  }
+  .sidebar {
+    width: 43%;
+    padding-left: 5%;
+  }
+  .main__header {
+    padding-bottom: 3.4em;
+  }
+  .express-checkout {
+    margin-bottom: -30px;
+  }
+}
+
+@media (min-width: 750px) {
+  .section {
+    padding-top: 2.5em;
+  }
+}
+
+// Inputs Fields
+.main .field__input,
+.field__input,
+input[type="text"], 
+input[type="email"], 
+input[type="password"], 
+input[type="tel"]{
+  border-radius: 3px;
+  border-color: #EAE8ED;
+  font-size: 15px;
+  line-height: 26px;
+  color:#697071 ;  
+  padding: 0.55em 0.9em 0.55em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.field__input {
+  border-radius: 3px;
+  font-size: 15px;
+  line-height: 26px;
+  color:#697071 ;  
+  padding: 0.55em 0.9em 0.55em;
+  height: 45px;
+}
+
+.main .field__input::placeholder,
+input::placeholder,
+textarea::placeholder{
+  color: #B4B9BB;
+  opacity: 1;
+}
+
+.input-radio:after {
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  margin-top: -3px;
+}
+
+.floating-labels .main .field__label {
+  color: #B4B9BB;
+}
+
+@media (max-width: 749px) {
+    .review-block__label {
+      min-width: 100px;
+    }  
+}
+
+.review-block__label {
+  color: #B4B9BB;
+}
+
+.review-block__content {
+  color: #697071;
+}
+
+.field__message {
+  line-height: 1.1em;
+  font-size: 14px;
+}
+
+.card-fields-container--loaded .field__message--error {
+  font-size: 14px;
+  max-height: 3em;
+}
+
+.radio__label__accessory > span .payment-icon-list__more {
+  display: none;
+}
+
+.floating-labels .field__label {
+  margin: 5px 0 3px;
+  font-size: 0.65714em;
+  line-height: 13px; 
+}
+
+.floating-labels .field--show-floating-label .field__input {
+  padding-top: 1em;
+  padding-bottom: 0.32714em;
+}
+
+.sidebar .field__input {
+  font-size: 15px;
+  font-weight: 400;  
+  border-color: #E9E9E9;
+  border-radius: 3px;
+}
+
+.sidebar .field__input::placeholder {
+  color: #ADB2B3;
+}
+
+.card-fields-iframe {
+  height: 45px !important;
+  font-family: 'Futura', sans-serif;
+}
+
+.card-fields-iframe input {
+  font-family: 'Futura', sans-serif;
+}
+
+.card-fields-container--loaded .field__input--iframe-container {
+  padding: 0 5px;
+  height: 45px;
+  border-color: #E9E9E9;
+}
+
+.card-fields-container--loaded .field--show-floating-label .field__input {
+  padding-top: 0;
+}
+
+.content-box__emphasis {
+  font-weight: 400;
+  color: #697071;
+}
+
+// Headers
+h2 {
+  color: #24254E;
+  font-family: 'Futura', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.section__title {
+  color: #24254E;
+  font-family: 'Futura', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+} 
+
+.layout-flex__item > span {
+  color: #697071;
+}
+
+.section__header {
+  margin-bottom: 0.8em;
+}
+
+.checkbox__label {
+  color: #697071;
+  font-size: 14px;
+  line-height: 22px; 
+}
+
+.dynamic-checkout__title {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #B4B9BB !important;
+  font-weight: 500;
+}
+
+.dynamic-checkout__title::before {
+  border-top-left-radius: 3px;
+}
+
+.dynamic-checkout__title::after {
+  border-top-right-radius: 3px;
+}
+
+.alternative-payment-separator::after,
+.alternative-payment-separator::before {
+  background-color: #EFF2F3;
+}
+
+.dynamic-checkout__content {
+  border-color: #EAE8ED;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.alternative-payment-separator {
+  font-size: 11px;
+  color: #B4B9BB;
+}
+
+// Breadcrumbs
+
+.breadcrumb__item {
+  color: #B4B9BB;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.breadcrumb__item:first-child {
+  display: none;
+}
+
+.breadcrumb__item--current {  
+  color: #697071;
+}
+
+.breadcrumb__item--blank {  
+  color: #B4B9BB;
+}
+
+.main .icon-svg--color-adaptive-light {
+  color: #B4B9BB;
+}
+
+// Buttons
+@media (max-width: 749px) {
+  .btn {      
+      padding: 0;
+  }
+}
+
+.btn {
+  width: 300px;
+  padding: 10px 26px;
+  font-weight: 400;
+}
+
+.btn:hover {
+  color: white;
+  background-color: #E8675E;
+}
+
+// Main Content
+@media (min-width: 750px) {
+  .main__content {
+      padding-bottom: 2.6em;
+  }
+}
+
+.content-box {
+  border: 1px #E9E9E9 solid;
+  border-radius: 3px;
+  color: #697071;
+}
+
+.content-box__row {
+  padding: 0.9em;
+}
+
+.content-box__row:first-child,
+.content-box__row:last-child {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.review-block ~ .review-block {
+  padding-top: 0.8em;
+}
+
+.review-block__link {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.section--payment-method .section__header .section__title {
+  display: inline-block;
+  font-size: 19px;
+  color: #24254E;
+}
+
+.section--payment-method .section__header .section__text {    
+  font-size: 14px;
+  color: #697071;
+}
+
+@media (min-width: 750px) {
+  .section--payment-method .section__header .section__text {
+    float: right;
+    margin-top: 0;
+  }
+}
+
+@media (min-width: 420px) {
+  .payment-method-wrapper .radio__label,.payment-method-wrapper .radio__label__accessory {
+    display: table-cell;     
+  }
+}
+
+.content-box__row ~ .content-box__row {
+  border-top: 1px solid #E9E9E9;
+}
+
+.content-box__row--secondary {
+  background-color: #FAFBFB;
+}
+
+// .step[data-step="payment_method"] .step__sections .section--reductions {
+//   display: none;
+// }
+
+.step[data-step="contact_information"] .step__footer .step__footer__previous-link {
+  display: none;
+}
+
+
+//Sidebar 
+.sidebar {
+  padding-top: 5em;
+}
+
+.sidebar::after {
+  box-shadow: none;
+}
+
+.sidebar__content .section__title {
+  display: none;
+}
+
+@media (min-width: 1000px) {
+  .sidebar__content .section__title {
+    display: block;    
+    font-family: 'Futura', sans-serif;
+    font-size: 22px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+.sidebar .order-summary__emphasis {
+  font-size: 17px;
+  color: #24254E;
+}
+
+.sidebar .order-summary__small-text {
+  font-size: 14px;
+  color: #879093;
+  padding-right: 10px;
+}
+
+.product-thumbnail {
+  background: none;
+}
+
+.product-thumbnail {
+  width: 5em;
+  height: 5em;
+  border-radius: 50%;  
+  margin-right: 20px;  
+}
+
+.product-thumbnail__wrapper {
+  border-radius: 50%;
+}
+
+.product-thumbnail::after {
+  border: none;
+}
+
+.product-thumbnail__quantity {
+  background-color: #F26C62;
+  top: 0em;
+  right: -0.25em;
+}
+
+.sidebar .total-line-table__tbody+.total-line-table__footer .total-line th::before,
+.sidebar .total-line-table__tbody+.total-line-table__footer .total-line td::before {
+  background-color: #E1EAEC;
+}
+
+.order-summary__section--product-list::after {
+  display: none;
+}
+
+.order-summary__sections .order-summary__section:first-child {
+  border-top: none;
+}
+
+.order-summary__section ~ .order-summary__section {
+  border-top: 1px solid #E1EAEC;
+}
+
+.order-summary__section {
+  padding-top: 1.2em;
+  padding-bottom: 1.2em;
+}
+
+.total-line__name {
+  font-size: 15px;
+  color: #879093;
+}
+
+.total-line__price .order-summary__emphasis {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.sidebar .payment-due-label__total,
+.sidebar .payment-due__price {
+  color: #24254E;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.payment-due__currency {
+  display: none;
+}
+
+// Footer
+a, .link {
+  color: #9C9C9C;
+}
+
+.policy-list .policy-list__item:first-child {
+  display: none;
+}
+
+.policy-list__item a {
+  font-size: 14px;
+  color: #9C9C9C;
+}
+
+.step[data-step="thank-you"] .section:last-child {
+  padding-top: 0;
+}
+
+.couponCode {
+  color: #9C9C9C;
+}
+
+// Postscript agreemnet text
+.section__content {
+  div:last-child {
+    display: none;
+  }
+  #ps__footer {
+    display: none !important;
+    color: #697071;
+  }
+}
+
+.tvgorderbump-title {
+  font-size: 14px;
+}
+.tvgorderbump-subtitle {
+  font-size: 12px;
+}

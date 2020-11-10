@@ -1,0 +1,79 @@
+[
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social Media Sharing Logo"
+      },
+      {
+        "type": "paragraph",
+        "content": "Shown when sharing a link on social media. [Learn more](https:\/\/help.shopify.com\/manual\/using-themes\/troubleshooting\/showing-social-media-thumbnail-images\/) about image thumbnails."
+      },
+      {
+        "type": "image_picker",
+        "id": "share_image",
+        "label": "Image"
+      },
+      {
+        "type": "header",
+        "content": "Social Media Accounts"
+      },
+      {
+        "type": "paragraph",
+        "content": "Leave a social account blank to not use within your store."
+      },
+      {
+        "type": "text",
+        "id": "social_facebook",
+        "label": "Facebook Username"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram Username"
+      }
+    ]
+  },
+  {
+    "name": "Adv Page Settings",
+    "settings": [
+      {
+        "type": "header",
+        "content": "RushButton"
+      },
+      {
+        "type": "text",
+        "id": "sales-page-link",
+        "label": "Sales Page Link",
+        "default": "https:\/\/schoolyardsnacks.com\/pages\/sales"
+      },
+      {
+        "type": "text",
+        "id": "sales-btn-text",
+        "label": "Sales Button Text",
+        "default": "CHECK AVAILABILITY"
+      }
+    ]
+  },
+  {
+    "name": "Sales Page Settings",
+    "settings": [
+      {
+        "type": "header",
+        "content": "RushButton"
+      },
+      {
+        "type": "text",
+        "id": "sales-btn-text2",
+        "label": "Sales Button Text",
+        "default": "CHECK AVAILABILITY"
+      },
+      {
+        "type": "product",
+        "id": "product_id",
+        "label": "Product"
+      }
+    ]
+  }
+]

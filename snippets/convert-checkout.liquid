@@ -1,0 +1,20 @@
+{% if checkout %}
+
+    {% assign count = 0 %}
+    {% for line_item in checkout.line_items %}
+    {% assign count = count | plus: line_item.quantity %}
+    {% endfor %}
+
+    <!-- Convert Experiments conversion tracking -->
+    <script type="text/javascript">
+    window._conv_q = window._conv_q || [];
+    _conv_q.push(["pushRevenue", "{{ checkout.total_price | money_without_currency | remove:',' }}", "{{ count }}", "10036444"]);
+	</script>
+
+{% endif %}
+
+<!-- Convert Experiments conversion tracking -->
+<script type="text/javascript">
+window._conv_q = window._conv_q || [];
+_conv_q.push(["triggerConversion", "10036446"]);
+</script>

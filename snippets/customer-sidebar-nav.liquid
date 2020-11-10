@@ -1,0 +1,16 @@
+<nav class="widget widget--navigation">
+  <ul>
+    <li class="{% if template == 'customers/account' or template == 'customers/order' %}active {% endif %}">
+      <a href="/account" title="Orders">Orders</a>
+    </li>
+    <li>
+      <a href="/tools/recurring/login/">Subscriptions</a>
+    </li>
+    <li class="{% if template == 'customers/addresses' %}active {% endif %}">
+      <a href="/account/addresses" title="Addresses">Addresses</a>
+    </li>
+    <li>
+      <a href="/account/logout" title="Logout">Logout</a>
+    </li>
+  </ul>
+</nav>

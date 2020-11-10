@@ -1,0 +1,43 @@
+<div id="minicart-container"></div>
+
+<script>
+  (function() {
+    var schoolyardMiniCart,
+      miniCartExtraData = {},
+      miniCartOptionsData = {
+        addToCartFormId: 'minicart-add-to-cart-form',
+        cartTotalQuantityClass: 'minicart-cart-count',
+        scrollToAfterAdd: false,
+        showBackground: true,
+        showUpsells: true,
+        showCartAction: true,
+        showCartCountZero: true,
+        showCheckoutAction: true,
+        showQtyAction: true,
+        showQtyInput: true,
+        showSubtotal: true,
+        header: "{{ section.settings.header }}",
+        moneyFormat: {% raw %}'{{ amount_no_decimals_with_comma_separator }}'{% endraw %},
+        showVariantCompareAtPrice: true
+      };
+
+    document.addEventListener('DOMContentLoaded', function() {
+      window.schoolyardMiniCart = new MiniCart(miniCartOptionsData);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "MiniCart",
+  "settings": [
+    {
+      "type": "text",
+      "id": "header",
+      "label": "Header",
+      "default": "Your Cart"
+    }
+  ]
+}
+{% endschema %}
+

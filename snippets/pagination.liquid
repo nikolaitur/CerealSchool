@@ -1,0 +1,26 @@
+{% if paginate.previous or paginate.next %}
+  <nav class="pagination pagination--ajax" role="navigation">
+    <a class="pagination__part pagination__part--prev btn btn--small btn--no-style" href="{% if paginate.previous %}{{ paginate.previous.url }}{% endif %}" data-page="{{ paginate.current_page | minus: 1}}" title="Previous">
+      {% include 'icon', handle: 'arrow-left' %}
+    </a>
+
+     <ol class="pagination__part pagination__part--links">
+      {% for part in paginate.parts %}
+        {% if part.is_link %}
+          <li class="pagination__part pagination__part--link"><a href="{{ part.url }}" data-page="{{ part.title }}">{{ part.title }}</a></li>
+        {% else %}
+          {% if part.title == '&hellip;' %}
+            <li class="pagination__part pagination__part--link">{{ part.title }}</li>
+          {% else %}
+            <li class="pagination__part pagination__part--current" aria-current="page">{{ part.title }}</li>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </ol>
+
+
+    <a class="pagination__part pagination__part--next btn btn--small btn--no-style" href="{% if paginate.next %}{{ paginate.next.url }}{% endif %}" data-page="{{ paginate.current_page | plus: 1}}" title="Next">
+      {% include 'icon', handle: 'arrow-right' %}
+    </a>
+  </nav>
+{% endif %}

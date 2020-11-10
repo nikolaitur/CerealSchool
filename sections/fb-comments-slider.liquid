@@ -1,0 +1,302 @@
+{% if section.settings.show_section %}
+  
+{% assign section_id = section_id | default: page.handle %}
+{% assign slides_per_view = section.settings.slides_per_view | times: 1 %}
+{% assign desktop_no_sliding = false %}
+{% if section.blocks.size <= slides_per_view %}
+  {% assign desktop_no_sliding = true %}
+{% endif %}
+<!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6"></script>
+
+<style>
+  .slider--{{ section_id }} .sliders {
+    overflow: unset;
+  }
+  .slider--{{ section_id }} .swiper-container {
+    overflow: hidden;
+    min-height: 166px;
+  }
+  .slider--{{ section_id }} .swiper-container.add-padding {
+    padding-top: 5%;
+    padding-bottom: 5%;
+
+  }
+  {% if section.settings.centered_slides %}
+  .slider--{{ section_id }} .swiper-wrapper {
+    align-items: center;
+  }
+  {% endif %}
+  .swiper-container:not(.swiper-container-initialized) + .swiper__button-next--{{ section_id }},
+  .swiper-container:not(.swiper-container-initialized) + .swiper__button-next--{{ section_id }} + .swiper__button-prev--{{ section_id }} {
+    display: none;
+  }
+  .slider .swiper__button-prev--{{ section_id }} {
+    left: -2.8rem;
+  }
+  .slider .swiper__button-next--{{ section_id }} {
+    right: -2.8rem;
+  }
+  .slider--{{ section_id }} {
+    background-color: {{ section.settings.bg_color }};
+
+    {% if section.settings.margin > 0 %}
+      {% if section.settings.margin_application == "top" %}
+        margin-top: {{ section.settings.margin | append: "px" }}
+      {% elsif section.settings.margin_application == "bottom" %}
+        margin-bottom: {{ section.settings.margin | append: "px" }}
+      {% else %}
+        margin-top: {{ section.settings.margin | append: "px" }}
+        margin-bottom: {{ section.settings.margin | append: "px" }}
+      {% endif %}    
+    {% endif %}
+  }
+  
+  .slider--{{ section_id }} .fb_iframe_widget {
+      box-shadow:  0 0 0.8rem rgba(0,0,0,0.2);
+  }
+  .slider--{{ section_id }} .fb_iframe_widget iframe {
+      clip-path: inset(1px 1px 1px 1px);
+  }
+  {% for block in section.blocks %}
+  /* {{block.type}} */
+  /* {{ block.settings.color }} */
+  {% if block.type == "slider_item" %}
+  .slider--{{ section_id }} .fb-comment-embed--{{ block.id }}.fb_iframe_widget {
+      background: {{ block.settings.color | default: "#fff" }};
+  }
+  {% endif %}
+  {% endfor %}
+</style>
+<section class="section section--slider slider slider--{{ section_id }}" {{ section.shopify_attributes }} >
+  {% if section.settings.title != blank %}
+  <div class="section__header">
+    <h2>{{ section.settings.title }}</h2>
+    <p class="h5">{{ section.settings.subheading }}</p>
+  </div>
+  {% endif %}
+  <div class="sliders section__content container">
+    <div class="swiper-container {% if section.settings.title == blank and section.settings.button_text == blank %}add-padding{% endif %}">
+      <div class="swiper-wrapper{% if desktop_no_sliding == true %} swiper-no-swiping{% endif %}">
+        {% for block in section.blocks %}
+          {% if block.settings.shown and block.settings.url != blank %}
+          <div class="slider__item swiper-slide slider__item--{{ block.id }}" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+            {%- comment -%}
+            {% if block.settings.url != blank %}<a href="{{ block.settings.url }}">{% endif %}
+            <img class="lazy" data-src="{{ block.settings.image | img_url: '1000x' }}" alt="{{ block.settings.title }}" />
+            <h3 class="slider__item-title" style="color: {{ block.settings.color }};">{{ block.settings.title }}</h3>
+            {% if block.settings.url != blank %}</a>{% endif %}
+            {%- endcomment -%}
+
+            <div class="fb-comment-embed fb-comment-embed--{{ block.id }}" data-href="{{block.settings.url}}" data-width="320"></div>
+          </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+    </div>
+    <div class="swiper__button swiper__button--next swiper__button-next--{{ section_id }}{% if desktop_no_sliding == true %} swiper-button--mobile-only{% endif %}">{% include 'icon', handle: 'next' %}</div>
+    <div class="swiper__button swiper__button--prev swiper__button-prev--{{ section_id }}{% if desktop_no_sliding == true %} swiper-button--mobile-only{% endif %}">{% include 'icon', handle: 'prev' %}</div>
+  </div>
+
+  {% if section.settings.button_text != blank %}
+  <div class="slider__action">
+      <a class="{{ section.settings.button_style }}" href="{{ section.settings.button_url }}">{{ section.settings.button_text }}</a>
+  </div>
+  {% endif %}
+
+  <script>
+    {%- assign section_id_js = section_id | replace: '-', '_' %}
+    var swiper_{{ section_id_js }},
+      swiper_{{ section_id_js }}_options = {
+        effect: 'slide',
+        loop: true,
+        centeredSlides: {{ section.settings.centered_slides }},
+        slidesPerView: 1,
+        spaceBetween: 48,
+        noSwiping: false,
+        threshold: 10,
+        navigation: {
+          nextEl: '.swiper__button-next--{{ section_id }}',
+          prevEl: '.swiper__button-prev--{{ section_id }}',
+        },
+        breakpoints: {
+          960: {
+            slidesPerView: parseInt({{ slides_per_view }}),
+            loop: {{ section.settings.loop }},
+            {% if desktop_no_sliding == true %}noSwiping: true{% endif %}
+          },
+          768: {
+            slidesPerView: 2,
+            loop: {{ section.settings.loop }},
+            {% if desktop_no_sliding == true %}noSwiping: true{% endif %}   
+          }
+        }
+      };
+
+    document.addEventListener('DOMContentLoaded', function() {
+      swiper_{{ section_id_js }} = new Swiper('.slider--{{ section_id }} .swiper-container', swiper_{{ section_id_js }}_options)
+    });
+
+    document.addEventListener('shopify:block:select', function(e) {
+      var targetSlide = $('.slider__item--' + e.detail.blockId);
+      {% if section.settings.loop %}
+        swiper_{{ section_id_js }}.slideToLoop( targetSlide.data('index') );
+      {% else %}
+        swiper_{{ section_id_js }}.slideTo( targetSlide.data('index') );
+      {% endif %}
+    });
+  </script>
+</section>
+{% endif %}
+{% schema %}
+{
+  "name": "FB Comment Slider",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show Section?",
+      "default": true
+    },
+    {
+      "type":"header",
+      "content":"Design Settings"
+    },
+    {
+      "type":"color",
+      "id":"bg_color",
+      "label":"Container Background Color",
+      "default":"#fff"
+    },
+    {
+      "type":"color",
+      "id":"text_color",
+      "label":"Text Color",
+      "default":"#252525"
+    },
+    {
+      "type":"select",
+      "id":"button_style",
+      "label":"Button Style",
+      "options":[
+        {"label":"Red","value":"btn"},
+        {"label":"Blue","value":"btn btn--alt"},
+        {"label":"Text Only","value":"btn btn--no-style"}
+      ]
+    },
+    {
+      "type": "range",
+      "id": "margin",
+      "label": "Margin",
+      "unit": "px",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "margin_application",
+      "label": "Apply Margin to",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "both",
+          "label": "Top/Bottom"
+        }
+      ]
+    },
+    {
+      "type":"checkbox",
+      "id":"loop",
+      "label":"Loop?",
+      "default":true
+    },
+    {
+      "type":"checkbox",
+      "id":"centered_slides",
+      "label":"Center Slides?",
+      "default":true
+    },
+    {
+      "type":"text",
+      "id":"slides_per_view",
+      "label":"Slides Per View",
+      "default":"3"
+    },
+    {
+      "type":"header",
+      "content":"Content Settings"
+    },
+    {
+      "type":"text",
+      "id":"title",
+      "label":"Heading"
+    },
+    {
+      "type":"text",
+      "id":"subheading",
+      "label":"Sub Heading"
+    },
+    {
+      "type":"text",
+      "id":"button_text",
+      "label":"Button Text",
+      "info":"Leave blank to hide"
+    },
+    {
+      "type":"url",
+      "id":"button_url",
+      "label":"Button URL"
+    }
+  ],
+  "blocks":[
+    {
+      "type":"slider_item",
+      "name":"Slider item",
+      "settings":[
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Commenter",
+          "info": "Not displayed but useful to see which comment is which",
+          "placeholder": "Jane Doe"
+        },
+        {
+          "type":"url",
+          "id":"url",
+          "label":"URL",
+          "info": "Leave blank for no link."
+        },
+        {
+          "type": "checkbox",
+          "id": "shown",
+          "label": "Show comment",
+          "default": true,
+          "info": "Allows you to quickly hide a comment."
+        },
+        {
+          "type":"color",
+          "id":"color",
+          "label":"Background Color",
+          "default":"#fff"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "FB Comments Slider",
+    "category": "Content"
+  }]
+}
+{% endschema %}
+

@@ -1,0 +1,36 @@
+<div class="footer-top" style="background-image: url({{ section.settings.bg_image | img_url:'master'  }});">
+	<div class="enclose">
+		<div class="footerlast last-batch">
+			<h2>{{section.settings.footer-last-batch}}</h2>
+			<div class="last-butn">
+				<a href="{{settings.sales-page-link}}">{{settings.sales-btn-text}}</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+{% schema %}
+  {
+    "name": "Advertorial Prefooter",
+    "settings": [     
+	{
+   	  "type": "text",
+   	  "id":"footer-last-batch",
+	  "label":"Last Batch Text Footer"
+	},
+    {
+    "type": "image_picker",
+    "id":"bg_image",
+    "label":"Prefooter image"
+    }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

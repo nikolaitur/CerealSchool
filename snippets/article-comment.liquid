@@ -1,0 +1,8 @@
+<!-- /snippets/comment.liquid -->
+<div class="comment__meta">
+  <span class="comment__meta-item">{{ comment.created_at | time_tag: format: 'month_day_year' }}</span>
+  <span class="comment__meta-item comment__meta-item--author">{{ comment.author }}</span>
+</div>
+<div class="comment__content rte">
+  {{ comment.content }}
+</div>

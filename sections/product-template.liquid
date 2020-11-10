@@ -1,0 +1,65 @@
+{% assign current_variant = product.selected_or_first_available_variant %}
+
+
+{% comment %}
+  Image file name format: season_style-number_style-title_variant-title_etc-001.jpg
+
+   image.src | split: 'products/' | last | split: '_'
+
+   image[0] - season
+   image[1] - style-number
+   image[2] - style-title
+   image[3] - variant-title
+   image[4] - etc-001.jpg
+{% endcomment %}
+
+<div class="product-container container--fluid">
+  <div class="product-container__side product-container__side--left">
+    <div class="product__part product__part--gallery">
+      <div class="gallery swiper-container">
+        <div class="swiper-wrapper">
+          {% for image in product.images %}
+            <figure data-swiper-slide-index="{{ forloop.index0 }}" data-image-id="{{ image.id }}" id="n-{{ forloop.index }}" class="swiper-slide">
+              <a href="{{ image | product_img_url:'3000x' }}" data-size="{{ image.aspect_ratio }}" title="Product Image">
+                <img alt="{{ image.alt | escape  }}" src="{{ image | img_url: '900x' }}" srcset="{{ image | img_url: '900x' }} 1x, {{ image | img_url: '1800x' }} 2x">
+              </a>
+            </figure>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-container__side product-container__side--right">
+    <div class="product__part product__part--form">
+      <header class="product-header">
+        <h1 class="product-header__title h6">{{ product.title }}</h1>
+        <span class="product-pricing">
+          <span class="product-price {% if current_variant.compare_at_price < current_variant.price %} product-price--on-sale{% endif %}">{{ current_variant.price | money_without_trailing_zeros }}</span>
+          {% if product.compare_at_price_max > product.price %}
+            <span class="product-price product-price--old">{% if current_variant.compare_at_price > current_variant.price %}{{ current_variant.compare_at_price | money_without_trailing_zeros }}{% endif %}</span>
+          {% endif %}
+        </span>
+      </header>
+
+      {% if product.description contains '<p>---</p>' %}
+      {% capture short_description %}{{- product.description | split:"<p>---</p>" | first -}}{% endcapture %}
+      <div class="product-info__short-description">
+        {{ short_description }}
+      </div>
+      {% endif %}
+
+      {% include 'add-to-cart-form' %}
+
+    </div>
+  </div>
+</div>
+
+<script type="application/json" id="variant__inv">{"variants":[{% for variant in product.variants %}{"id":{{variant.id}},"inv":{{variant.inventory_quantity}}}{% unless forloop.last %},{% endunless%}{% endfor %}],"threshold":"{{ section.settings.low_stock_threshold}}","message":"{{ section.settings.low_stock_message}}"}</script>
+
+{% schema %}
+  {
+    "name": "Product",
+    "settings": []
+  }
+{% endschema %}

@@ -1,0 +1,115 @@
+<header class="header" {{ section.shopify_attributes }}>
+  <style>
+    .header-promo {background-color: {{ section.settings.bg_color }};}
+    .header-promo p {color: {{ section.settings.text_color }};}
+  </style>
+  <div class="header-promo">{% if section.settings.promo_text != blank %}<p>{{ section.settings.promo_text }}</p>{% endif %}</div>
+
+  <div class="header-main">
+    <div class="container--fluid">
+      <div class="header-mobile-toggle">
+        <button class="header__mobile-nav-toggle" type="button" id="mobile-navigation-toggle" aria-label="Toggle Navigation">
+          <span class="open">{% include 'icon', handle: 'hamburger' %}</span>
+          <span class="close">{% include 'icon', handle: 'close' %}</span>
+        </button>
+      </div>
+
+      <div class="header-logo">
+        <a href="/" title="{{ shop.name }}" aria-label="{{ shop.name }}">
+          <img src="{{ 'logo.png' | asset_img_url: '280x' }}" alt="{{ shop.name }}" />
+        </a>
+      </div>
+
+      <div class="header-menu">
+        {% include 'navigation' linklist: section.settings.main_linklist %}
+      </div>
+
+      <div class="header-actions">
+        <div class="header-account">
+          <a href="{{ routes.account_url }}">
+            <span class="visually-hidden">View Account</span>
+            {% include 'icon', handle: 'account' %}
+          </a>
+        </div>
+        <div class="header-cart">
+          <button class="cart-drawer-toggle" type="button" aria-label="Toggle Cart Drawer">
+            <span>{% include 'icon', handle: 'bag' %}</span>
+            <span class="cart-count">{% if cart.item_count > 0 %}{{ cart.item_count }}{% endif %}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% include 'navigation-mobile' %}
+</header>
+<script>
+  // Blog Landing Subscription Mode
+  (function() {
+    function checkSubscriptionMode() {
+      var subscriptionModeEnabled = {{ section.settings.enable_subscription_nav_override }};
+      if (localStorage.getItem('subscriptionMode') && subscriptionModeEnabled) {
+        $('a').each(function(){
+          var href = $(this).attr('href');
+          if (href && href.includes('products/cereal')) {
+            // replace cereal
+            href = href.replace('products/cereal','products/copy-of-the-cereal-school')
+            $(this).attr('href', href)
+          }
+          if (href && href.includes('products/keto-puffs')) {
+            // replace puffs
+            href = href.replace('products/keto-puffs','products/keto-cheese-puffs')
+            $(this).attr('href', href)
+          }
+        });
+      }
+
+    };
+    document.addEventListener('DOMContentLoaded', checkSubscriptionMode);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings":[
+    {
+      "type":"header",
+      "content":"Promo Bar"
+    },
+    {
+      "type":"color",
+      "id":"bg_color",
+      "label":"Background Color",
+      "default":"#7adbd4"
+    },
+    {
+      "type":"color",
+      "id":"text_color",
+      "label":"Text Color",
+      "default":"#272b60"
+    },
+    {
+      "type":"text",
+      "id":"promo_text",
+      "label":"Promo Bar Text",
+      "info":"Leave blank to hide."
+    },
+    {
+      "type":"header",
+      "content":"Menus"
+    },
+    {
+      "type":"link_list",
+      "id":"main_linklist",
+      "label":"Main Menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_subscription_nav_override",
+      "label": "Enable Subscription Nav Override?",
+      "default": true,
+      "info": "When enabled, blog posts can trigger a user to be forced in to subscription product mode."
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,10 @@
+{% include 'collection-header', heading: 'dark' %}
+
+<main class="content" role="main">
+  {% section 'collection-filtering' %}
+  <div class="container">
+    {% include 'collection-main', alternate: true %}
+    {% section 'collection-promos' %}
+    {% include 'collection-description' %}
+  </div>
+</main>

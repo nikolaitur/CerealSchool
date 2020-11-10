@@ -1,0 +1,2038 @@
+{
+  "current": {
+    "share_image": "",
+    "social_facebook": "schoolyardsnacks",
+    "social_instagram": "schoolyardsnacks",
+    "sales-page-link": "https:\/\/schoolyardsnacks.com\/pages\/sales",
+    "sales-btn-text": "CHECK AVAILABILITY",
+    "sales-btn-text2": "CHECK AVAILABILITY",
+    "product_id": "",
+    "checkout_header_image": "",
+    "checkout_logo_image": "shopify:\/\/shop_images\/logo_primary_colour.png",
+    "checkout_logo_position": "center",
+    "checkout_logo_size": "medium",
+    "checkout_body_background_image": "",
+    "checkout_body_background_color": "#ffffff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_image": "",
+    "checkout_sidebar_background_color": "#e8f3f6",
+    "checkout_heading_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Futura'",
+    "checkout_body_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Futura'",
+    "checkout_accent_color": "#ff595a",
+    "checkout_button_color": "#ff595a",
+    "checkout_error_color": "#c85959",
+    "mailing_address": "",
+    "email_address": "",
+    "phone_number": "",
+    "social_twitter": "",
+    "social_pinterest": "",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "bg_color": "#7adbd4",
+          "text_color": "#272b60",
+          "promo_text": "FREE Shipping + 30 Day Money Back Guarantee",
+          "main_linklist": "main-menu-w-puffs",
+          "enable_subscription_nav_override": true
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "linklist": "footer",
+          "menu_image": "shopify:\/\/shop_images\/Old_School_Snacks.png",
+          "newsletter_heading": "Join our VIP List",
+          "newsletter_subheading": "Be the first to hear about promotions and new flavors.",
+          "newsletter_image": "shopify:\/\/shop_images\/mailbox.gif"
+        }
+      },
+      "minicart": {
+        "type": "minicart",
+        "settings": {
+          "header": "Your Cart"
+        }
+      },
+      "1592862435873": {
+        "type": "50-50",
+        "settings": {
+          "container_width": "container",
+          "bg_color": "#ffedd2",
+          "text_color": "#262b60",
+          "image_location": "left",
+          "offset_text": false,
+          "button_style": "btn btn--no-style",
+          "image": "shopify:\/\/shop_images\/aboutus.gif",
+          "title": "Started by two kids who never grew up.",
+          "content": "<p>It started in our 450 sqft apartment after we were told by food industry &quot;experts&quot; that our idea was <em>impossible<\/em>.<\/p><p>We didn&#x27;t let the haters hold us back from dreaming big. Now, we have hundreds of thousands of customers across the country who&#x27;ve helped make our dream a reality.<\/p>",
+          "button_text": "Read our story",
+          "button_url": "shopify:\/\/pages\/our-story",
+          "button_text_2": "",
+          "accent_image": "shopify:\/\/shop_images\/airplane.png",
+          "accent_image_position": "top-right"
+        }
+      },
+      "1592863880592": {
+        "type": "50-50",
+        "settings": {
+          "container_width": "container",
+          "bg_color": "#ffedd2",
+          "text_color": "#272b60",
+          "image_location": "left",
+          "offset_text": true,
+          "button_style": "btn",
+          "image": "shopify:\/\/shop_images\/homepage_puffs.gif",
+          "title": "Old School Snacks Made the New Way.",
+          "content": "<p>In an act of pure magic, we&#x27;ve reinvented our favorite carb-loaded cereals and snacks from childhood by replacing the carbs and sugar with high-quality protein and monk fruit (a natural sweetener with zero sugar).<\/p><p>No gluten or grains. No long ingredient list with big words. Just a sweet, delightful crunch that will transport you right back to childhood.<\/p>",
+          "button_text": "Shop Cereal",
+          "button_url": "shopify:\/\/products\/cereal",
+          "button_text_2": "Shop Cheese Puffs",
+          "button_url_2": "shopify:\/\/products\/keto-puffs",
+          "accent_image": "shopify:\/\/shop_images\/sparkles_723dac91-5fec-411c-82e4-d29c24b7ac2b.png",
+          "accent_image_position": "bottom-right"
+        }
+      },
+      "1592943123387": {
+        "type": "icons",
+        "blocks": {
+          "1592943128218": {
+            "type": "icon",
+            "settings": {
+              "title": "Sugar Free",
+              "image": "shopify:\/\/shop_images\/fact1_2000x_b906368d-4fd5-43ed-96ec-97e9ecae8aa8.png"
+            }
+          },
+          "1592943413836": {
+            "type": "icon",
+            "settings": {
+              "title": "High Protein",
+              "image": "shopify:\/\/shop_images\/fact2_2000x_80152678-76ee-48c2-a70b-b95abfa20d4a.png"
+            }
+          },
+          "1592943431474": {
+            "type": "icon",
+            "settings": {
+              "title": "Net 1 Gram Carb",
+              "image": "shopify:\/\/shop_images\/fact3_2000x_34d9c461-320c-42ad-aa9b-68ef48ceb595.png"
+            }
+          },
+          "1592943445782": {
+            "type": "icon",
+            "settings": {
+              "title": "Gluten & Grain Free",
+              "image": "shopify:\/\/shop_images\/fact4_2000x_da226700-5879-4d87-b3f0-28c1d374c445.png"
+            }
+          }
+        },
+        "block_order": [
+          "1592943128218",
+          "1592943413836",
+          "1592943431474",
+          "1592943445782"
+        ],
+        "settings": {
+          "container_width": "container",
+          "bg_color": "#ffffff"
+        }
+      },
+      "1592944298167": {
+        "type": "hero",
+        "blocks": {
+          "1592944356505": {
+            "type": "button",
+            "settings": {
+              "text": "Shop Cereal",
+              "url": "shopify:\/\/products\/cereal"
+            }
+          },
+          "1592944368269": {
+            "type": "button",
+            "settings": {
+              "text": "Shop Cheese Puffs",
+              "url": "shopify:\/\/products\/keto-puffs"
+            }
+          }
+        },
+        "block_order": [
+          "1592944356505",
+          "1592944368269"
+        ],
+        "settings": {
+          "bg_color": "#f8cbcb",
+          "text_color": "#272b60",
+          "image_position": "top-left",
+          "image": "shopify:\/\/shop_images\/spoonandbowl_1600px.gif",
+          "mobile_image": "shopify:\/\/shop_images\/spoonandbowl_mobile-edit.gif",
+          "title": "The World’s Best | Low Carb, Keto Snacks",
+          "subtext": "★★★★★ | 5100+ Reviews (4.8\/5 Rating)",
+          "tagline_image": "shopify:\/\/shop_images\/tagline.png"
+        }
+      },
+      "1592949942677": {
+        "type": "testimonials",
+        "blocks": {
+          "1592950046316": {
+            "type": "testimonial",
+            "settings": {
+              "text": "“The flaming hot is 🔥 Reminds me a lot of the baked hot Cheetos. So good”",
+              "title": "Ki Moore",
+              "image": "shopify:\/\/shop_images\/Ki_profile_circle.png"
+            }
+          },
+          "1592950120251": {
+            "type": "testimonial",
+            "settings": {
+              "text": "“These are my go to at night. Fills me up and no sugar. 😁😁\"",
+              "title": "Lisa",
+              "image": "shopify:\/\/shop_images\/Lisa_profile_circle.png"
+            }
+          },
+          "1594155037584": {
+            "type": "testimonial",
+            "settings": {
+              "text": "\"Got my package yesterday both flavors are straight 🔥!!! I so happy to have these in my life!!!!\"",
+              "title": "Jess",
+              "image": "shopify:\/\/shop_images\/Jess_profile_circle.png"
+            }
+          },
+          "1594155203561": {
+            "type": "testimonial",
+            "settings": {
+              "text": "\"I have tried other keto cereals and this is the crunchiest and most flavorful!! Awesome flavors!\"",
+              "title": "Cindy",
+              "image": "shopify:\/\/shop_images\/Cindy_profile_circle.png"
+            }
+          },
+          "1594155660169": {
+            "type": "testimonial",
+            "settings": {
+              "text": "\"Unbelievably tasty, and the crunch!! 5 stars 😍\"",
+              "title": "Denise",
+              "image": "shopify:\/\/shop_images\/Denise_profile_circle.png"
+            }
+          },
+          "1594157817351": {
+            "type": "testimonial",
+            "settings": {
+              "text": "\"I just got mine today and they are absolutely delicious. \n\nI’ve been on keto for 30 months and this is by far the best snack food I’ve been able to find. Autoship here I come.\"",
+              "title": "Mark",
+              "image": "shopify:\/\/shop_images\/Mark_profile_circle.png"
+            }
+          },
+          "1594158122937": {
+            "type": "testimonial",
+            "settings": {
+              "text": "\"Just got my new box of Fruity in the mail and OH MY GOSH! \n\nBetter than Trix—I LOVE how it doesn’t get soggy, either!\"",
+              "title": "Jenny",
+              "image": "shopify:\/\/shop_images\/Jenny_profile_circle.png"
+            }
+          }
+        },
+        "block_order": [
+          "1592950046316",
+          "1592950120251",
+          "1594155037584",
+          "1594155203561",
+          "1594155660169",
+          "1594157817351",
+          "1594158122937"
+        ],
+        "settings": {
+          "bg_color": "#79dad3",
+          "text_color": "#252525",
+          "button_style": "btn",
+          "title": "5300+ [image] Reviews",
+          "inline_header_image": "shopify:\/\/shop_images\/review-stars.png",
+          "subheading": "Check out our report card!",
+          "button_text": "Shop Cereal",
+          "button_url": "shopify:\/\/products\/cereal",
+          "button_text_2": "Shop Cheese Puffs",
+          "button_url_2": "shopify:\/\/products\/keto-puffs",
+          "accent_image": "shopify:\/\/shop_images\/a-plus.png"
+        }
+      },
+      "1592952775685": {
+        "type": "social",
+        "blocks": {
+          "1592953081871": {
+            "type": "social_item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/temp_400x640.png"
+            }
+          },
+          "1594254237513": {
+            "type": "social_item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Puffs_5_-_400x640.png"
+            }
+          },
+          "1592953827776": {
+            "type": "social_item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/i.shgcdn-1.jpg"
+            }
+          },
+          "1592954017460": {
+            "type": "social_item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/i.shgcdn-2.jpg"
+            }
+          },
+          "1592954025860": {
+            "type": "social_item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/i.shgcdn-3.jpg"
+            }
+          }
+        },
+        "block_order": [
+          "1592953081871",
+          "1594254237513",
+          "1592953827776",
+          "1592954017460",
+          "1592954025860"
+        ],
+        "settings": {
+          "show_section": true,
+          "bg_color": "#ffffff",
+          "text_color": "#252525",
+          "button_style": "btn",
+          "accent_image_position": "top-left",
+          "accent_image_offset": "-50px",
+          "bg_image": "shopify:\/\/shop_images\/lined-paper.png",
+          "title": "Join our 150,000+ fans",
+          "subheading": "@schoolyardsnacks",
+          "button_text": "Shop Cereal",
+          "button_url": "shopify:\/\/products\/cereal",
+          "button_text_2": "Shop Cheese Puffs",
+          "button_url_2": "shopify:\/\/products\/keto-puffs",
+          "accent_image": "shopify:\/\/shop_images\/pencil.png",
+          "header_accent_image": "shopify:\/\/shop_images\/heart-arrow.png"
+        }
+      },
+      "1593015332012": {
+        "type": "toggle-image",
+        "blocks": {
+          "1593015652251": {
+            "type": "toggle-image",
+            "settings": {
+              "title": "Cereal",
+              "image_desktop": "shopify:\/\/shop_images\/cereal-desktop.png",
+              "image_mobile": "shopify:\/\/shop_images\/cereal-mobile.png",
+              "button_text": "Shop Cereal",
+              "button_url": "shopify:\/\/products\/cereal"
+            }
+          },
+          "1593015658705": {
+            "type": "toggle-image",
+            "settings": {
+              "title": "Cheese Puffs",
+              "image_desktop": "shopify:\/\/shop_images\/puffs-desktop.png",
+              "image_mobile": "shopify:\/\/shop_images\/puffs-mobile.png",
+              "button_text": "Shop Cheese Puffs",
+              "button_url": "shopify:\/\/products\/keto-puffs"
+            }
+          }
+        },
+        "block_order": [
+          "1593015652251",
+          "1593015658705"
+        ],
+        "settings": {
+          "bg_color": "#79dad3",
+          "text_color": "#252525",
+          "button_style": "btn",
+          "accent_image_position": "bottom-right",
+          "accent_image_offset": "-80px",
+          "title": "Do Your Homework",
+          "subheading": "Let's compare",
+          "accent_image": "shopify:\/\/shop_images\/bowl.gif"
+        }
+      },
+      "1593020009923": {
+        "type": "slider",
+        "blocks": {
+          "1593020755898": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Peanut Butter",
+              "url": "shopify:\/\/products\/cereal",
+              "color": "#f88d2a",
+              "image": "shopify:\/\/shop_images\/pouches_3d_pb.png"
+            }
+          },
+          "1593020715445": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Cocoa",
+              "url": "shopify:\/\/products\/cereal",
+              "color": "#502c1e",
+              "image": "shopify:\/\/shop_images\/pouches_3d_cocoa.png"
+            }
+          },
+          "1593020627199": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Fruity",
+              "url": "shopify:\/\/products\/cereal",
+              "color": "#f88d2a",
+              "image": "shopify:\/\/shop_images\/pouches_3d_fruity_93eecd93-3e9b-4322-9039-1500dd575d63.png"
+            }
+          },
+          "1593020639590": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Berries",
+              "url": "shopify:\/\/products\/cereal",
+              "color": "#df3faf",
+              "image": "shopify:\/\/shop_images\/pouches_3d_berries.png"
+            }
+          },
+          "1593020304070": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Cinnamon Bun",
+              "url": "shopify:\/\/products\/cereal",
+              "color": "#ca8342",
+              "image": "shopify:\/\/shop_images\/pouches_3d_cinnamon.png"
+            }
+          },
+          "1593020783989": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Cookies & Cream",
+              "url": "shopify:\/\/products\/cereal",
+              "color": "#000000",
+              "image": "shopify:\/\/shop_images\/pouches_3d_cookiescream.png"
+            }
+          },
+          "1594061579144": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Apple Pie",
+              "url": "shopify:\/\/products\/cereal",
+              "color": "#ffa268",
+              "image": "shopify:\/\/shop_images\/pouches_3d_applepie_aa1cef52-8913-4109-b24d-705dfb692f5e.png"
+            }
+          }
+        },
+        "block_order": [
+          "1593020755898",
+          "1593020715445",
+          "1593020627199",
+          "1593020639590",
+          "1593020304070",
+          "1593020783989",
+          "1594061579144"
+        ],
+        "settings": {
+          "bg_color": "#ffedd2",
+          "text_color": "#252525",
+          "button_style": "btn",
+          "loop": true,
+          "centered_slides": true,
+          "slides_per_view": "3",
+          "title": "Our Cereal",
+          "subheading": "Meet the Class!",
+          "button_text": "Shop Cereal",
+          "button_url": "shopify:\/\/products\/cereal"
+        }
+      },
+      "1593020099870": {
+        "type": "slider",
+        "blocks": {
+          "1593022822787": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Cheddar Cheese",
+              "url": "shopify:\/\/products\/keto-puffs",
+              "color": "#ff9e18",
+              "image": "shopify:\/\/shop_images\/puffpouches_3d_cheddar.png"
+            }
+          },
+          "1600367513536": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Sour Cream & Onion",
+              "url": "shopify:\/\/products\/keto-puffs",
+              "color": "#f5b335",
+              "image": "shopify:\/\/shop_images\/puffpouches_3d_sourcream.png"
+            }
+          },
+          "1593022837801": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Flaming Hot",
+              "url": "shopify:\/\/products\/keto-puffs",
+              "color": "#ff7f40",
+              "image": "shopify:\/\/shop_images\/puffpouches_3d_flaminghot.png"
+            }
+          }
+        },
+        "block_order": [
+          "1593022822787",
+          "1600367513536",
+          "1593022837801"
+        ],
+        "settings": {
+          "bg_color": "#ffedd2",
+          "text_color": "#252525",
+          "button_style": "btn",
+          "loop": true,
+          "centered_slides": true,
+          "slides_per_view": "3",
+          "title": "Our Cheese Puffs",
+          "subheading": "Meet the Class!",
+          "button_text": "Shop Cheese Puffs",
+          "button_url": "shopify:\/\/products\/keto-puffs"
+        }
+      },
+      "faq": {
+        "type": "faq",
+        "blocks": {
+          "1593030722786": {
+            "type": "faq",
+            "settings": {
+              "title": "How do you sweeten your cereals?",
+              "answer": "<p>We sweeten our cereals exclusively with monk fruit. Monk fruit is a superfood that’s part of the gourd family. It’s a 0 sugar sweetener that has no glycemic impact, making it one of the healthiest alternatives to sugar.<\/p>"
+            }
+          },
+          "1593030738962": {
+            "type": "faq",
+            "settings": {
+              "title": "What makes your cereals low-carb and keto friendly?",
+              "answer": "<p>We replace the sugar and flour in traditional sugary cereals with lactose-free protein and sweeten with monk fruit. This allows us to keep our cereals at only 1g of total carbs per bag!<\/p>"
+            }
+          },
+          "1593031769771": {
+            "type": "faq",
+            "settings": {
+              "title": "What is the shelf life on your products?",
+              "answer": "<p>The shelf life is 1 year.<\/p>"
+            }
+          },
+          "1593533001968": {
+            "type": "faq",
+            "settings": {
+              "title": "Where can I buy your products?",
+              "answer": "<p>You can only purchase our products here on our website.<\/p>"
+            }
+          },
+          "1593533022050": {
+            "type": "faq",
+            "settings": {
+              "title": "Are your cereals gluten-free and grain-free?",
+              "answer": "<p>Yes, all of our cereals are naturally gluten-free and grain-free. Our facility does process other products that may contain gluten (though we conduct gluten swab tests on the line prior to each production run).<\/p>"
+            }
+          },
+          "1593533045567": {
+            "type": "faq",
+            "settings": {
+              "title": "How many grams of carbs are in your cereals?",
+              "answer": "<p>All our cereals contain just 1g total carbs per bag!<\/p>"
+            }
+          },
+          "1593533062984": {
+            "type": "faq",
+            "settings": {
+              "title": "How many WW SmartPoints are in your cereal?",
+              "answer": "<p>Each bag is just 1 WW SmartPoint!<\/p>"
+            }
+          },
+          "1593533074101": {
+            "type": "faq",
+            "settings": {
+              "title": "What allergens are present in your cereals?",
+              "answer": "<p>All of our cereals are naturally gluten-free, grain-free, soy-free. All flavors except for Peanut Butter are also tree nut and peanut-free (Peanut Butter is produced in a separate facility that processes peanuts and tree nuts). Our facilities do process other products that may contain gluten (though we conduct gluten swab tests on the line prior to each production run).<\/p>"
+            }
+          },
+          "1593533092688": {
+            "type": "faq",
+            "settings": {
+              "title": "Where do you ship your products to? Do you ship internationally?",
+              "answer": "<p>We currently only offer shipping to US addresses, including Alaska and Hawaii.<\/p>"
+            }
+          },
+          "1593533113298": {
+            "type": "faq",
+            "settings": {
+              "title": "How fast is shipping?",
+              "answer": "<p>Orders generally arrive at your doorstep in 5-7 business days.<\/p>"
+            }
+          },
+          "1593533119036": {
+            "type": "faq",
+            "settings": {
+              "title": "Can you tell me more about your subscription?",
+              "answer": "<p>You can subscribe to receive our cereals every 15, 30, or 45 days. You can cancel your subscription at any time.<\/p>"
+            }
+          },
+          "1593533134963": {
+            "type": "faq",
+            "settings": {
+              "title": "How much cereal is in each bag?",
+              "answer": "<p>One bag = one filling bowl of cereal (3\/4 cup).<\/p>"
+            }
+          },
+          "1593533146952": {
+            "type": "faq",
+            "settings": {
+              "title": "When do I get charged for my order?",
+              "answer": "<p>You get charged when you place your order on our website.<\/p>"
+            }
+          },
+          "1593533159080": {
+            "type": "faq",
+            "settings": {
+              "title": "What is your return policy?",
+              "answer": "<p>In case of damages\/product defects, we accept returns for a full refund less $10 for return processing and handling on any product purchased in the last 30 days directly from our website. Please email <a href=\"mailto:hello@thecerealschool.com\">hello@schoolyardsnacks.com, and <\/a>we will gladly send you a pre-paid return shipping label. After you have sent the order back to us, please let us know and we will refund your order right away.<\/p><p>We also have a 30 day taste satisfaction guarantee. Please email <a href=\"mailto:hello@thecerealschool.com\">hello@schoolyardsnacks.com, and <\/a>we will gladly send you a pre-paid return shipping label. After you have sent the order back to us, please let us know and we will refund your order less $10 for return processing and handling. Please note our 30-day taste satisfaction guarantee only applies to first-time purchases of a flavor and we will refund up to $29.99 for each flavor (the minimum required to taste one flavor) so that you can try any flavor out risk-free. If you ordered more than that, we will only pay the $29.99 portion of it, so we recommend you order less if it is your first time tasting a flavor and you are unsure if you will like it.<\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "1593030722786",
+          "1593030738962",
+          "1593031769771",
+          "1593533001968",
+          "1593533022050",
+          "1593533045567",
+          "1593533062984",
+          "1593533074101",
+          "1593533092688",
+          "1593533113298",
+          "1593533119036",
+          "1593533134963",
+          "1593533146952",
+          "1593533159080"
+        ],
+        "settings": {
+          "title": "Frequently Asked Questions"
+        }
+      },
+      "product-template": {
+        "type": "product-template",
+        "settings": {}
+      },
+      "product-icons-highlights-cereal": {
+        "type": "product-icons-highlights-cereal",
+        "blocks": {
+          "1593096823236": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/bg_keto.gif",
+              "title": "100% Keto Approved",
+              "subtitle": ""
+            }
+          },
+          "1593096958655": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/bg_sugarfree.gif",
+              "title": "Sugar Free",
+              "subtitle": ""
+            }
+          },
+          "1593097097963": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/bg_100calories.gif",
+              "title": "Only 100 Calories Per Bag",
+              "subtitle": ""
+            }
+          },
+          "1593097113703": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/bg_glutenfree.gif",
+              "title": "Gluten & Grain Free",
+              "subtitle": ""
+            }
+          },
+          "1593097074053": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/bg_nongmo.gif",
+              "title": "Non-GMO",
+              "subtitle": ""
+            }
+          },
+          "1593097089031": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/bg_natural.gif",
+              "title": "All-Natural Ingredients,\u0003No Artificial Sweeteners or Colors",
+              "subtitle": ""
+            }
+          },
+          "1593096997001": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/bg_soyfree.gif",
+              "title": "No Soy or Nuts",
+              "subtitle": "(except Peanut Butter, which is \u0003produced in a separate facility)"
+            }
+          },
+          "1593097081896": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/bg_usa.gif",
+              "title": "Made in the USA",
+              "subtitle": ""
+            }
+          }
+        },
+        "block_order": [
+          "1593096823236",
+          "1593096958655",
+          "1593097097963",
+          "1593097113703",
+          "1593097074053",
+          "1593097089031",
+          "1593096997001",
+          "1593097081896"
+        ],
+        "settings": {
+          "bg_color": "#7adbd4",
+          "container_width": "container--slim",
+          "title": "Highlights"
+        }
+      },
+      "product-social-cereal": {
+        "type": "product-social-cereal",
+        "blocks": {
+          "1593098208671": {
+            "type": "social_item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/i.shgcdn-3.jpg"
+            }
+          },
+          "1593098215956": {
+            "type": "social_item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/i.shgcdn-2.jpg"
+            }
+          },
+          "1593098223382": {
+            "type": "social_item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/i.shgcdn-1.jpg"
+            }
+          },
+          "1593098232861": {
+            "type": "social_item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/i.shgcdn.jpg"
+            }
+          }
+        },
+        "block_order": [
+          "1593098208671",
+          "1593098215956",
+          "1593098223382",
+          "1593098232861"
+        ],
+        "settings": {
+          "bg_color": "#ffffff",
+          "text_color": "#252525",
+          "button_style": "btn",
+          "accent_image_position": "top-left",
+          "accent_image_offset": "",
+          "bg_image": "shopify:\/\/shop_images\/lined-paper.png",
+          "title": "Overheard in the Classroom",
+          "subheading": "@schoolyardsnacks",
+          "button_text": "",
+          "button_text_2": ""
+        }
+      },
+      "product-icons-seen-cereal": {
+        "type": "product-icons-seen-cereal",
+        "blocks": {
+          "1593099487090": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/womenshealth.png",
+              "mobile_image": false
+            }
+          },
+          "1593099904439": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/gq.png",
+              "mobile_image": false
+            }
+          },
+          "1593099910467": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/vox.png",
+              "mobile_image": false
+            }
+          },
+          "1593099917631": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/forbes.png",
+              "mobile_image": false
+            }
+          },
+          "1593099926417": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/inc_d795146a-3667-4ec9-ba11-ae54ce33cd77.png",
+              "mobile_image": false
+            }
+          },
+          "1593617337129": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/seen-in-logos__mobile.png",
+              "mobile_image": true
+            }
+          }
+        },
+        "block_order": [
+          "1593099487090",
+          "1593099904439",
+          "1593099910467",
+          "1593099917631",
+          "1593099926417",
+          "1593617337129"
+        ],
+        "settings": {
+          "bg_color": "#ffedd2",
+          "container_width": "container",
+          "title": "As seen in"
+        }
+      },
+      "product-faq-cereal": {
+        "type": "product-faq-cereal",
+        "blocks": {
+          "1593100596119": {
+            "type": "faq",
+            "settings": {
+              "title": "How Exactly is The Cereal School made?",
+              "answer": "<p>We replaced the carbs and sugar in conventional cereals with high-quality protein and monk fruit sweetener. And we bake (never fry) each batch of our all-natural cereal in an NSF and Safe Quality Food-certified facility. <\/p>"
+            }
+          },
+          "1593100658147": {
+            "type": "faq",
+            "settings": {
+              "title": "How much cereal is in each bag?",
+              "answer": "<p>One bag = one bowl of cereal (3\/4 cup) with 1g net carbs, 0 sugar, and 16g protein. So each bag is basically a complete meal or snack in your pocket. On-the-go yum!<\/p>"
+            }
+          },
+          "1593100665578": {
+            "type": "faq",
+            "settings": {
+              "title": "Can I buy your cereal in stores?",
+              "answer": "<p>Our cereals are only available on our website (good thing you&#x27;re already here!), and we&#x27;ll ship to your doorstep for FREE.<\/p>"
+            }
+          },
+          "1593100679327": {
+            "type": "faq",
+            "settings": {
+              "title": "What about the milk?",
+              "answer": "<p>If you like the traditional slurp of cereal in milk, try unsweetened nut milks (almond, cashew, macadamia) for a low-carb alternative. For a higher fat option, add a dash of heavy cream or a spoonful of peanut butter. We also love snacking on our cereal dry!<\/p>"
+            }
+          },
+          "1593100754271": {
+            "type": "faq",
+            "settings": {
+              "title": "What if I have a nut or lactose allergy?",
+              "answer": "<p>All our flavors are lactose-free, and with the exception of Peanut Butter, all flavors are produced in a peanut and tree nut-free facility. In addition, we do regular third-party microbial tests to make sure there’s no cross-contamination, so you can trust that you’re getting the same high quality ingredients and flavor profile in every bag.<\/p>"
+            }
+          },
+          "1593100766898": {
+            "type": "faq",
+            "settings": {
+              "title": "Why is your cereal more expensive than traditional cereal?",
+              "answer": "<p>To create the healthiest low-carb cereal, we’ve eliminated sugar and starches, but our premium ingredients do cost more than sugar and flour (two of the cheapest ingredients on the market). Even so, one bag of our cereal is roughly the cost of a protein bar with similar nutritionals. And with 16g protein per serving, you’ll stay full way longer.<\/p>"
+            }
+          },
+          "1593100782043": {
+            "type": "faq",
+            "settings": {
+              "title": "Are your cereals Keto friendly?",
+              "answer": "<p>Yes! All of our ingredients are Keto-approved.<\/p>"
+            }
+          },
+          "1593100801770": {
+            "type": "faq",
+            "settings": {
+              "title": "How fast is shipping?",
+              "answer": "<p>Your order will arrive within 5-7 business days.<\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "1593100596119",
+          "1593100658147",
+          "1593100665578",
+          "1593100679327",
+          "1593100754271",
+          "1593100766898",
+          "1593100782043",
+          "1593100801770"
+        ],
+        "settings": {
+          "title": "Frequently Asked Questions"
+        }
+      },
+      "product-nutritional-cereal": {
+        "type": "product-nutritional-cereal",
+        "blocks": {
+          "1593110240510": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Peanut Butter",
+              "content": "Milk Protein Isolate, Roasted Peanuts, Keto Sweetener Blend (Allulose, Monk Fruit), High-Oleic Sunflower Oil, \u0003Tapioca Fiber, Salt",
+              "image": "shopify:\/\/shop_images\/pouches_3d_pb.png",
+              "secondary_image": "shopify:\/\/shop_images\/nutritional-peanut-button.png",
+              "accent_image": "shopify:\/\/shop_images\/keto-approved.png"
+            }
+          },
+          "1594063103019": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Cocoa",
+              "content": "Milk Protein Isolate, Keto Sweetener Blend (Allulose, Monk Fruit), High-Oleic Sunflower Oil, Cocoa (processed with alkali), Tapioca Fiber, Vanilla Bean, Salt, Natural Flavor",
+              "image": "shopify:\/\/shop_images\/pouches_3d_cocoa.png",
+              "secondary_image": "shopify:\/\/shop_images\/nutritional-cocoa.png",
+              "accent_image": "shopify:\/\/shop_images\/keto-approved.png"
+            }
+          },
+          "1593109990320": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Fruity",
+              "content": "Milk Protein Isolate, Keto Sweetener Blend (Allulose, Monk Fruit), High-Oleic Sunflower Oil, Tapioca Fiber, Natural Flavor, Vegetable Juice (color), Salt, Citric Acid",
+              "image": "shopify:\/\/shop_images\/pouches_3d_fruity_93eecd93-3e9b-4322-9039-1500dd575d63.png",
+              "secondary_image": "shopify:\/\/shop_images\/nutritional-fruity.png",
+              "accent_image": "shopify:\/\/shop_images\/keto-approved.png"
+            }
+          },
+          "1594063097699": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Cinnamon",
+              "content": "Milk Protein Isolate, Keto Sweetener Blend (Allulose, Monk Fruit), High-Oleic Sunflower Oil, Tapioca Fiber, Natural Flavor, Cinnamon, Salt",
+              "image": "shopify:\/\/shop_images\/pouches_3d_cinnamon.png",
+              "secondary_image": "shopify:\/\/shop_images\/nutritional-cinnamon.png",
+              "accent_image": "shopify:\/\/shop_images\/keto-approved.png"
+            }
+          },
+          "1594062946537": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Cookies & Cream",
+              "content": "Milk Protein Isolate, Keto Sweetener Blend (Allulose, Monk Fruit), High-Oleic Sunflower Oil, Cocoa (processed with alkali), Tapioca Fiber, Natural Flavor, Salt",
+              "image": "shopify:\/\/shop_images\/pouches_3d_cookiescream.png",
+              "secondary_image": "shopify:\/\/shop_images\/nutritional-cookies-and-cream.png",
+              "accent_image": "shopify:\/\/shop_images\/keto-approved.png"
+            }
+          },
+          "1594063116171": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Apple Pie",
+              "content": "Milk Protein Isolate, Keto Sweetener Blend (Allulose, Monk Fruit), High-Oleic Sunflower Oil, Tapioca Fiber, Natural Flavor, Cinnamon, Vegetable Juice (color), Salt, Malic Acid",
+              "image": "shopify:\/\/shop_images\/pouches_3d_applepie_aa1cef52-8913-4109-b24d-705dfb692f5e.png",
+              "secondary_image": "shopify:\/\/shop_images\/nutritional-apple-pie.png",
+              "accent_image": "shopify:\/\/shop_images\/keto-approved.png"
+            }
+          },
+          "1594063109434": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Berries",
+              "content": "Milk Protein Isolate, Keto Sweetener Blend (Allulose, Monk Fruit), High-Oleic Sunflower Oil, Tapioca Fiber, Natural Flavor, Vegetable Juice (color), Salt, Citric Acid",
+              "image": "shopify:\/\/shop_images\/pouches_3d_berries.png",
+              "secondary_image": "shopify:\/\/shop_images\/nutritional-berries.png",
+              "accent_image": "shopify:\/\/shop_images\/keto-approved.png"
+            }
+          }
+        },
+        "block_order": [
+          "1593110240510",
+          "1594063103019",
+          "1593109990320",
+          "1594063097699",
+          "1594062946537",
+          "1594063116171",
+          "1594063109434"
+        ],
+        "settings": {
+          "bg_color": "#ffedd2",
+          "text_color": "#272b60",
+          "accent_image_position": "top-right",
+          "accent_image_offset": "-60px",
+          "title": "Nutritional Facts",
+          "accent_image": "shopify:\/\/shop_images\/pencil.png"
+        }
+      },
+      "product-upper-cereal": {
+        "type": "product-upper-cereal",
+        "blocks": {
+          "1593117235303": {
+            "type": "bundle",
+            "settings": {
+              "title": "4 Flavors - 48 Bags",
+              "value": "variety",
+              "flavor_limit": "4",
+              "default": false,
+              "sold_out": false
+            }
+          },
+          "1593117258233": {
+            "type": "bundle",
+            "settings": {
+              "title": "2 Flavors - 24 Bags",
+              "value": "bundle",
+              "flavor_limit": "2",
+              "default": true,
+              "sold_out": false
+            }
+          },
+          "1593117275021": {
+            "type": "bundle",
+            "settings": {
+              "title": "1 Flavor - 24 bags",
+              "value": "single",
+              "flavor_limit": "1",
+              "default": false,
+              "sold_out": false
+            }
+          },
+          "1593117287277": {
+            "type": "bundle",
+            "settings": {
+              "title": "1 Flavor - 12 Bags",
+              "value": "single-sm",
+              "flavor_limit": "1",
+              "default": false,
+              "sold_out": false
+            }
+          },
+          "1593139179827": {
+            "type": "flavor",
+            "settings": {
+              "title": "Peanut Butter",
+              "swatch_image": "shopify:\/\/shop_images\/swatch-flavor-peanut-bowl.png",
+              "new": false,
+              "sold_out": false
+            }
+          },
+          "1593139142681": {
+            "type": "flavor",
+            "settings": {
+              "title": "Cocoa",
+              "swatch_image": "shopify:\/\/shop_images\/swatch-flavor-cocoa-bowl.png",
+              "new": false,
+              "sold_out": false
+            }
+          },
+          "1593139161288": {
+            "type": "flavor",
+            "settings": {
+              "title": "Fruity",
+              "swatch_image": "shopify:\/\/shop_images\/swatch-flavor-fruity-bowl.png",
+              "new": false,
+              "sold_out": false
+            }
+          },
+          "1593139171889": {
+            "type": "flavor",
+            "settings": {
+              "title": "Cinnamon Bun",
+              "swatch_image": "shopify:\/\/shop_images\/swatch-flavor-cinnamon-bowl.png",
+              "new": false,
+              "sold_out": false
+            }
+          },
+          "1593139198719": {
+            "type": "flavor",
+            "settings": {
+              "title": "Cookies & Cream",
+              "swatch_image": "shopify:\/\/shop_images\/swatch-flavor-cookies-cream.png",
+              "new": false,
+              "sold_out": false
+            }
+          },
+          "1593139205503": {
+            "type": "flavor",
+            "settings": {
+              "title": "Berries",
+              "swatch_image": "shopify:\/\/shop_images\/swatch-flavor-berries-bowl.png",
+              "new": false,
+              "sold_out": false
+            }
+          },
+          "1593139188207": {
+            "type": "flavor",
+            "settings": {
+              "title": "Apple Pie",
+              "swatch_image": "shopify:\/\/shop_images\/swatch-flavor-apple-pie-bowl.png",
+              "new": true,
+              "sold_out": false
+            }
+          },
+          "1599260543415": {
+            "type": "dynamic_description",
+            "settings": {
+              "product_handle": "copy-of-the-cereal-school",
+              "description": "<style>\ndiv.product-header__description>ul {\n    margin: 10px 0 0 0;\n}\ndiv.product-header__description>ul li:last-child {\n    margin-bottom:0;    \n}\ndiv.product-header__description {\n    max-width: 100% !important;\n    padding: .8rem 0 2.8rem 0 !important;\n}\n<\/style>\n<ul>\n  <li style=\"text-decoration: underline;\">Sold Out 4 Times Already.<\/li>\n  <li>Over 3 million bags sold in 2020.<\/li>\n  <li>Join 200,000 other people who switched to Schoolyard Snacks!<\/li>\n<\/ul>"
+            }
+          },
+          "1599260573611": {
+            "type": "dynamic_description",
+            "settings": {
+              "product_handle": "cereal",
+              "description": "<style>\ndiv.product-header__description>ul {\n    margin: 10px 0 0 0;\n}\ndiv.product-header__description>ul li:last-child {\n    margin-bottom:0;    \n}\ndiv.product-header__description {\n    max-width: 100% !important;\n    padding: .8rem 0 2.8rem 0 !important;\n}\n<\/style>\n<ul>\n  <li style=\"text-decoration: underline;\">Sold Out 4 Times Already.<\/li>\n  <li>Over 3 million bags sold in 2020.<\/li>\n  <li>Join 200,000 other people who switched to Schoolyard Snacks!<\/li>\n<\/ul>"
+            }
+          }
+        },
+        "block_order": [
+          "1593117235303",
+          "1593117258233",
+          "1593117275021",
+          "1593117287277",
+          "1593139179827",
+          "1593139142681",
+          "1593139161288",
+          "1593139171889",
+          "1593139198719",
+          "1593139205503",
+          "1593139188207",
+          "1599260543415",
+          "1599260573611"
+        ],
+        "settings": {
+          "title": "Low Carb, Keto Cereal",
+          "tagline": "Keto|Sugar Free|1g Net Carb|16g Protein",
+          "description": "<p>We’ve cut the carbs and sugar without sacrificing the crunch. Order quick! Our delicious keto cereal has already sold out 4 times this year!<\/p>",
+          "add_to_cart_text": "Add to Cart",
+          "disclaimer": "<p><strong>30 Day Money Back Guarantee!<\/strong><br\/>Cancel subscriptions at anytime<\/p>",
+          "bundle_label": "1. Select Bundle:",
+          "flavor_label": "2. Choose Flavors:",
+          "frequency_label": "3. Select Frequency:",
+          "variety_default_selected": "Fruity|Cinnamon Bun|Peanut Butter|Cocoa",
+          "bundle_default_selected": "Peanut Butter|Cocoa",
+          "single_default_selected": "Peanut Butter",
+          "singlesm_default_selected": "Peanut Butter",
+          "enable_free_gift": true
+        }
+      },
+      "cart-drawer": {
+        "type": "cart-drawer",
+        "settings": {
+          "title": "Your Cart",
+          "subheading": "FREE Shipping + 30 Day Money Back Guarantee",
+          "no_items_message": "You have no items in your shopping bag.",
+          "flash_sale_timer": false,
+          "hide_express_checkout": "copy-of-new-keto-cheese-puffs",
+          "show_upsell_gauge": false,
+          "upsell_message": "Spend $75 to unlock a mystery gift",
+          "upsell_amount": 75,
+          "upsell_congratulations_message": "Congrats! You've unlocked a mystery gift",
+          "upsell_milestone_1": "Free Shipping",
+          "upsell_milestone_2": "Mystery Gift",
+          "upsell_gift_product": "keto-cheese-puffs-sampler-pack-cheddar"
+        }
+      },
+      "product-upper-puffs": {
+        "type": "product-upper-puffs",
+        "blocks": {
+          "1593552720935": {
+            "type": "bundle",
+            "settings": {
+              "title": "2 Flavors - 48 Bags",
+              "value": "variety",
+              "flavor_limit": "2",
+              "default": false,
+              "sold_out": false
+            }
+          },
+          "1593552763478": {
+            "type": "bundle",
+            "settings": {
+              "title": "2 Flavors - 24 Bags",
+              "value": "bundle",
+              "flavor_limit": "2",
+              "default": true,
+              "sold_out": false
+            }
+          },
+          "1593552776799": {
+            "type": "bundle",
+            "settings": {
+              "title": "1 Flavor - 24 Bags",
+              "value": "single",
+              "flavor_limit": "1",
+              "default": false,
+              "sold_out": false
+            }
+          },
+          "1593552797102": {
+            "type": "bundle",
+            "settings": {
+              "title": "1 Flavor - 12 Bags",
+              "value": "single-sm",
+              "flavor_limit": "1",
+              "default": false,
+              "sold_out": false
+            }
+          },
+          "1593552827664": {
+            "type": "flavor",
+            "settings": {
+              "title": "Cheddar Cheese",
+              "swatch_image": "shopify:\/\/shop_images\/swatch-flavor-cheddar-cheese.png",
+              "new": false,
+              "sold_out": false
+            }
+          },
+          "1593552881550": {
+            "type": "flavor",
+            "settings": {
+              "title": "Flaming Hot",
+              "swatch_image": "shopify:\/\/shop_images\/swatch-flavor-flaming-hot.png",
+              "new": false,
+              "sold_out": false
+            }
+          },
+          "1600368054388": {
+            "type": "flavor",
+            "settings": {
+              "title": "Sour Cream & Onion",
+              "swatch_image": "shopify:\/\/shop_images\/sour_cream_swatch.png",
+              "new": true,
+              "sold_out": false
+            }
+          },
+          "1599694348642": {
+            "type": "dynamic_description",
+            "settings": {
+              "product_handle": "keto-puffs",
+              "description": "<style>div.product-header__description>ul {\n    margin: 10px 0 0 0;\n}\ndiv.product-header__description>ul li:last-child {\n    margin-bottom:0;    \n}\ndiv.product-header__description {\n    max-width: 100% !important;\n    padding: .8rem 0 2.8rem 0 !important;\n}<\/style>\n<ul>\n<li style=\"text-decoration: underline\">Sold Out 4 Times Already.<\/li>\n<li>Over 3 million bags sold in 2020.<\/li>\n<li>Join 200,000 other people who switched to Schoolyard Snacks!<\/li>\n<\/ul>"
+            }
+          },
+          "1599694372698": {
+            "type": "dynamic_description",
+            "settings": {
+              "product_handle": "keto-cheese-puffs",
+              "description": "<style>div.product-header__description>ul {\n    margin: 10px 0 0 0;\n}\ndiv.product-header__description>ul li:last-child {\n    margin-bottom:0;    \n}\ndiv.product-header__description {\n    max-width: 100% !important;\n    padding: .8rem 0 2.8rem 0 !important;\n}<\/style>\n<ul>\n<li style=\"text-decoration: underline\">Sold Out 4 Times Already.<\/li>\n<li>Over 3 million bags sold in 2020.<\/li>\n<li>Join 200,000 other people who switched to Schoolyard Snacks!<\/li>\n<\/ul>"
+            }
+          }
+        },
+        "block_order": [
+          "1593552720935",
+          "1593552763478",
+          "1593552776799",
+          "1593552797102",
+          "1593552827664",
+          "1593552881550",
+          "1600368054388",
+          "1599694348642",
+          "1599694372698"
+        ],
+        "settings": {
+          "title": "NEW Keto Cheese Puffs",
+          "tagline": "Keto|1g Net Carb|High Protein|Grain Free",
+          "description": "<p>We’ve cut the carbs without sacrificing the crunch. These are good enough to devour in one sitting without any of the guilt.<\/p>",
+          "add_to_cart_text": "Add to Cart",
+          "sold_out_text": "Sold Out",
+          "click_to_be_notified_text": "Click To Be Notified",
+          "disclaimer": "<p><strong>30 days risk-free!<\/strong> Love it or a full refund.<br\/>Cancel subscriptions at anytime<\/p>",
+          "all_flavors_sold_out_text": "<p>Starts at $1.69 per bag<\/p>",
+          "all_flavors_sold_out": false,
+          "bundle_label": "1. Select Bundle:",
+          "flavor_label": "2. Choose Flavors:",
+          "flavor_sold_out_label": "Flavors:",
+          "frequency_label": "3. Select Frequency:",
+          "variety_default_selected": "Cheddar Cheese|Sour Cream & Onion",
+          "bundle_default_selected": "Cheddar Cheese|Sour Cream & Onion",
+          "single_default_selected": "Sour Cream & Onion",
+          "singlesm_default_selected": "Sour Cream & Onion",
+          "enable_free_gift": true
+        }
+      },
+      "product-icons-highlights-puffs": {
+        "type": "product-icons-highlights-puffs",
+        "blocks": {
+          "1593553370908": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/bg_keto.gif",
+              "title": "100% Keto Approved",
+              "subtitle": ""
+            }
+          },
+          "1593553389335": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/bg_sugarfree.gif",
+              "title": "Sugar Free",
+              "subtitle": ""
+            }
+          },
+          "1593553405246": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/bg_100calories.gif",
+              "title": "Only 100 Calories Per Bag",
+              "subtitle": ""
+            }
+          },
+          "1593553425155": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/bg_glutenfree.gif",
+              "title": "Gluten & Grain Free",
+              "subtitle": ""
+            }
+          },
+          "1593553429805": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/bg_nongmo.gif",
+              "title": "Non-GMO",
+              "subtitle": ""
+            }
+          },
+          "1593553439449": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/bg_natural.gif",
+              "title": "All-Natural Ingredients,\u0003No Artificial Sweeteners or Colors",
+              "subtitle": ""
+            }
+          },
+          "1593553446552": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/bg_soyfree.gif",
+              "title": "No Soy or Nuts",
+              "subtitle": "(except Peanut Butter, which is \u0003produced in a separate facility)  Made in the USA"
+            }
+          },
+          "1593553461639": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/bg_usa.gif",
+              "title": "Made in the USA",
+              "subtitle": ""
+            }
+          }
+        },
+        "block_order": [
+          "1593553370908",
+          "1593553389335",
+          "1593553405246",
+          "1593553425155",
+          "1593553429805",
+          "1593553439449",
+          "1593553446552",
+          "1593553461639"
+        ],
+        "settings": {
+          "bg_color": "#7adbd4",
+          "container_width": "container--slim",
+          "title": "Highlights"
+        }
+      },
+      "product-nutritional-puffs": {
+        "type": "product-nutritional-puffs",
+        "blocks": {
+          "1600367125760": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Sour Cream & Onion",
+              "content": "Milk Protein Isolate, High-Oleic Sunflower Oil, Natural Flavor, Buttermilk Powder, Salt, Yeast Extract, Tapioca Fiber, Keto Sweetener Blend (Allulose, Monk fruit), Citric Acid.",
+              "image": "shopify:\/\/shop_images\/puffpouches_3d_sourcream.png",
+              "secondary_image": "shopify:\/\/shop_images\/nutrition_sourcream.jpg",
+              "accent_image": "shopify:\/\/shop_images\/keto-approved.png"
+            }
+          },
+          "1593553598852": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Cheddar Cheese",
+              "content": "Milk Protein Isolate, High-Oleic Sunflower Oil, Natural Flavor, Cheddar Powder, Yeast Extract, Vegetable Juice (color), Tapioca Fiber, Salt, Keto Sweetener Blend (Allulose, Monk Fruit), Lactic Acid",
+              "image": "shopify:\/\/shop_images\/puffpouches_3d_cheddar.png",
+              "secondary_image": "shopify:\/\/shop_images\/nutritional-cheddar-cheese_972b0fca-b5f3-4675-8836-b46039e5c9fb.png",
+              "accent_image": "shopify:\/\/shop_images\/keto-approved.png"
+            }
+          },
+          "1593553666538": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Flaming Hot",
+              "content": "Milk Protein Isolate, High-Oleic Sunflower Oil, Natural Flavor, Cheddar Powder, Salt, Vegetable Juice (color), Buttermilk Powder, Cayenne Powder, Yeast Extract, Tapioca Fiber, Lactic Acid, Keto Sweetener Blend (Allulose, Monk fruit)",
+              "image": "shopify:\/\/shop_images\/puffpouches_3d_flaminghot.png",
+              "secondary_image": "shopify:\/\/shop_images\/nutritional-flaming-hot_936c69f4-04b7-412c-8743-50ead53560cb.png",
+              "accent_image": "shopify:\/\/shop_images\/keto-approved.png"
+            }
+          }
+        },
+        "block_order": [
+          "1600367125760",
+          "1593553598852",
+          "1593553666538"
+        ],
+        "settings": {
+          "bg_color": "#ffedd2",
+          "text_color": "#252525",
+          "accent_image_position": "top-right",
+          "accent_image_offset": "-60px",
+          "title": "Nutritional Facts",
+          "accent_image": "shopify:\/\/shop_images\/pencil.png"
+        }
+      },
+      "product-faq-puffs": {
+        "type": "product-faq-puffs",
+        "blocks": {
+          "1593553799218": {
+            "type": "faq",
+            "settings": {
+              "title": "How exactly are the Keto Cheese Puffs made?",
+              "answer": "<p>We replaced the carbs in conventional cheese puffs with high-quality protein. We bake (never fry) each batch of our all-natural Keto Puffs in an NSF and Safe Quality Food-certified facility.<\/p>"
+            }
+          },
+          "1593553811078": {
+            "type": "faq",
+            "settings": {
+              "title": "How big is each bag?",
+              "answer": "<p>Each bag is a single serving snack with 1g net carb. On-the-go yum!<\/p>"
+            }
+          },
+          "1593553824370": {
+            "type": "faq",
+            "settings": {
+              "title": "Can I buy your cheese puffs in stores?",
+              "answer": "<p>Our cheese puffs are only available on our website (good thing you&#x27;re already here!), and we&#x27;ll ship to your doorstep for FREE.<\/p>"
+            }
+          },
+          "1593553759120": {
+            "type": "faq",
+            "settings": {
+              "title": "What if I have a nut or lactose allergy?",
+              "answer": "<p>All our flavors are lactose-free, and with the exception of Peanut Butter, all flavors are produced in a peanut and tree nut-free facility. In addition, we do regular third-party microbial tests to make sure there’s no cross-contamination, so you can trust that you’re getting the same high quality ingredients and flavor profile in every bag.<\/p>"
+            }
+          },
+          "1593553836873": {
+            "type": "faq",
+            "settings": {
+              "title": "Why are your cheese puffs more expensive than traditional cheese puffs?",
+              "answer": "<p>To create the healthiest Keto Cheese Puffs, we’ve eliminated flour, hydrogenated oils, and artificial ingredients. However, premium ingredients do simply cost more for us to source. Even so, one bag of our cheese puffs is roughly the cost of a protein bar with similar nutritionals. And with all the protein, you’ll stay full way longer.<\/p>"
+            }
+          },
+          "1593553733412": {
+            "type": "faq",
+            "settings": {
+              "title": "Are your Cheese Puffs Keto Approved?",
+              "answer": "<p>Yes! All of our ingredients are Keto-approved.<\/p>"
+            }
+          },
+          "1593553719005": {
+            "type": "faq",
+            "settings": {
+              "title": "How Fast is Shipping",
+              "answer": "<p>Your order will arrive within 5-7 business days.<\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "1593553799218",
+          "1593553811078",
+          "1593553824370",
+          "1593553759120",
+          "1593553836873",
+          "1593553733412",
+          "1593553719005"
+        ],
+        "settings": {
+          "title": "Frequently Asked Questions"
+        }
+      },
+      "product-icons-seen-puffs": {
+        "type": "product-icons-seen-puffs",
+        "blocks": {
+          "1593553908517": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/womenshealth.png",
+              "mobile_image": false
+            }
+          },
+          "1593553936944": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/gq.png",
+              "mobile_image": false
+            }
+          },
+          "1593553943356": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/vox.png",
+              "mobile_image": false
+            }
+          },
+          "1593553954363": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/forbes.png",
+              "mobile_image": false
+            }
+          },
+          "1593553962530": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/inc_d795146a-3667-4ec9-ba11-ae54ce33cd77.png",
+              "mobile_image": false
+            }
+          },
+          "1593617911788": {
+            "type": "icon",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/seen-in-logos__mobile.png",
+              "mobile_image": true
+            }
+          }
+        },
+        "block_order": [
+          "1593553908517",
+          "1593553936944",
+          "1593553943356",
+          "1593553954363",
+          "1593553962530",
+          "1593617911788"
+        ],
+        "settings": {
+          "bg_color": "#ffedd2",
+          "container_width": "container",
+          "title": "As seen in"
+        }
+      },
+      "product-social-puffs": {
+        "type": "product-social-puffs",
+        "blocks": {
+          "1593554028335": {
+            "type": "social_item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/temp_400x640.png"
+            }
+          },
+          "1593554038586": {
+            "type": "social_item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Puffs_2_-_400x640.png"
+            }
+          },
+          "1593554049809": {
+            "type": "social_item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Puffs_3_-_400x640.png"
+            }
+          },
+          "1593554071457": {
+            "type": "social_item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Puffs_4-_400x640.png"
+            }
+          },
+          "1594253758378": {
+            "type": "social_item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Puffs_5_-_400x640.png"
+            }
+          },
+          "1594253766051": {
+            "type": "social_item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Puffs_6_-_400x640.png"
+            }
+          },
+          "1594253775936": {
+            "type": "social_item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Puffs_7_-_400x640.png"
+            }
+          }
+        },
+        "block_order": [
+          "1593554028335",
+          "1593554038586",
+          "1593554049809",
+          "1593554071457",
+          "1594253758378",
+          "1594253766051",
+          "1594253775936"
+        ],
+        "settings": {
+          "bg_color": "#ffffff",
+          "text_color": "#262b60",
+          "button_style": "btn",
+          "accent_image_position": "top-left",
+          "accent_image_offset": "",
+          "bg_image": "shopify:\/\/shop_images\/lined-paper.png",
+          "title": "Overheard in the classroom",
+          "subheading": "@schoolyardsnacks",
+          "button_text": "",
+          "button_text_2": ""
+        }
+      },
+      "article-template": {
+        "type": "article-template",
+        "blocks": {
+          "1594233124905": {
+            "type": "recipe_footer",
+            "settings": {
+              "tag": "puffs",
+              "title": "Introducing World’s First Keto-Friendly Cheese Puffs",
+              "image": "shopify:\/\/shop_images\/lighter.jpeg",
+              "content": "<p>Amazing Crunch Keto-Friendly Cheese Puffs Available in Cheddar Cheese 🧀 &amp; Flaming Hot 🔥 Now you can get your hands dirty&nbsp;<em>without the guilt!<\/em>&nbsp;😇<\/p>",
+              "button_url": "shopify:\/\/products\/keto-puffs",
+              "button_text": "Shop Cheese Puffs"
+            }
+          },
+          "1594233229682": {
+            "type": "recipe_footer",
+            "settings": {
+              "tag": "cereal",
+              "title": "100% Keto Approved Cereal Makes It Easy To Kiss Cravings Goodbye...",
+              "image": "shopify:\/\/shop_images\/lighter-1.jpeg",
+              "content": "<p>Join over 100,000 Keto Cereal fans&nbsp;who are killing two cravings with one spoon and try Keto cereal that&rsquo;s both sweet and crunchy.<\/p>",
+              "button_url": "shopify:\/\/products\/cereal",
+              "button_text": "Shop Cereal"
+            }
+          }
+        },
+        "block_order": [
+          "1594233124905",
+          "1594233229682"
+        ],
+        "settings": {}
+      },
+      "blog-template": {
+        "type": "blog-template",
+        "settings": {}
+      },
+      "page-our-story": {
+        "type": "page-our-story",
+        "blocks": {
+          "1595522387818": {
+            "type": "intro",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/aboutus.gif",
+              "right_image": "shopify:\/\/shop_images\/lettering.png",
+              "accent_image": "shopify:\/\/shop_images\/sparkles_c0467393-823a-4723-a2c3-3b9e66f71781.png",
+              "title": "Started by Two Big Kids"
+            }
+          },
+          "1595522735376": {
+            "type": "text-content",
+            "settings": {
+              "bg_color": "#ffedd2",
+              "left_image": "shopify:\/\/shop_images\/cereal-left.png",
+              "right_image": "shopify:\/\/shop_images\/cereal-right.png",
+              "title": "Hi, we're Helen & Dylan, |\u0003founders of Schoolyard Snacks",
+              "content": "<p>Three years ago, we graduated from Georgetown University, officially entering adulthood. We decided then to &ldquo;grow up&rdquo; and start limiting our sugar intake. While we felt SO much better, we quickly realized everything we loved to eat growing up was suddenly off limits. It was this yearning for childhood comfort food that made us start Schoolyard Snacks.<\/p>\n<p>We decided to start by reinventing a timeless favorite, cereal, by turning the sugary cereals we all love into a guilt-free treat that we&rsquo;d feel good about eating every day (and night, let&rsquo;s be real!).<\/p>",
+              "footer_text": "Low carb. High protein. | [No sugar (ever)]."
+            }
+          },
+          "1595522804329": {
+            "type": "image-text",
+            "settings": {
+              "bg_color": "#79dad3",
+              "image": "shopify:\/\/shop_images\/polaroids.png",
+              "title": "<p>What we didn't foresee was that we would be told by every single manufacturer and &ldquo;food scientist&rdquo; we spoke to that our idea just wasn't possible. Some laughed at us. Some literally hung up on us. They said that if the big guys haven't figured it out, then we should probably dream on.<\/p>",
+              "footer_text": "And so [we did]."
+            }
+          },
+          "1595522835763": {
+            "type": "paper-text",
+            "settings": {
+              "bg_color": "#f8cccd",
+              "image": "shopify:\/\/shop_images\/lined-paper_466f3809-8ddb-4c11-94ad-757cda6d66c8.png",
+              "accent_image_1": "shopify:\/\/shop_images\/pencil.png",
+              "accent_image_2": "shopify:\/\/shop_images\/a-plus.png",
+              "title": "<p>We turned the kitchen in our 450 sq. ft. apartment into a lab and started experimenting. After what felt like a <strong>million recipe iterations<\/strong> and countless thoughts of giving up, one day we got it right&hellip;<em><strong>really right!<\/strong><\/em> We started sending our cereals out to blind taste testers. We never expected to hear feedback like this...<\/p>",
+              "line_1": "<p>&ldquo;The taste is <em><strong>phenomenal<\/strong><\/em>&rdquo;<\/p>",
+              "line_2": "<p>\"What kind of sorcery is this?\"<\/p>",
+              "line_3": "<p>\"This is <strong>everything<\/strong> I was missing\"<\/p>"
+            }
+          },
+          "1595523007573": {
+            "type": "call-to-action",
+            "settings": {
+              "bg_color": "#ffedd2",
+              "image": "shopify:\/\/shop_images\/helen.png",
+              "image_2": "shopify:\/\/shop_images\/dylan.png",
+              "mobile_image": "shopify:\/\/shop_images\/helen-dylan-mobile.png",
+              "title": "<p>Even the manufacturers who rejected us in the beginning couldn&rsquo;t believe what us two \"kids\" had created. Flash forward to today, we have shipped our cereals to hundreds of thousands of amazing customers across the country, and even launched a new line of products: <strong>Cheese Puffs<\/strong>!<\/p>\n<p><strong>Growing up is overrated<\/strong>, and it&rsquo;s time to unleash \u0003the inner child in each and every one of us.<\/p>",
+              "signatures": "shopify:\/\/shop_images\/signatures.png",
+              "button_url_1": "shopify:\/\/products\/cereal",
+              "button_text_1": "Shop Cereal",
+              "button_url_2": "shopify:\/\/products\/keto-puffs",
+              "button_text_2": "Shop Cheese Puffs"
+            }
+          }
+        },
+        "block_order": [
+          "1595522387818",
+          "1595522735376",
+          "1595522804329",
+          "1595522835763",
+          "1595523007573"
+        ],
+        "settings": {}
+      },
+      "checkout-toggles": {
+        "type": "checkout-toggles",
+        "settings": {
+          "flash_sale_timer": true
+        }
+      },
+      "cart-template": {
+        "type": "cart-template",
+        "settings": {
+          "cart_collection_heading": "Oops. Lookings like you haven't added anything to your cart. Check out some of these products",
+          "cart_collection": "",
+          "cart_collection_limit": "12",
+          "cart_upsell_limit": "3"
+        }
+      },
+      "1602020642312": {
+        "type": "fb-comments-slider",
+        "disabled": true,
+        "blocks": {
+          "1602020674837": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Cindy Henderson",
+              "url": "https:\/\/business.facebook.com\/thecerealschool\/posts\/2918037711574630?comment_id=3156697427708656",
+              "shown": true,
+              "color": ""
+            }
+          },
+          "1602020693111": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Chelsea Bryan",
+              "url": "https:\/\/business.facebook.com\/thecerealschool\/posts\/2918037711574630?comment_id=3178990425479356",
+              "shown": true,
+              "color": ""
+            }
+          },
+          "1602020757630": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Michelle Jenson",
+              "url": "https:\/\/business.facebook.com\/thecerealschool\/posts\/2918037711574630?comment_id=3058717414173325",
+              "shown": true,
+              "color": ""
+            }
+          },
+          "1602020779657": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Summer Heil",
+              "url": "https:\/\/business.facebook.com\/thecerealschool\/posts\/2918037711574630?comment_id=3139713889407010",
+              "shown": true,
+              "color": ""
+            }
+          },
+          "1602021732155": {
+            "type": "slider_item",
+            "settings": {
+              "title": "",
+              "shown": true,
+              "color": ""
+            }
+          },
+          "1602021762226": {
+            "type": "slider_item",
+            "settings": {
+              "title": "",
+              "shown": true,
+              "color": ""
+            }
+          },
+          "1602021782747": {
+            "type": "slider_item",
+            "settings": {
+              "title": "",
+              "shown": true,
+              "color": ""
+            }
+          },
+          "1602021789776": {
+            "type": "slider_item",
+            "settings": {
+              "title": "",
+              "shown": true,
+              "color": ""
+            }
+          },
+          "1602021795321": {
+            "type": "slider_item",
+            "settings": {
+              "title": "",
+              "shown": true,
+              "color": ""
+            }
+          },
+          "1602021806953": {
+            "type": "slider_item",
+            "settings": {
+              "title": "",
+              "shown": true,
+              "color": ""
+            }
+          }
+        },
+        "block_order": [
+          "1602020674837",
+          "1602020693111",
+          "1602020757630",
+          "1602020779657",
+          "1602021732155",
+          "1602021762226",
+          "1602021782747",
+          "1602021789776",
+          "1602021795321",
+          "1602021806953"
+        ],
+        "settings": {
+          "show_section": true,
+          "bg_color": "#79dad3",
+          "text_color": "#252525",
+          "button_style": "btn",
+          "margin": 0,
+          "margin_application": "top",
+          "loop": true,
+          "centered_slides": true,
+          "slides_per_view": "4",
+          "title": "",
+          "subheading": "",
+          "button_text": ""
+        }
+      },
+      "fb-comments-slider": {
+        "type": "fb-comments-slider",
+        "blocks": {
+          "1602800488072": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Cindy Henderson",
+              "url": "https:\/\/business.facebook.com\/thecerealschool\/posts\/2918037711574630?comment_id=3156697427708656",
+              "shown": true,
+              "color": "#fff"
+            }
+          },
+          "1602800511967": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Chelsea Bryan",
+              "url": "https:\/\/business.facebook.com\/thecerealschool\/posts\/2918037711574630?comment_id=3178990425479356",
+              "shown": true,
+              "color": "#fff"
+            }
+          },
+          "1602800532025": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Michelle Jensen",
+              "url": "https:\/\/business.facebook.com\/thecerealschool\/posts\/2918037711574630?comment_id=3058717414173325",
+              "shown": true,
+              "color": "#fff"
+            }
+          },
+          "1602800550858": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Summer Heil",
+              "url": "https:\/\/business.facebook.com\/thecerealschool\/posts\/2918037711574630?comment_id=3139713889407010",
+              "shown": true,
+              "color": "#fff"
+            }
+          },
+          "1602800776404": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Nancy Kruh-Meyer",
+              "url": "https:\/\/business.facebook.com\/thecerealschool\/photos\/a.1949365435108534\/2991358837575850\/?type=3&av=1689262831118797&eav=AfaZWot2Ro6vgAWADvYe-HjS_WVeEQyZ-E_AyS9DdAJdotiky1qj3ZVpoFTSX88-SrKCNFhKs3XaCYhFgqtsyWmC&comment_id=3028173000561100",
+              "shown": true,
+              "color": "#fff"
+            }
+          },
+          "1602800796272": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Marsha Mooney",
+              "url": "https:\/\/business.facebook.com\/thecerealschool\/posts\/2993974510647616?comment_id=3195616407150091",
+              "shown": true,
+              "color": "#fff"
+            }
+          },
+          "1602800818931": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Lisa Braulick",
+              "url": "https:\/\/business.facebook.com\/thecerealschool\/posts\/2993974510647616?comment_id=3016289028416164",
+              "shown": true,
+              "color": "#fff"
+            }
+          },
+          "1602800827833": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Debra Doktor",
+              "url": "https:\/\/business.facebook.com\/thecerealschool\/posts\/2993974510647616?comment_id=3332672200111177",
+              "shown": true,
+              "color": "#fff"
+            }
+          },
+          "1602800840135": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Andre Cox",
+              "url": "https:\/\/business.facebook.com\/thecerealschool\/posts\/2993974510647616?comment_id=3386212521423811",
+              "shown": true,
+              "color": "#fff"
+            }
+          },
+          "1602800854019": {
+            "type": "slider_item",
+            "settings": {
+              "title": "Chris Gillen",
+              "url": "https:\/\/business.facebook.com\/thecerealschool\/posts\/2993974510647616?comment_id=3019737188071348",
+              "shown": true,
+              "color": "#fff"
+            }
+          }
+        },
+        "block_order": [
+          "1602800488072",
+          "1602800511967",
+          "1602800532025",
+          "1602800550858",
+          "1602800776404",
+          "1602800796272",
+          "1602800818931",
+          "1602800827833",
+          "1602800840135",
+          "1602800854019"
+        ],
+        "settings": {
+          "show_section": true,
+          "bg_color": "#79dad3",
+          "text_color": "#252525",
+          "button_style": "btn",
+          "margin": 18,
+          "margin_application": "top",
+          "loop": true,
+          "centered_slides": true,
+          "slides_per_view": "4",
+          "title": "",
+          "subheading": "",
+          "button_text": "",
+          "button_url": ""
+        }
+      },
+      "social": {
+        "type": "social",
+        "blocks": {
+          "1602874717017": {
+            "type": "social_item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Puffs_1_400x640.png"
+            }
+          },
+          "1602874730623": {
+            "type": "social_item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Puffs_5_-_400x640_ed92d756-10f4-493e-b070-bdfbe0044fd8.png"
+            }
+          },
+          "1602876383971": {
+            "type": "social_item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/cereal_3.png"
+            }
+          },
+          "1602801990594": {
+            "type": "social_item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/i.shgcdn-1.jpg"
+            }
+          },
+          "1602802010191": {
+            "type": "social_item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/cereal_4.png"
+            }
+          },
+          "1602874826964": {
+            "type": "social_item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Puffs_2_-_400x640_f19c8c2c-cafc-4ca9-a80e-d7c7e34a1a8a.png"
+            }
+          },
+          "1602802017312": {
+            "type": "social_item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/i.shgcdn-3.jpg"
+            }
+          },
+          "1602876360236": {
+            "type": "social_item",
+            "settings": {
+              "image": "shopify:\/\/shop_images\/Cereal_2.png"
+            }
+          }
+        },
+        "block_order": [
+          "1602874717017",
+          "1602874730623",
+          "1602876383971",
+          "1602801990594",
+          "1602802010191",
+          "1602874826964",
+          "1602802017312",
+          "1602876360236"
+        ],
+        "settings": {
+          "show_section": true,
+          "bg_color": "#fff",
+          "text_color": "#252525",
+          "button_style": "btn",
+          "accent_image_position": "top-left",
+          "accent_image_offset": "-50px",
+          "bg_image": "shopify:\/\/shop_images\/lined-paper.png",
+          "title": "",
+          "subheading": "",
+          "button_text": "",
+          "button_url": "",
+          "button_text_2": "",
+          "button_url_2": "",
+          "accent_image": "",
+          "header_accent_image": ""
+        }
+      }
+    },
+    "content_for_index": [
+      "1592944298167",
+      "1592943123387",
+      "1592863880592",
+      "1593015332012",
+      "1593020009923",
+      "1593020099870",
+      "1592952775685",
+      "1592949942677",
+      "1592862435873",
+      "1602020642312"
+    ]
+  }
+}

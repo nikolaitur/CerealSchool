@@ -1,0 +1,368 @@
+{% assign product = all_products[settings.product_id] %}
+{% assign current_variant = product.selected_or_first_available_variant %}
+
+<div class="probundle-sec" id="bundle">
+	<div class="enclose">
+		<div class="inn">
+			<div class="figure">
+				<img src="{{ section.settings.bund_img | img_url:'master'  }}" alt="image">
+			</div>
+			<div class="content">
+				<div class="review">{% include 'judgeme_widgets', widget_type: 'judgeme_preview_badge' %} &nbsp; | &nbsp; <span class="sold-in-emoji">🔥</span> &nbsp;&nbsp; <span class="sold-in-number">...</span> &nbsp;sold in the last 22 hours</div>
+				<h4>{{ section.settings.bundle_label }}</h4>
+				<ul class="variations">
+                  {% for block in section.blocks %}
+                  {% if block.type == 'bundle' %}
+					<li><input type="radio" value="{{ block.settings.flavor_limit }}" name="bundle1" {% if block.settings.default == true %}checked{% endif %} id="vari_{{ block.settings.value }}">
+                      <label for="vari_{{ block.settings.value }}">{{ block.settings.title }}<strong>{{ block.settings.rate }}</strong></label></li>
+                  {% endif %}
+                  {% endfor %}
+				</ul>
+				<h4>{{ section.settings.flavor_label }}</h4>
+                <ul class="flavors">
+                  {% for block in section.blocks %}
+                  {% if block.type == 'flavor' %}
+					<li>
+                      <input type="checkbox" name="single-option-select-flavor" id="swatch-2-{{ block.settings.title | handle }}" value="{{ block.settings.title }}" class="single-option-select visually-hidden" data-type="flavor"{% if block.settings.sold_out %} disabled{% endif %} />
+                      <label for="swatch-2-{{ block.settings.title | handle }}" class="product-option__label product-option__label--swatch">
+                        <img src="{{ block.settings.swatch_image | img_url: '200x200', crop: 'center' }}" alt="{{ block.settings.title }}" />
+                        <strong>{{ block.settings.title }}</strong></li>
+                  {% endif %}
+                  {% endfor %}
+				</ul>
+				<!-- <ul class="flavors">
+					<li><a href="#" class="active"><img src="{{ 'flavor1.png' | asset_url }}" alt="image"></a><strong>Cheddar <br>Cheese</strong></li>
+					<li><a href="#"><img src="{{ 'flavor2.png' | asset_url }}" alt="image"></a><strong>Flaming <br>Hot</strong></li>
+					<li><a href="#"><img src="{{ 'flavor3.png' | asset_url }}" alt="image"></a><strong>Sour Cream <br>& Onion</strong></li>
+				</ul> -->
+				<p><strong>{{ section.settings.del_head }}</strong></p>
+				<p>{{ section.settings.del_text }}</p>
+              <div>
+                
+                
+{% assign form_class = product.type | handleize %}
+
+{% form 'product', product, id: 'add-to-cart-form', class: form_class, data-productid: product.id, data-cart-submit: true %}
+  {% if section.settings.all_flavors_sold_out %}
+    <div class="product-sold-out-text">
+      {{ section.settings.all_flavors_sold_out_text }}
+    </div>
+    <button class="btn btn--block" disabled>Sold Out</button>
+  {% else %}
+
+
+  {% comment %} Main variant drop down (hidden) {% endcomment %}
+  {% if product.variants.size <= 1 %}
+    <input name="id" id="product-select" type="hidden" value="{{ product.variants.first.id }}" data-productid="{{product.id}}" />
+  {% else %}
+    <select name="id" id="product-select" data-productid="{{product.id}}" style="display:none;">
+      {% for variant in product.variants %}
+        {% if variant.available %}
+          <option  value="{{ variant.id }}">{{ variant.title }}</option>
+        {% else %}
+          <option disabled="disabled">{{ variant.title }} - Sold Out</option>
+        {% endif %}
+      {% endfor %}
+    </select>
+  {% endif %}
+
+  {% if product.available %}
+    <div class="product-option-row product-option-row--bundle" style="display:none;">
+      {% if is_alternate_template == true %}
+        {% include 'subscription-product-alternate' %}
+      {% else %}
+        {% include 'subscription-product' %}
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% if is_free_gift_template and product_type == "puffs" %}
+  <div class="product-option-row product-option-row--free-gift">
+    <input type="checkbox" name="properties[free_puffs_gift]" value="true" checked />
+    <label for="properties[free_puffs_gift]">Get My Free Mystery Gift (Today Only)</label>
+  </div>
+  {% endif %}
+
+  <div class="product-action{% if is_alternate_template %} product-action--alternate{% endif %}" style="display:none;">
+    {% comment %}We're not letting them edit quantity here, but we still need to send 1 to the form{% endcomment %}
+    <input type="hidden" name="quantity" value="1" />
+    {% if product.tags contains 'SkipCart' %}
+    <input type="hidden" name="properties[skip_cart]" value="true" />
+    {% endif %}
+      <button name="add" id="add-to-cart" type="submit" class="btn btn--block">
+        {% assign add_to_cart_text = section.settings.add_to_cart_text %}
+        <span id="add-to-cart-text" class="minicart-add-to-cart-text" data-sold-out-text="Sold Out" data-add-to-cart-text="{{ add_to_cart_text }}">Add</span>
+
+        {% if is_alternate_template %}
+          - <span id="rc_price_autodeliver" class="rc_price rc_price__autodeliver" aria-label="recurring price"></span> {% include 'icon', handle: 'arrow-right' %}
+        {% endif %}
+<!--         <input type="hidden" name="return_to" value="/checkout/" /> -->
+      </button>
+    </div>
+  {% endif %}
+{% endform %}                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+              </div>
+				<div class="btns">
+                  <div id="err" style="color:red; display:none;">Please select Flavours..</div>
+					<a href="#" id="final" class="buybtn big">{{ settings.sales-btn-text2 }} <img src="{{ 'icon-hand.png' | asset_url }}" alt="image"></a>
+					<div class="price">€59,90 <span>€119,80</span></div>
+				</div>
+				<p class="back">{{ section.settings.money_back }}</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+ $(document).ready(function(){
+
+  var productId = $('#add-to-cart-form').data('productid');
+  var soldInNum = localStorage.getItem(productId+'SoldIn');
+  if (!soldInNum) {
+    soldInNum = Math.floor(Math.random() * (220 - 150 + 1) + 150);
+    localStorage.setItem(productId+'SoldIn', soldInNum);
+  }
+  $('.sold-in-number').html(soldInNum);
+  
+  var limit = 2;
+  $('.rc_select__frequency option[value=30]').attr("selected","selected");
+  
+  $('input.single-option-select').on('change', function(evt) {
+    if ($('input.single-option-select:checked').length > limit) {
+       $(this).prop('checked', false);
+       // set button visibility true
+      $("#error").css("display", "none");
+       
+    }else{
+      // set button visibility false
+      $("#error").css("display", "block");
+    } 
+  });
+  
+  $(document).on('click', 'input[name="bundle1"]', function() {
+    limit = $(this).val();
+    $('input.single-option-select').prop('checked', false);    
+  });
+   
+  $('#final').on('click', function(e) {
+    var sel = $('input[type=radio][name=bundle1]:checked').attr('id');
+    var arr1 = sel.split('_');
+    var bundle_type = arr1[1];
+    var arr = [];
+	$('input.single-option-select:checkbox:checked').each(function () {
+    	arr.push($(this).val());
+	});
+    
+    switch(bundle_type) {
+        case 'bundle':
+          var set;
+          var arr1 = [];
+          var i = 0;
+          if (arr.includes('Sour Cream & Onion')){
+            arr1[i] = "Sour Cream & Onion";
+            i = i+1;
+          }
+          if (arr.includes('Cheddar Cheese')){
+            arr1[i] = "Cheddar Cheese";
+            i = i+1;
+          }
+          if (arr.includes('Flaming Hot')){
+            arr1[i] = "Flaming Hot";
+            i = i+1;
+          }
+          var set = arr1[0] + " + " + arr1[1] + " / 24 Bags / bundle";
+          var value1 = $('select[id="product-select"] > option:contains("' + set + '")').val();
+          $('#product-select option[value="' + value1 + '"]').attr("selected","selected").change();
+           $("#product-select").trigger("change");
+           var varientID = $( "#product-select option:selected" ).val();
+             alert(varientID);
+           addToCheckout(varientID);
+          break;
+        case 'variety':
+          var set;
+          var arr1 = [];
+          var i = 0;
+          if (arr.includes('Sour Cream & Onion')){
+            arr1[i] = "Sour Cream & Onion";
+            i = i+1;
+          }
+          if (arr.includes('Cheddar Cheese')){
+            arr1[i] = "Cheddar Cheese";
+            i = i+1;
+          }
+          if (arr.includes('Flaming Hot')){
+            arr1[i] = "Flaming Hot";
+            i = i+1;
+          }
+          var set = arr1[0] + " + " + arr1[1] + " / 48 Bags / variety";
+          var value1 = $('select[id="product-select"] > option:contains("' + set + '")').val();
+          $('#product-select option[value="' + value1 + '"]').attr("selected","selected").change();
+            $("#product-select").trigger("change");
+           var varientID = $( "#product-select option:selected" ).val();
+             alert(varientID);
+           addToCheckout(varientID);
+          break;
+        case 'single':
+          var set = arr[0] + " / 24 Bags / single";
+          var value1 = $('select[id="product-select"] > option:contains("' + set + '")').val();
+          $('#product-select option[value="' + value1 + '"]').attr("selected","selected").change();
+         $("#product-select").trigger("change");
+           var varientID = $( "#product-select option:selected" ).val();
+             alert(varientID);
+           addToCheckout(varientID);
+          break;        
+        case 'single-sm':
+          var set = arr[0] + " / 12 Bags / single-sm";
+          var value1 = $('select[id="product-select"] > option:contains("' + set + '")').val();
+//         $('#product-select').find('option:selected').attr('selected', false);
+           $('#product-select option[value="' + value1 + '"]').attr("selected","selected");
+           $('#product-select option[value="' + value1 + '"]').prop("selected","selected");
+           $("#product-select").trigger("change");
+           var varientID = $( "#product-select option:selected" ).val();
+           addToCheckout(varientID);
+//          $('#product-select').selectmenu('refresh', true);
+//          $("#product-select").val(value1).trigger('change');
+//         $("#product-select").change();
+//         $('#product-select').trigger("updated");
+//         $("#product-select").val(value1).change();
+          break;
+      }
+//         alert($('#product-select').find('option:selected').val());
+    
+//     $("#add-to-cart-text").click();
+  });
+
+ });
+  
+</script>
+
+<script>
+  function addToCheckout(varientID){
+    var URLNew = "https://schoolyardsnacks.com/cart/"+varientID+":1";
+    window.location.replace(URLNew);
+  }
+</script>
+
+{% schema %}
+  {
+    "name": "Sales product",
+    "settings": [  
+  {
+	"type":"image_picker",
+	"id":"bund_img",
+	"label":"Bundle Image"
+  },
+  {
+   	"type": "text",
+  	"id":"bundle_label",
+	"label":"Select Bundle"
+  },
+  {
+   	"type": "text",
+  	"id":"flavor_label",
+	"label":"CHOOSE FLAVORS"
+  },
+  {
+   	"type": "text",
+  	"id":"del_head",
+	"label":"Deliver Heading"
+  },
+  {
+   	"type": "text",
+  	"id":"del_text",
+	"label":"Deliver Text"
+  },
+  {
+   	"type": "text",
+  	"id":"money_back",
+	"label":"Money back text"
+  }
+],
+"blocks":[
+      {
+        "type":"bundle",
+        "name":"Bundle",
+        "settings":[
+          {
+            "type":"text",
+            "id":"title",
+            "label":"Label"
+          },
+          {
+            "type":"text",
+            "id":"value",
+            "label":"Value",
+            "info":"Must match the variant Type option exactly. i.e. - 'bundle' or 'variety'"
+          },
+		  {
+            "type":"text",
+            "id":"rate",
+            "label":"Price"
+          },
+          {
+            "type":"text",
+            "id":"flavor_limit",
+            "label":"Flavor Limit",
+            "info":"How many flavors can be selected?"
+          },
+          {
+            "type":"checkbox",
+            "id":"default",
+            "label":"Default selected?",
+            "default": false
+          },
+          {
+            "type":"checkbox",
+            "id":"sold_out",
+            "label":"Mark as sold out?",
+            "default": false
+          }
+        ]
+      },
+      {
+        "type":"flavor",
+        "name":"Flavor",
+        "settings":[
+          {
+            "type":"text",
+            "id":"title",
+            "label":"Title"
+          },
+          {
+            "type":"image_picker",
+            "id":"swatch_image",
+            "label":"Swatch Image"
+          },
+          {
+            "type":"checkbox",
+            "id":"new",
+            "label":"Mark as new?",
+            "default": false
+          },
+          {
+            "type":"checkbox",
+            "id":"sold_out",
+            "label":"Mark as sold out?",
+            "default": false
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

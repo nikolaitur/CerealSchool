@@ -1,0 +1,89 @@
+<div class="hurry-sec">
+    <h4>{{ section.settings.side-bar-hurrytext}}</h4>
+    <figure><img src="{{ section.settings.side-bar-hurryimg | img_url:'master' }}" alt="image" /></figure>
+    <div class="hurry-butn">
+        <a href="{{settings.sales-page-link}}">{{settings.sales-btn-text}}</a>
+    </div>
+</div>
+<div class="reviews-num">
+    <h2>{{ section.settings.side-bar-reviews}}</h2>
+    <h3>{{ section.settings.side-bar-reportcard}}</h3>
+</div>
+
+<div class="customer-mnreview">					
+    {% for block in section.blocks %}
+          {% if block.type == 'AllReviews' %}
+          <div class="custm-block1">
+            <div class="cus-star"><figure><img src="{{ block.settings.side-review-star | img_url:'master' }}" alt="image" /></figure></div>
+      <p>{{ block.settings.side-review-text-1}}</p>
+      <div class="cus-img"><figure><img src="{{ block.settings.side-review-review-p | img_url:'master' }}" alt="image" /></figure></div>
+      <h6>{{ block.settings.review_name}}</h6>
+            </div>
+      {% endif %}
+      {% endfor %}  
+</div>
+
+
+
+{% schema %}
+  {
+    "name": "Advertorial Sidebar",
+    "settings": [
+	{
+   		"type": "text",
+   		"id":"side-bar-hurrytext",
+		"label":"Side Bar Hurry Text"
+	},
+      
+        {
+   		"type": "image_picker",
+   		"id":"side-bar-hurryimg",
+		"label":"Side Bar Hurry Image"
+	},
+        {
+   		"type": "text",
+   		"id":"side-bar-reviews",
+		"label":"Side Bar Reviews"
+	},
+        {
+   		"type": "text",
+   		"id":"side-bar-reportcard",
+		"label":"Side Bar Report Card"
+	}
+],
+"blocks":[
+{
+"type":"AllReviews",
+"name":"AllReviews",
+"settings":[
+{
+"type":"image_picker",
+"id":"side-review-star",
+"label":"Stars Image"
+},
+{
+"type":"textarea",
+"id":"side-review-text-1",
+"label":"Review Text"
+},
+{
+"type":"image_picker",
+"id":"side-review-review-p",
+"label":"Person Image"
+},
+{
+"type":"text",
+"id":"review_name",
+"label":"Review Name"
+}
+]
+}
+]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

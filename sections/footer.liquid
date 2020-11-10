@@ -1,0 +1,86 @@
+<footer class="footer">
+  <div class="footer-section footer-section--nav">
+    {% if section.settings.menu_image != blank %}
+      <img class="footer-section--nav__offset-image lazy" data-src="{{ section.settings.menu_image | img_url: '500x' }}" alt="{% if section.settings.menu_image.alt != blank %}{{ section.settings.menu_image.alt }}{% else %}{{ shop.name }}{% endif %}" />
+    {% endif %}
+    <ul class="footer-navigation footer-navigation--block">
+      {% for link in linklists[section.settings.linklist].links %}
+        <li class="footer-navigation__item footer-navigation__item--{{ link.title | handle }}">
+          <a href="{{ link.url }}" title="Go to {{ link.title }}">{{ link.title }}</a>
+        </li>
+      {% endfor %}
+      {% if settings.social_facebook != blank %}
+        <li class="footer-navigation__item footer-navigation__item--social">
+          <a href="https://facebook.com/{{ settings.social_facebook }}" title="Visit us on Facebook">{% include 'icon', handle: 'facebook' %}</a>
+        </li>
+      {% endif %}
+      {% if settings.social_instagram != blank %}
+        <li class="footer-navigation__item footer-navigation__item--social">
+          <a href="https://instagram.com/{{ settings.social_instagram }}" title="Visit us on Instagram">{% include 'icon', handle: 'instagram' %}</a>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+  <div class="footer-section footer-section--newsletter">
+    {% form 'customer' %}
+      {% if section.settings.newsletter_image != blank %}
+        <img class="footer-section--newsletter__offset-image lazy" data-src="{{ section.settings.newsletter_image | img_url: '500x' }}" alt="{% if section.settings.newsletter_image.alt != blank %}{{ section.settings.newsletter_image.alt }}{% else %}{{ section.settings.newsletter_heading }}{% endif %}" />
+      {% endif %}
+      {% if form.posted_successfully? %}
+        <p class="form-message form-message--success">{{ 'general.newsletter_form.confirmation' | t }}</p>
+      {% else %}
+        <label for="newsletter_email" class="h4">{{ section.settings.newsletter_heading }}</label>
+        {% if section.settings.newsletter_subheading != blank %}<p>{{ section.settings.newsletter_subheading }}</p>{% endif %}
+        <div class="newsletter-field-group">
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <input type="email" name="contact[email]" id="newsletter_email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="Email Address" autocorrect="off" autocapitalize="off">
+          <button type="submit" class="btn" name="commit" id="Subscribe">Join Now</button>
+        </div>
+      {% endif %}
+    {% endform %}
+  </div>
+  <div class="footer-section footer-section--copyright">
+    <p>
+      {% for policy in shop.policies %}
+        <a href="{{ policy.url }}">{{ policy.title }}</a>
+      {% endfor %}
+      <span>&copy; {{ 'now' | date: '%Y' }}, {{ shop.name }}</span>
+      {{ powered_by_link }}
+    </p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type":"link_list",
+      "id":"linklist",
+      "label":"Menu"
+    },
+    {
+      "type":"image_picker",
+      "id":"menu_image",
+      "label":"Menu Image"
+    },
+    {
+      "type":"text",
+      "id":"newsletter_heading",
+      "label":"Newsletter Heading",
+      "default":"Join our VIP List"
+    },
+    {
+      "type":"text",
+      "id":"newsletter_subheading",
+      "label":"Newsletter SubHeading",
+      "default":"Be the first to hear about promotions and new flavors."
+    },
+    {
+      "type":"image_picker",
+      "id":"newsletter_image",
+      "label":"Newsletter Image"
+    }
+  ]
+}
+{% endschema %}

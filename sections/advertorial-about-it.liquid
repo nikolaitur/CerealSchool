@@ -1,0 +1,50 @@
+<div class="situation">
+    <h3>{{ section.settings.last-batch-section-2-heading}} </h3>
+  	{{ section.settings.last-batch-section-2}}
+    <figure><img src="{{ section.settings.about-image | img_url:'master' }}" alt="image" /></figure>
+    <div class="founder-block">
+        <ul>
+            <li><img src="{{ section.settings.co-founder-image | img_url:'master' }}" alt="image" /></li>
+            <li>{{ section.settings.co-founder-name}} </li>
+        </ul>
+    </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Advertorial About It",
+    "settings": [
+	{
+   		"type": "text",
+   		"id":"last-batch-section-2-heading",
+		"label":"Last Batch Section Heading"
+	},   
+	{
+   		"type": "textarea",
+   		"id":"last-batch-section-2",
+		"label":"Last Batch Section Text"
+	},
+       {
+   		"type": "image_picker",
+   		"id":"about-image",
+		"label":"About Image"
+	},{
+   		"type": "image_picker",
+   		"id":"co-founder-image",
+		"label":"CoFounder Image"
+	},
+      {
+   		"type": "text",
+   		"id":"co-founder-name",
+		"label":"Co Founder Name"
+	}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

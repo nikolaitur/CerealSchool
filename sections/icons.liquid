@@ -1,0 +1,61 @@
+<section class="section section--icons icons {{ section.settings.padding }} icons--{{ section.id }}" {{ section.shopify_attributes }} >
+  <style>.icons--{{ section.id }} { background-color: {{ section.settings.bg_color }}; }</style>
+  <div class="section__content icons__items icons__items--padded {{ section.settings.container_width }}" {{ section.shopify_attributes }}>
+    {% for block in section.blocks %}
+      <img class="icon__item lazy" data-src="{{ block.settings.image | img_url: '2000x' }}" alt="{% if block.settings.image.alt != blank %}{{ block.settings.image.alt }}{% else %}{{ block.settings.title }}{% endif %}"/>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Icons",
+  "settings": [
+    {
+      "type":"header",
+      "content":"Design Settings"
+    },
+    {
+      "type":"select",
+      "id":"container_width",
+      "label":"Container Width",
+      "options":[
+        {"value":"container--full", "label":"Full Width"},
+        {"value":"container", "label":"Contained"}
+      ],
+      "default":"container"
+    },
+    {
+      "type":"color",
+      "id":"bg_color",
+      "label":"Container Background Color",
+      "default":"#fff"
+    }
+  ],
+  "blocks": [
+    {
+      "type":"icon",
+      "name":"Icons",
+      "settings":[
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Title",
+          "info":"Used for both admin and alt text."
+        },
+        {
+          "type":"image_picker",
+          "id":"image",
+          "label":"Image"
+        }
+      ]
+    }
+  ],
+  "max_blocks":4,
+  "presets": [{
+    "name": "Icons",
+    "category": "Content"
+  }]
+}
+{% endschema %}
+

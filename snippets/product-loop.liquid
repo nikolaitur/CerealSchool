@@ -1,0 +1,102 @@
+{% assign variant = prod.variants.first %}
+
+<article
+  itemtype="http://schema.org/Product"
+  itemscope="itemscope"
+  class="{% if prod.available == false%}product--unavailable {% endif %}column {% if classes %}{{ classes }}{% else %}column--xs-12 column--sm-6 column--sm-stretch column--md-4 column--md-stretch column--lg-3 column--lg-stretch{% endif %} product product--{{ prod.id }} product--{{ forloop.index }}{% if variant.compare_at_price > variant.price %} product--on-sale{% endif %}"
+  {% if template contains 'collection' or template contains 'index' %} data-prod-id="{{ prod.id }}"{% endif %}
+>
+  <div class="product__content">
+    <a itemprop="url" href="{{ prod.url | within: collection }}" title="{{ prod.title | strip_html | escape }}">
+
+      <div class="product__image-wrapper">
+        <img
+          itemprop="image"
+          class="product__image product__image--primary product__image--{{ prod.id }} lazy"
+          data-src="{{ prod.images[0] | img_url: '800x' }}"
+          data-default-image="{{ prod.images[0] | img_url: '800x' }}"
+          alt="{% if prod.images[0].alt != blank %}{{ prod.images[0].alt | escape }}{% else %}{{ prod.title | escape}}{% endif %}"
+        >
+        {% if prod.images[1] %}
+          <img
+            class="product__image product__image--{{ prod.id }} product__image--secondary lazy"
+            data-src="{{ prod.images[1] | img_url: '800x' }}"
+            data-default-image="{{ prod.images[1] | img_url: '800x' }}"
+            alt="{% if prod.images[1].alt != blank %}{{ prod.images[1].alt | escape }}{% else %}{{ prod.title | escape}}{% endif %}"
+          >
+        {% endif %}
+      </div>
+      <header class="product__header">
+        <h2 class="product__title" itemprop="name">{{ prod.title }}</h2>
+        <div class="product__pricing" itemprop="offers" itemtype="http://schema.org/Offer" itemscope="itemscope">
+          {% if prod.available %}
+            <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+            <span class="product__price product__price--current" itemprop="price">{{ variant.price | money_without_trailing_zeros }}</span>
+            <span class="product__price product__price--old">{% if variant.compare_at_price > 0 %}{{ variant.compare_at_price | money_without_trailing_zeros }}{% endif %}</span>
+          {% else %}
+            <span class="product__price">Out of Stock</span>
+          {% endif %}
+        </div>
+
+        {% if swatches != false %}
+          <div class="product__swatches">
+            {% for option in prod.options_with_values %}
+              {% if option.name == 'Color' or option.name == 'COLOR' %}
+                {% if option.values.size > 1 %}
+                  {% for value in option.values %}
+                    {% capture position_key %}option{{ option.position }}{% endcapture %}
+                    {% assign swatch_variant = '' %}
+                    {% for swatch_var in prod.variants %}
+                      {% if swatch_var[position_key] == value and swatch_var.available %}
+                        {% assign swatch_variant = swatch_var %}
+                        {% break %}
+                      {% endif %}
+                    {% endfor %}
+                    {% if swatch_variant != '' %}
+                      {% comment %} We're gathering all of the variant images that match the swatch colors here to pass as data attributes {% endcomment %}
+                      {% assign swatch_media_srcs = '' %}
+                      {% for media in prod.media %}
+                        {% assign split_filename = '' %}
+                        {% if media.media_type == 'image' %}
+                          {% assign split_filename = media.src | split: 'products/' | last | split: '.' | first | split: '_' %}
+                          {% assign color_handle = split_filename[3] | handle %}
+                          {% assign option_1_handle = swatch_variant.option1 | handle %}
+                          {% assign option_2_handle = swatch_variant.option2 | handle %}
+                          {% assign option_3_handle = swatch_variant.option3 | handle %}
+                          {% if color_handle == option_1_handle or color_handle == option_2_handle or color_handle == option_3_handle %}
+                            {% assign media_src = media | img_url: '800x' %}
+                            {% assign swatch_media_srcs = swatch_media_srcs | append: ':::' | append: media_src %}
+                          {% endif %}
+                        {% endif %}
+                      {% endfor %}
+                      {% assign swatch_media_srcs = swatch_media_srcs | remove_first: ':::' | split: ':::' %}
+
+                      <div class="product__swatch"
+                        data-variant-image="{% if swatch_media_srcs[0] %}{{ swatch_media_srcs[0] }}{% endif %}"
+                        data-variant-image-secondary="{% if swatch_media_srcs[1] %}{{ swatch_media_srcs[1] }}{% endif %}"
+                        data-variant-url="{{ swatch_variant.url | within: collection }}"
+                        data-variant-price="{{ swatch_variant.price | money_without_trailing_zeros }}"
+                        data-variant-compare-at-price="{{ swatch_variant.compare_at_price | money_without_trailing_zeros }}"
+                        data-on-sale="{% if swatch_variant.compare_at_price > swatch_variant.price %}true{% else %}false{% endif%}"
+                      >
+                        {% assign swatch_group = '' %}
+                        {% for tag in prod.tags %}
+                          {% if tag contains 'Style:' %}
+                            {% assign swatch_group = tag | split: ':' | last | handleize | append: '_'  %}
+                            {% break %}
+                          {% endif %}
+                        {% endfor %}
+                        {% assign swatch_img = value | handleize | prepend: swatch_group | prepend: 'swatch_' | append: '.jpg' %}
+                        <img src="{{ swatch_img | file_img_url: '100x' }}" alt="{{ value }} Swatch" />
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </header>
+    </a>
+  </div>
+</article>

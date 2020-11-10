@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% render 'google-tag-manager', tag: 'head' %}
+  {% include 'head-meta' %}
+  {{ content_for_header }}
+  {{ 'advertorial.scss.css' | asset_url | stylesheet_tag }}
+
+  {% render 'shogun-head' %}
+</head>
+
+<body id="{% if template contains 'gift_card' %}gift-card-id{% else %}{{ page_title | truncatewords: 3 | handle }}-id{% endif %}" class="{{ bodyClasses | split: ' ' | uniq | join: ' ' }}">
+  {% render 'google-tag-manager', tag: 'body' %}
+  <div class="wrapper">
+    {{content_for_layout}}
+  </div>
+</html>

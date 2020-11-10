@@ -1,0 +1,42 @@
+<div class="seen-sec">
+	<div class="enclose">
+		<h2>{{ section.settings.heading }}</h2>
+		<div class="figure">
+          {% for block in section.blocks %}
+          	<img src="{{ block.settings.fea_img | img_url : 'master' }}" alt="image">
+          {% endfor %}
+		</div>
+	</div>
+</div>
+
+{% schema %}
+  {
+    "name": "Sales SeenIn",
+    "settings": [
+  {
+   	"type": "text",
+  	"id":"heading",
+	"label":"Heading"
+  }
+],
+"blocks":[
+{
+"type":"Featured",
+"name":"Featured",
+"settings":[
+{
+"type":"image_picker",
+"id":"fea_img",
+"label":"Featured Image"
+}
+]
+}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,28 @@
+<main class="content content--no-sidebar" role="main">
+  <div class="content--404">
+    <div class="container row">
+      <section class="page-main">
+        <header class="page-header">
+          <h1>404</h1>
+        </header>
+        <div class="page-content">
+          <h2>Sorry, we can't find the page you are looking for.</h2>
+
+          <form id="search-404-form" action="/search" class="form clearfix" method="get">
+            <p>Try searching our site instead:</p>
+            <div class="form-container">
+              <div class="form__fieldrow">
+                <label for="search-input" class="visually-hidden">Search</label>
+                <input id="search-input" type="text" name="q" class="forn__field" value="{{search.terms | escape}}" size="25" />
+              </div>
+              <div class="form__actions">
+                <button type="submit" class="btn">Search</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+ {% include 'BrokenLinkRedirect' %}

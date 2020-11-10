@@ -1,0 +1,55 @@
+<main class="content content--no-sidebar" role="main">
+  <div class="container--slim">
+    <section class="page-main" style="padding-top: 100px;">
+      <header class="page-header">
+        <h1>Here's your e-gift card!</h1>
+      </header><!-- page-header -->
+      <div class="page-content{% if gift_card.expired or gift_card.enabled != true %} disabled{% endif %}">
+        <div id="gift-card-holder">
+          <div class="corner top-left"></div>
+          <div class="corner bottom-right"></div>
+          <div class="corner top-right"></div>
+          <div class="corner bottom-left"></div>
+          <div id="gift-card">
+          <img src="{{ 'gift-card-code.jpg' | asset_url }}" alt="Gift card illustration">
+            {% assign initial_value_size = formatted_initial_value | size %}
+            <div id="gift-card-amount" class="{% if initial_value_size > 6 %}medium{% endif %}">
+              {% if gift_card.balance != gift_card.initial_value %}
+              <span class="tooltip-container"><span class="tooltip-label">{{ gift_card.balance | money }} <small>left</small></span><span class="tooltip-triangle"></span></span>
+              {% endif %}
+              <strong>{{ formatted_initial_value }}</strong>
+            </div>
+            {% assign code_size = gift_card.code | format_code | size %}
+            <div id="gift-card-code-outer" class="{% if code_size <= 25 %}large{% elsif code_size > 25 and code_size <= 30 %}medium{% else %}small{% endif %}" onclick="selectText('gift-card-code-digits');">
+              <div id="gift-card-code-inner">
+                <strong id="gift-card-code-digits">{{ gift_card.code | format_code }}</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="gift-card-instructions">
+          <p>Use this code at checkout to redeem your e-gift card.</p>
+        </div>
+        <div id="qr-code"></div>
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            new QRCode(document.getElementById("qr-code"), {
+              text: "{{ gift_card.qr_identifier }}",
+              width: 120,
+              height: 120
+            });
+          });
+        </script>
+        <div id="gift-card-actions">
+          <a href="{{ shop.url }}" class="btn center" target="_blank" rel="noopener noreferrer" title="Start Shopping">Start Shopping</a>
+          <a href="#" class="action-link left" onclick="window.print();" title="Print"><i class="ico-16 print"></i>Print</a>
+        </div>
+        <footer role="contentinfo">
+          {% if gift_card.pass_url %}
+          <a href="{{ gift_card.pass_url }}" title="Add to Apple Wallet"><img id="apple-wallet-badge" src="{{ 'gift-card/add-to-apple-wallet.svg' | shopify_asset_url }}" width="120" height="40" alt="Add To Apple Wallet"></a>
+          {% endif %}
+        </footer>
+      </div><!-- page-content -->
+    </section><!-- page-main -->
+  </div><!-- container--slim -->
+</main><!-- content -->

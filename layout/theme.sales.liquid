@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% render 'google-tag-manager', tag: 'head' %}
+  {% include 'head-meta' %}
+  {{ content_for_header }}
+  {% include 'judgeme_core' %}
+  {{ 'sales.scss.css' | asset_url | stylesheet_tag }}
+
+  {% render 'shogun-head' %}
+  
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+</head>
+
+<body id="{% if template contains 'gift_card' %}gift-card-id{% else %}{{ page_title | truncatewords: 3 | handle }}-id{% endif %}" class="{{ bodyClasses | split: ' ' | uniq | join: ' ' }}">
+  {% render 'google-tag-manager', tag: 'body' %}
+  <div class="wrapper">
+    {{content_for_layout}}
+  </div>
+  
+  
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />   
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.pro-items').slick({asNavFor: '.pro-nav'});
+	
+	$('.pro-nav').slick({
+		arrows:false, slidesToShow:4,  slidesToScroll:1, asNavFor:'.pro-items', focusOnSelect:true, infinite: false
+	});
+	
+	$('.customer-reviews').slick({
+		slidesToShow:3,  slidesToScroll:3, dots:true,
+		responsive: [
+		{
+		breakpoint:1023,
+		settings:{
+			slidesToShow:2,
+			slidesToScroll:2
+		}
+		},
+		{
+		breakpoint:640,
+		settings:{
+			slidesToShow:1,
+			slidesToScroll:1
+		}
+		}
+		]
+	});
+	
+	$('.facts-slider').slick({
+		slidesToShow:2,
+		responsive: [
+		{
+		breakpoint:1023,
+		settings:{
+			slidesToShow:1
+		}
+		}
+		]
+	});
+	
+	$('.faq-items .item:first-child h4').addClass('active');
+	
+	$('.faq-items .item h4').click(function(){
+		$('.faq-items .item .ans').slideUp(200);
+		$('.faq-items .item h4').removeClass('active');
+		$(this).next().slideDown(300);
+		$(this).addClass('active');
+	});
+	
+	$('.buybtn').click(function(){
+		$('html, body').animate({
+        	scrollTop: $("#bundle").offset().top
+    	}, 1000);
+		return false;
+	});
+	
+	$('#footer .navi a, .facts-slider .item .content .btns a').click(function(){
+		var alink = $(this).attr('href');
+		$('.poplayer').show();
+		$(alink).show();
+		return false;
+	});
+	
+	$('.poplayer').click(function(){
+		$(this).hide();
+		$('.popup').hide();
+	});
+	
+	$('.popclose').click(function(){
+		$('.poplayer').hide();
+		$('.popup').hide();
+		return false;
+	});
+	
+	$('#header .inn .navi ul li a').click(function(){
+		var nlink = $(this).attr('href');
+		$('html, body').animate({
+        	scrollTop: $(nlink).offset().top
+    	}, 1000);
+		return false;
+	});
+});
+</script>  
+  
+  
+  </body>
+</html>

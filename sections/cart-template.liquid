@@ -1,0 +1,279 @@
+{% assign limit = section.settings.cart_collection_limit %}
+<main class="content content--no-sidebar" role="main">
+  <div class="container">
+    <section class="page-main">
+      <div class="page-header">
+        <h1 class="page-title">Shopping Cart</h1>
+      </div>
+      {% if cart.item_count == 0 %}
+        <div class="page-content cart-no-products">
+          <p class="lead center container--slim">{{ section.settings.cart_collection_heading }}</p>
+          <h2 class="center">Shop Featured Products:</h2>
+          <div class="products row row--gutters">
+            {% for prod in collections[section.settings.cart_collection].products limit:limit %}
+              {% include 'product-loop', quickview:false, classes: 'column column--xs-12 column--md-3' %}
+            {% endfor %}
+          </div>
+        </div>
+      {% else %}
+        <div class="page-content">
+          <form action="/cart" method="post" id="cartform" class="row row--gutters">
+            <div class="column column--xs-12 column--md-7" id="cart-products">
+              <h4 id="cart-products-title">Items currently in your cart</h4>
+              <ul id="cart-items">
+                {% for item in cart.items %}
+                  <li id="cart-row-{{ item.id }}" class="cart-row">
+                    {% if forloop.index == 1 %}<script type="application/json" id="cart-item__json">{{ item | json }}</script>{% endif %}
+                    <div class="cart-column item-image-wrapper">
+                      <img class="item-image" src="{{ item.image.src | product_img_url: 'medium' }}" alt="{{ item.title | escape }}" />
+                    </div>
+                    <div class="cart-column item-header">
+                      <h3 class="item-title"><a href="{{ item.product.url }}" title="{{ item.product.title }}">{{ item.product.title }}</a></h3>
+                      <div class="cart__meta-text">
+                        {% unless item.variant.title contains 'Default' and item.total_discount == 0 %}
+                          {% for option in item.product.options %}
+                            <div class="item-meta"><span class="item-meta__item">{{ option }}: <span class="item-meta__option">{{ item.variant.options[forloop.index0] }}</span></span></div>
+                          {% endfor %}
+                        {% endunless %}
+                        {% if item.total_discount > 0 %}
+                          <div class="item-meta item-meta--discount">{{ item.message }} / {{ item.total_discount | money_without_trailing_zeros }} OFF</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div class="cart-column item-qty-price">
+                      <div class="item-qty">
+                        <div class="cart-qty">
+                          <input type="text" size="5" name="updates[]" class="cart-qty-input" id="updates_{{ item.id }}" value="{{ item.quantity }}" {% unless item.variant.inventory_management == blank or item.variant.inventory_policy == 'continue' %} max="{{ item.variant.inventory_quantity }}" {% endunless %} onfocus="this.select();"/>
+                          <input id="qtyminus-{{ item.id }}" type="button" value="–" class="qtyminus" field="quantity" />
+                          <input id="qtyplus-{{ item.id }}" type="button" value="+" class="qtyplus" field="quantity" />
+                        </div>
+                      </div>
+                      <div class="item-line-price">{{ item.line_price | money_without_trailing_zeros }} {% if item.total_discount > 0 %} <span class="item-old-price"> {{ item.original_line_price | money }}</span>{% endif %}</div>
+                      <a class="btn btn--small item-delete item-delete-{{ item.id }}" href="/cart/change?line={{ forloop.index }}&quantity=0" title="Delete">Remove Item</a>
+                    </div>
+                    <script>
+                      document.addEventListener('DOMContentLoaded', function () {
+                        (function($){
+                          $(function(){
+                            $('#qtyplus-{{ item.id }}').click(function(e){
+                              e.preventDefault();
+                              var currentVal = parseInt($("#updates_{{ item.id }}").val());
+                              $('#updates_{{ item.id }}').val(currentVal + 1);
+                              $('#update-cart').trigger('click');
+                            });
+                            $('#qtyminus-{{ item.id }}').click(function(e){
+                              e.preventDefault();
+                              var currentVal = parseInt($("#updates_{{ item.id }}").val());
+                              if (currentVal == '1'){
+                                if (confirm('Would you like to remove this product from your cart?')) {
+                                  window.location.href = '/cart/change?line={{ forloop.index }}&quantity=0';
+                                }
+                              }
+                              else {
+                                $('#updates_{{ item.id }}').val(currentVal - 1);
+                                $('#update-cart').trigger('click');
+                              }
+                            });
+                          });
+                        })(jQuery)
+                      });
+                    </script>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+            <div class="column column--xs-12 column--md-4 column--md-offset-1" id="cart-summary">
+              <header class="center">
+                <h1 class="h5">Summary</h1>
+              </header>
+              <div id="cart-actions">
+                <div id="totals">
+                  <div class="total-row clearfix total-row--sub-total">
+                    <span class="total-row__title">Sub Total </span> <span class="total-row__value">{{ cart.original_total_price | money_without_trailing_zeros }}</span>
+                  </div>
+                  {% if cart.total_discount > 0 %}
+                    <div class="total-row clearfix total-row--savings">
+                      <span id="cart-saving-amount" class="total-row__title" data-savings-total="{{ cart.total_discount | remove:'$' }}">Savings</span> <span class="total-row__value">-{{ cart.total_discount | money_without_trailing_zeros }}</span>
+                    </div>
+                  {% endif %}
+
+                  {% unless customer %}
+                    <a href="#" id="show-shipping-calculator-start" title="Estimate Shipping"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-32 252c0 6.6-5.4 12-12 12h-92v92c0 6.6-5.4 12-12 12h-56c-6.6 0-12-5.4-12-12v-92H92c-6.6 0-12-5.4-12-12v-56c0-6.6 5.4-12 12-12h92v-92c0-6.6 5.4-12 12-12h56c6.6 0 12 5.4 12 12v92h92c6.6 0 12 5.4 12 12v56z"/></svg> Enter address to estimate shipping</a>
+                  {% endunless %}
+                  <div class="total-row clearfix total-row--estimated-shipping{% unless customer %} total-row--estimated-shipping--hidden{% endunless %}">
+                    <span class="total-row__title ">Shipping</span> <span id="estimated-shipping-cost" class="total-row__value"></span>
+                  </div>
+                  <div id="estimating-messaging">Estimating for <span id="shipping_zipcode_result"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M444.788 291.1l42.616 24.599c4.867 2.809 7.126 8.618 5.459 13.985-11.07 35.642-29.97 67.842-54.689 94.586a12.016 12.016 0 0 1-14.832 2.254l-42.584-24.595a191.577 191.577 0 0 1-60.759 35.13v49.182a12.01 12.01 0 0 1-9.377 11.718c-34.956 7.85-72.499 8.256-109.219.007-5.49-1.233-9.403-6.096-9.403-11.723v-49.184a191.555 191.555 0 0 1-60.759-35.13l-42.584 24.595a12.016 12.016 0 0 1-14.832-2.254c-24.718-26.744-43.619-58.944-54.689-94.586-1.667-5.366.592-11.175 5.459-13.985L67.212 291.1a193.48 193.48 0 0 1 0-70.199l-42.616-24.599c-4.867-2.809-7.126-8.618-5.459-13.985 11.07-35.642 29.97-67.842 54.689-94.586a12.016 12.016 0 0 1 14.832-2.254l42.584 24.595a191.577 191.577 0 0 1 60.759-35.13V25.759a12.01 12.01 0 0 1 9.377-11.718c34.956-7.85 72.499-8.256 109.219-.007 5.49 1.233 9.403 6.096 9.403 11.723v49.184a191.555 191.555 0 0 1 60.759 35.13l42.584-24.595a12.016 12.016 0 0 1 14.832 2.254c24.718 26.744 43.619 58.944 54.689 94.586 1.667 5.366-.592 11.175-5.459 13.985L444.788 220.9a193.485 193.485 0 0 1 0 70.2zM336 256c0-44.112-35.888-80-80-80s-80 35.888-80 80 35.888 80 80 80 80-35.888 80-80z"/></svg></span><a href="#" id="show-shipping-calculator"{% unless customer %}class="hidden"{% endunless %} title="Show Shipping"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg></a></div>
+                  <div id="shipping-calculator">
+                    <div id="shipping-calculator-form" class="form">
+                      <div class="form__fieldrow">
+                        <label for="address-country">Country</label>
+                        <div class="form__field--select">
+                          <select id="address-country" name="address[country]" data-default="{% if shop.customer_accounts_enabled and customer %}{{ customer.default_address.country }}{% else %}United States{% endif %}">{{ country_option_tags }}</select>
+                          {% include 'icon', handle: 'chevron-down' %}
+                        </div>
+                      </div>
+                      <div class="form__fieldrow" id="address-province-container">
+                        <label for="address-province" id="address_province_label">State/Province</label>
+                        <div class="form__field--select">
+                          <select id="address-province" name="address[province]" data-default="{% if shop.customer_accounts_enabled and customer and customer.default_address.province != '' %}{{ customer.default_address.province }}{% endif %}"></select>
+                          {% include 'icon', handle: 'chevron-down' %}
+                        </div>
+                      </div>
+                      <div class="form__fieldrow">
+                        <label for="address_zip">Zipcode</label>
+                        <input class="form__field" type="text" id="address-zip" name="address[zip]"{% if shop.customer_accounts_enabled and customer %} value="{{ customer.default_address.zip }}"{% endif %} />
+                      </div>
+                      <div class="form__actions">
+                        <a href="#" id="get-rates" class="btn" title="Estimate">Estimate</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="total-row clearfix total-row--total">
+                    <span class="total-row__title">Total </span> <span id="cart-total-amount" class="total-row__value" data-cart-total="{{ cart.total_price | remove:'$' }}">{{ cart.total_price | money_without_trailing_zeros }}</span>
+                  </div>
+                </div>
+                <div id="checkout-buttons" class="center">
+                  <input type="submit" id="checkout" class="btn btn--block" name="checkout" value="Proceed to Checkout" />
+                  <button type="submit" id="update-cart" class="btn--no-style" name="update"></button>
+                  {% if additional_checkout_buttons %}
+                    <span class="additional-checkout-buttons">
+                      {{ content_for_additional_checkout_buttons }}
+                    </span>
+                  {% endif %}
+                  <a id="continue-shopping" href="/collections/all" title="Continue Shopping">or continue shopping</a>
+                </div>
+              </div>
+
+            </div>
+          </form>
+        </div>
+
+        {% comment %} {% include 'related-products' %} {% endcomment %}
+
+        <script src="/services/javascripts/countries.js" defer></script>
+        <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
+
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            // calculates the cart total
+            function calculate_total(shipping_rate){
+              var cart_total = parseInt($('#cart-total-amount').data('cart-total'));
+              var savings = parseInt($('#cart-saving-amount').data('savings-total'));
+              $('#cart-total-amount').text((Shopify.formatMoney(cart_total+shipping_rate)));
+            }
+
+            new Shopify.CountryProvinceSelector('address-country', 'address-province', {hideElement: 'address-province-container'});
+            function get_rates(province, country, zipcode){
+
+              var form = $('#shipping-calculator');
+              form.addClass('calculating');
+
+              if(province == null){
+                var province = $('#address-province').val().replace(' ','+');
+              }
+              if(country == null){
+                var country = $('#address-country').val().replace(' ','+');
+              }
+              if(zipcode == null){
+                var zipcode = $('#address-zip').val().replace(' ','+');
+              }
+
+              var rates_url = '{{ shop.url }}/cart/shipping_rates.json?shipping_address%5Bzip%5D='+ zipcode +'&shipping_address%5Bcountry%5D='+ country +'&shipping_address%5Bprovince%5D='+ province;
+              $.getJSON( rates_url).done(function(data){
+                // UI changes
+                $("#show-shipping-calculator-start").hide();
+                form.removeClass('calculating');
+                $('.total-row--estimated-shipping').removeClass('total-row--estimated-shipping--hidden');
+                var shipping_price = Shopify.formatMoney(data.shipping_rates[0].price, "{{shop.money_without_currency_format}}").replace(".00", "");
+                if (shipping_price == '$0'){
+                  shipping_price = 'Free';
+                }
+                $("#estimated-shipping-cost").text(shipping_price);
+                $('#shipping_zipcode_result').text(zipcode.replace('+', ''));
+                $('#show-shipping-calculator, #shipping_zipcode_result, #estimating-messaging').show();
+                $("#shipping-calculator").removeClass('shown');
+                // get shipping address and store as JSON object in cookie
+                var address = [{ 'province':province , 'country': country, 'zipcode': zipcode }];
+                localStorage.setItem("get_rates_address", JSON.stringify(address), {expires: 30});
+                // triggers recalculation on cart total
+                var shipping_rate = parseInt(data.shipping_rates[0].price.replace('.',''));
+                calculate_total(shipping_rate, province);
+              }).fail(function(data){
+                form.removeClass('calculating');
+                alert('Sorry, something went wrong. Please try inputting your address again');
+              });
+            }
+            if (localStorage.getItem("get_rates_address")){
+              // has cookie
+              var rate_info = $.parseJSON(localStorage.getItem("get_rates_address")),
+              province  = rate_info[0].province,
+              country   = rate_info[0].country,
+              zipcode   = rate_info[0].zipcode;
+              get_rates(province, country, zipcode);
+            }
+            $('#get-rates').on('click', function(){
+              get_rates();
+              return false;
+            });
+            $("#address-zip").keypress(function( event ) {
+              if ( event.which == 13 ) {
+                event.preventDefault();
+                get_rates();
+              }
+            });
+            $("#show-shipping-calculator-start").on('click', function(){
+              $(this).hide();
+              $("#shipping-calculator").addClass('shown');
+              return false;
+            });
+            $("#show-shipping-calculator, #shipping_zipcode_result").on('click', function(){
+              $('#show-shipping-calculator, #shipping_zipcode_result, #estimating-messaging').hide();
+              $("#shipping-calculator").addClass('shown');
+              return false;
+            });
+            {% if customer %}
+            $('#get-rates').click();
+            {% endif %}
+          });
+        </script>
+      {% endif %}
+    </section>
+  </div>
+</main>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Empty Cart"
+    },
+    {
+      "type": "textarea",
+      "id": "cart_collection_heading",
+      "label": "Heading",
+      "default": "Oops. Lookings like you haven't added anything to your cart. Check out some of these products"
+    },
+    {
+      "type": "collection",
+      "id": "cart_collection",
+      "label": "Collection",
+      "info": "Collection to pull products from."
+    },
+    {
+      "type": "text",
+      "id": "cart_collection_limit",
+      "label": "How many products to show?",
+      "default": "12"
+    },
+    {
+      "type":"text",
+      "id":"cart_upsell_limit",
+      "label": "Upsell Product Limit",
+      "default": "3"
+    }
+  ]
+}
+{% endschema %}

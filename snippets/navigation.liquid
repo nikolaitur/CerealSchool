@@ -1,0 +1,49 @@
+{% assign highlight_index = section.settings.highlight_menu_index | times: 1 %}
+<nav class="navigation header__navigation" role="navigation">
+  <ul class="navigation-ul">
+    {% for link in linklists[linklist].links %}
+      {% capture navlink %}{% if template == 'article.sub' or template == 'product.sub' and link.title == 'Cereal' %}/products/copy-of-the-cereal-school?view=sub{% elsif template == 'article.sub' or template == 'product.sub' and link.title == 'Cheese Puffs' %}/products/keto-cheese-puffs?view=sub{% else %}{{ link.url }}{% endif %}{% endcapture %}
+      <li class="navigation-li navigation-li--{{ forloop.index }} navigation-li--{{ link.title | split: '|' | first| handle }}{% if link.links != blank %} has-children{%endif%}{% if link.url == page.url or link.url == collection.url %} navigation-li--active{%endif%} hover-intent">
+        <a class="navigation-main-link navigation-main-link--{{ link.title | handle }}" href="{{ navlink }}" title="{{ link.title | escape }}"{% if highlight_index == forloop.index %}style="color:{{ section.settings.highlight_color }};{% if section.settings.highlight_bold %}font-weight:700;{% endif %}"{% endif %}>
+          {{ link.title | escape }}
+        </a>
+
+        {% if link.links %}
+          <div class="sub-navigation-wrapper">
+            <div class="container--fluid">
+              {% for block in section.blocks %}
+                {% if link.title == block.settings.nav_item %}
+                  <div class="sub-navigation-wrapper-column sub-navigation-wrapper-column--image">
+                    {% if block.settings.nav_image_url != blank %}<a href="{{ block.settings.nav_image_url }}">{% endif %}
+                      <img class="lazy" alt="{{ link.title | escape }}" data-srcset="{{ block.settings.nav_image | img_url: '1226x1464', crop: 'center' }} 2x, {{ block.settings.nav_image | img_url: '613x732', crop: 'center' }} 1x" data-src="{{ block.settings.nav_image | img_url: '613x732', crop: 'center' }}" />
+                    {% if block.settings.nav_image_url != blank %}</a>{% endif %}
+                  </div>
+                  {% break %}
+                {% endif %}
+              {% endfor %}
+              <div class="sub-navigation-wrapper-column">
+                {% for sub_link in link.links %}
+                  <div class="sub-navigation-item sub-navigation-item--{{ sub_link.title | handleize}}{% if sub_link.url == '#heading-columns' %} sub-navigation-item--columns{% endif %}">
+                    {% if sub_link.url != '#heading' %}<a href="{{ sub_link.url }}" title="{{ sub_link.title | escape }}">{% else %}<h4>{% endif %}
+                      {{ sub_link.title | escape }}
+                    {% if sub_link.url != '#heading' %}</a>{% else %}</h4>{% endif %}
+
+                    {% if sub_link.links != blank %}
+                      <ul class="sub-navigation">
+                        {% for sub_sub_link in sub_link.links %}
+                          <li class="sub-navigation-link sub-navigation-link--{{ sub_sub_link.title | handleize }}">
+                            <a href="{{ sub_sub_link.url }}{{ abtest }}" title="{{ sub_sub_link.title | escape }}">{{ sub_sub_link.title | escape }}</a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</nav>

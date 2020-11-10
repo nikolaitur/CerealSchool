@@ -1,0 +1,45 @@
+<script type="application/ld+json">
+  {
+   "@context": "http://schema.org",
+   "@type": "Organization",
+   "name": "{{ shop.name }}",
+   "url": "{{ shop.url }}",
+   "logo": "https:{{ settings.share_image | img_url: '1200x' }}",
+   "sameAs": [
+     "https://www.facebook.com/{{ settings.social_facebook }}",
+     "https://twitter.com/{{ settings.social_twitter }}",
+     "https://www.instagram.com/{{ settings.social_instagram }}",
+     "https://youtube.com/{{ settings.social_youtube }}"
+   ]
+  }
+</script>
+<script>document.querySelector('.header .header-promo') && document.querySelector('body').classList.add('has-promo');</script>
+
+
+{% comment %}
+Scripts from old theme
+{% endcomment %}
+
+{% include 'sticky-cart-by-uplinkly' %}
+
+{% include 'mw_PO_objects' %}
+
+<!-- Begin ReCharge code -->
+{% include 'subscription-theme-footer-custom' %}
+<!-- End ReCharge code -->
+
+<script type="text/javascript">
+  {% if customer %}
+    window.dataLayer.push({
+      VisitorType: "Logged In",
+      CustomerId: "{{ customer.id }}",
+      CustomerEmail: "{{ customer.email }}",
+    });
+  {% else %}
+    window.dataLayer.push({
+      VisitorType: "Guest"
+    });
+  {% endif %}
+</script>
+
+<div class='better-cart-element-better-cart-theme'>{% include 'better-cart-theme' %}</div>

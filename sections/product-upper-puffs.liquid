@@ -1,0 +1,323 @@
+{% if product.handle == 'keto-cheese-puffs' %}
+  {% assign is_alternate_template = true %}
+{% endif %}
+{% if request.path contains 'free-gift' and section.settings.enable_free_gift %}
+  {% assign is_free_gift_template = true %}
+{% endif %}
+
+<div class="product-container container">
+  <div class="product-container__side product-container__side--left">
+    <div class="product__part product__part--gallery">
+      <div class="gallery swiper-container">
+        <div class="swiper-wrapper">
+          {% for image in product.images %}
+            <div class="swiper-slide" data-index="{{ forloop.index0 }}">
+              <div class="gallery__item-wrapper">
+                <img class="gallery__item lazy" alt="{{ image.alt | escape  }}" data-src="{{ image | img_url: '560x' }}" srcset="{{ image | img_url: '560x' }} 1x, {{ image | img_url: '1120x' }} 2x" />
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="swiper__button swiper__button--next swiper__button-next--{{ section.id }}{% if desktop_no_sliding == true %} swiper-button--mobile-only{% endif %}">{% include 'icon', handle: 'next' %}</div>
+        <div class="swiper__button swiper__button--prev swiper__button-prev--{{ section.id }}{% if desktop_no_sliding == true %} swiper-button--mobile-only{% endif %}">{% include 'icon', handle: 'prev' %}</div>
+      </div>
+      <div class="thumbs">
+        {% for image in product.images %}
+          <div class="thumbs__item" data-index="{{ forloop.index0 }}">
+            <div class="thumbs__item-image-wrapper">
+              <img class="thumbs__item-image lazy" alt="{{ image.alt | escape  }}" data-src="{{ image | img_url: '200x200', crop: 'center' }}" />
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="product-container__side product-container__side--right">
+    <div class="product__part product__part--form">
+      <header class="product-header">
+        <h1 class="product-header__title h6">{{ section.settings.title | replace: '|', ' <br>' }}</h1>
+        <div class="product-header__reviews">
+          {% include 'judgeme_widgets', widget_type: 'judgeme_preview_badge' %}
+          <div class="sold-in">
+            <span class="sold-in-emoji">🔥 </span><span class="sold-in-number">...</span> sold in the last 22 hours
+          </div>
+        </div>
+        <div class="product-header__tagline">
+          {% assign tagline_items = section.settings.tagline | split: '|' %}
+          {% for item in tagline_items %}{{ item | strip }}{% unless forloop.last %}<span>&middot;</span>{% endunless %}{% endfor %}
+        </div>
+        <div class="product-header__description">
+          {%- assign description = "" -%}
+          {% for block in section.blocks %}
+          {%- case block.type -%}
+            {%- when "dynamic_description" -%}
+            {%- if product.handle == block.settings.product_handle -%}
+              {%- assign description = block.settings.description -%}
+            {%- endif -%}    
+          {%- endcase -%}
+          {% endfor %}
+          {{ description | default: section.settings.description }}
+        </div>
+      </header>
+
+      {% if section.settings.all_flavors_sold_out %}
+        {% include 'add-to-cart-sold-out' %}
+      {% else %}
+        {% include 'add-to-cart-form', product_type: "puffs" %}
+      {% endif %}
+
+      <div class="product-disclaimer">
+        {{ section.settings.disclaimer }}
+      </div>
+    </div>
+  </div>
+  <script id="variant__defaults" type="application/json">
+    {
+      "variety": {{ section.settings.variety_default_selected | json }},
+      "bundle": {{ section.settings.bundle_default_selected | json }},
+      "single": {{ section.settings.single_default_selected | json }},
+      "single-sm": {{ section.settings.singlesm_default_selected | json }}
+    }
+  </script>
+  <script id="variant__flavor_limits" type="application/json">
+    {% assign bundles = section.blocks | where: "type", "bundle" %}
+    {
+    {% for bundle in bundles %}
+      {%- if bundle.type == "bundle" -%}
+      "{{bundle.settings.value}}": {{bundle.settings.flavor_limit}}{%- unless forloop.last -%},{%- endunless -%}
+      {%- endif -%}
+    {% endfor %}
+    }
+  </script>
+  {%- if product.metafields.subscriptions.subscription_id -%}
+    <script type="application/json" id="variant_per_bag">
+      {% assign first = true %}
+      {% for option in product.options %}
+        {% assign option_dc =  option | downcase %}
+        {% if option_dc == "size" %}
+          {% assign oindex = forloop.index0 %}
+          {
+            {% for variant in product.variants %}
+              {% assign opt_value = variant.options[ oindex ] | times: 1.0 %}
+              {% if opt_value > 0 %}
+                {% assign once_price =  variant.price | divided_by: opt_value %}
+                {% assign subs_price =  variant.metafields.subscriptions.discount_variant_price | replace: ".", ""  | divided_by: opt_value %}
+                {% if first %}{% assign first = false %}{% else %},{% endif %}
+                "{{ variant.id }}": {
+                  {% if is_alternate_template %}
+                  "once":	"<span>{{ once_price | money }}</span>/bag",
+                  "subs":	"<span>{{ subs_price | money }}</span>/bag"
+                  {% else %}
+                  "once":	"<span>Only</span> <span>{{ once_price | money }}</span> per bag",
+                  "subs":	"<span>Only</span> <span>{{ subs_price | money }}</span> per bag"
+                  {% endif %}
+                }
+              {% endif %}
+            {% endfor %}
+          }
+          {% break %}
+        {% endif %}
+      {% endfor %}
+    </script>
+  {%- endif -%}
+</div>
+
+{% schema %}
+  {
+    "name": "Product Upper",
+    "settings": [
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Title",
+        "info":"Use a pipe (|) for a forced line break"
+      },
+      {
+        "type":"text",
+        "id":"tagline",
+        "label":"Tagline",
+        "info":"Use a pipe (|) to create dots between items",
+        "default":"Keto|Sugar Free|1g Net Carb|16g Protein"
+      },
+      {
+        "type":"richtext",
+        "id":"description",
+        "label":"Description"
+      },
+      {
+        "type":"text",
+        "id":"add_to_cart_text",
+        "label":"CTA Text",
+        "default":"Add to Cart"
+      },
+      {
+        "type":"text",
+        "id":"sold_out_text",
+        "label":"Sold Out Text",
+        "default":"Sold Out"
+      },
+      {
+        "type":"text",
+        "id":"click_to_be_notified_text",
+        "label":"Sold Out Notify CTA Text",
+        "default":"Click To Be Notified"
+      },
+      {
+        "type":"richtext",
+        "id":"disclaimer",
+        "label":"Disclaimer",
+        "info":"Displayed beneath the product CTA"
+      },
+      {
+        "type":"richtext",
+        "id":"all_flavors_sold_out_text",
+        "label":"All Flavors Sold Out Text",
+        "info":"Displayed instead of the checkout form when the option below is checked",
+        "default":"<p>Starts at $1.69 per bag</p>"
+      },
+      {
+        "type":"checkbox",
+        "id":"all_flavors_sold_out",
+        "label":"Show sold out message instead of form?",
+        "default": false
+      },
+      {
+        "type":"text",
+        "id":"bundle_label",
+        "label":"Bundle Label",
+        "default":"1. Select Bundle:"
+      },
+      {
+        "type":"text",
+        "id":"flavor_label",
+        "label":"Flavor Label",
+        "default":"2. Choose Flavors:"
+      },
+      {
+        "type":"text",
+        "id":"flavor_sold_out_label",
+        "label":"Flavor Sold Out Label",
+        "default":"Flavors:"
+      },
+      {
+        "type":"text",
+        "id":"frequency_label",
+        "label":"Frequency Label",
+        "default":"3. Select Frequency:"
+      },
+      {
+        "type":"textarea",
+        "id":"variety_default_selected",
+        "label":"Default Selected: variety",
+        "info":"Use a pipe (|) between items"
+      },
+      {
+        "type":"textarea",
+        "id":"bundle_default_selected",
+        "label":"Default Selected: bundle",
+        "info":"Use a pipe (|) between items"
+      },
+      {
+        "type":"textarea",
+        "id":"single_default_selected",
+        "label":"Default Selected: single",
+        "info":"Use a pipe (|) between items"
+      },
+      {
+        "type":"textarea",
+        "id":"singlesm_default_selected",
+        "label":"Default Selected: single-sm",
+        "info":"Use a pipe (|) between items"
+      },
+	{
+		"type": "checkbox",
+		"id": "enable_free_gift",
+		"label": "Enable Free Gift Promo?",
+		"info": "Use this with the promo in the cart drawer settings",
+		"default": false
+	}
+    ],
+    "blocks":[
+      {
+        "type":"bundle",
+        "name":"Bundle",
+        "settings":[
+          {
+            "type":"text",
+            "id":"title",
+            "label":"Label"
+          },
+          {
+            "type":"text",
+            "id":"value",
+            "label":"Value",
+            "info":"Must match the variant Type option exactly. i.e. - 'bundle' or 'variety'"
+          },
+          {
+            "type":"text",
+            "id":"flavor_limit",
+            "label":"Flavor Limit",
+            "info":"How many flavors can be selected?"
+          },
+          {
+            "type":"checkbox",
+            "id":"default",
+            "label":"Default selected?",
+            "default": false
+          },
+          {
+            "type":"checkbox",
+            "id":"sold_out",
+            "label":"Mark as sold out?",
+            "default": false
+          }
+        ]
+      },
+      {
+        "type":"flavor",
+        "name":"Flavor",
+        "settings":[
+          {
+            "type":"text",
+            "id":"title",
+            "label":"Title"
+          },
+          {
+            "type":"image_picker",
+            "id":"swatch_image",
+            "label":"Swatch Image"
+          },
+          {
+            "type":"checkbox",
+            "id":"new",
+            "label":"Mark as new?",
+            "default": false
+          },
+          {
+            "type":"checkbox",
+            "id":"sold_out",
+            "label":"Mark as sold out?",
+            "default": false
+          }
+        ]
+      },
+      {
+        "type": "dynamic_description",
+        "name": "Dynamic Description",
+        "settings": [
+          {
+            "type": "text",
+            "id": "product_handle",
+            "label": "Product Handle",
+            "info": "Must match the product handle you want it visible on"
+          },
+          {
+            "type": "html",
+            "id": "description",
+            "label": "Description"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

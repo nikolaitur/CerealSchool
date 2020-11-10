@@ -1,0 +1,62 @@
+{% assign current_handle = collection.handle %}
+
+<div class="widget widget--filtering">
+  <div class="filtering-group filtering-group--clear"{% unless current_tags.size %} style="display: none;"{% endunless %}>
+    <h3 class="filtering-group__title">Clear Filters</h3>
+  </div>
+
+  {% for block in section.blocks %}
+    {% if block.type == 'facet' %}
+
+      {% assign filters = '' %}
+      {% assign all_filter_tags = '' %}
+      {% assign show_filters = true %}
+      {%- assign allowed = block.settings.allowed_collections -%}
+      {%- assign disallowed = block.settings.disallowed_collections -%}
+      {%- assign filters = block.settings.filters | replace: ' ,', ',' | replace: ', ', ',' | split: ',' | uniq -%}
+
+      {% if allowed != blank %}
+        {% assign show_filters = false %}
+        {% if allowed contains current_handle %}
+          {% assign show_filters = true %}
+        {% endif %}
+      {% endif %}
+
+      {% if disallowed contains current_handle %}
+        {% assign show_filters = false %}
+      {% endif %}
+
+      {% for filter in filters %}
+        {% for tag in collection.tags %}
+          {% if tag == filter %}
+            {% capture all_filter_tags %}{{ all_filter_tags }},{{ filter }},{% endcapture %}
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+
+      {% if show_filters %}
+        <div class="filtering-group">
+          <h3 class="filtering-group__title" data-original-text="{{ block.settings.title }}">
+            <span>{{ block.settings.title }}</span>
+            {% include 'icon-chevron-down.svg' %}
+          </h3>
+          <ul class="filtering-list filtering-list-items">
+            {% for filter in filters %}
+              <li class="filtering-list-item{% if current_tags contains filter %} filtering-list-item--selected{% endif %}" data-group="{{ block.settings.title | handleize }}" data-value="{{ filter | handleize }}" data-label="{{ filter }}"><span>{{ filter }}</span>{% include 'icon', handle: 'checkmark' %}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {%endif %}
+    {%endif %}
+  {% endfor  %}
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      window.REBASE = window.REBASE || {};
+      REBASE.theme = REBASE.theme || {};
+      REBASE.theme.collection = REBASE.theme.collection || {};
+      REBASE.theme.collection.url = "{{ collection.url }}";
+      REBASE.theme.collection.initialTags = {{ current_tags | json }};
+    })
+  </script>
+</div>

@@ -1,0 +1,9 @@
+{%- layout none -%}
+[{%- for item in cart.items -%}
+  {
+    "line_item_id":{{ item.id }},
+    "variant_id":{{ item.variant.id }},
+    "compare_at_price":{% if item.variant.compare_at_price %}{{item.variant.compare_at_price}}{% else %}null{% endif %},
+    "price":{% if item.variant.price %}{{item.variant.price}}{% else %}null{% endif%}
+  }{%- unless forloop.last -%},{%- endunless -%}
+{%- endfor -%}]

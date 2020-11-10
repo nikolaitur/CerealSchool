@@ -1,0 +1,49 @@
+<header id="header">
+	<div class="enclose">
+		<div class="inn">
+			<div class="logo">
+				<a href="/"><img src="{{ section.settings.header-logo | img_url:'master'  }}" alt="image"></a>
+			</div>
+			<div class="navi">
+				<ul>
+					<li><a href="#ingredients">ingredients</a></li>
+					<li><a href="#benefits">Benefits</a></li>
+					<li><a href="#reviews">Reviews</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</header>
+<div class="top-bar">
+	<div class="enclose">
+		<div class="inn">
+			<p>{{ section.settings.strip-text }}</p>
+			<a href="#" class="buybtn small">{{ settings.sales-btn-text2 }} <img src="{{ 'icon-hand.png' | asset_url }}" alt="image"></a>
+		</div>
+	</div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+  {
+   		"type": "image_picker",
+   		"id":"header-logo",
+		"label":"Header Logo"
+	},
+    {
+   		"type": "text",
+   		"id":"strip-text",
+		"label":"Sub Text"
+	}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,118 @@
+<style>
+  .hero--{{ section.id }} .hero__content--title,
+  .hero--{{ section.id }} .hero__content--subtext {color: {{ section.settings.text_color }};}
+  .hero--{{ section.id }} .hero__image {background-color: {{ section.settings.bg_color }};}
+  .hero--{{ section.id }} .hero__image {background-image: url('{{ section.settings.mobile_image | img_url: "1400x" }}');}
+  @media screen and ( min-width: 60em ) {
+    .hero--{{ section.id }} .hero__image {background-image: url('{{ section.settings.image | img_url: "3000x" }}');}
+  }
+</style>
+
+<section class="section section--hero hero hero--{{ section.id }} {{ section.settings.width }} {{ section.settings.top_padding }} {{ section.settings.bottom_padding }}" {{ section.shopify_attributes }} >
+
+  <div class="hero__image">
+    <div class="hero__content">
+      <h1 class="hero__content--title">{{ section.settings.title | replace: '|', '<br>' }}</h1>
+      <div class="hero__actions">
+        {% for block in section.blocks %}
+          <a class="btn" href="{{ block.settings.url }}">{{ block.settings.text }}</a>
+        {% endfor %}
+      </div>
+      <p class="hero__content--subtext">{{ section.settings.subtext | replace: '|', '<br>' }}</p>
+    </div>
+    <img class="lazy hero__tagline-image" data-src="{{ section.settings.tagline_image | img_url: '1800x' }}" alt="{% if section.settings.tagline_image != blank %}{{ section.settings.tagline_image }}{% else %}{{ section.settings.title }}{% endif %}">
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Design Settings"
+    },
+    {
+      "type":"color",
+      "id":"bg_color",
+      "label":"Background Color",
+      "default":"#f8cbcb"
+    },
+    {
+      "type":"color",
+      "id":"text_color",
+      "label":"Text Color",
+      "info":"Text Color for Title",
+      "default":"#272b60"
+    },
+    {
+      "type":"select",
+      "id":"image_position",
+      "label":"Image Position",
+      "options":[
+        {"value":"top-left","label":"Top Left"},
+        {"value":"top-center","label":"Top Center"},
+        {"value":"top-right","label":"Top Right"},
+        {"value":"center-left","label":"Center Left"},
+        {"value":"center-center","label":"Center Center"},
+        {"value":"center-right","label":"Center Right"},
+        {"value":"bottom-left","label":"Bottom Left"},
+        {"value":"bottom-center","label":"Bottom Center"},
+        {"value":"bottom-right","label":"Bottom Right"}
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type":"image_picker",
+      "id":"image",
+      "label":"Image"
+    },
+    {
+      "type":"image_picker",
+      "id":"mobile_image",
+      "label":"Mobile Image"
+    },
+    {
+      "type":"text",
+      "id":"title",
+      "label":"Hero Title"
+    },
+    {
+      "type":"text",
+      "id":"subtext",
+      "label":"Sub Text"
+    },
+    {
+      "type":"image_picker",
+      "id":"tagline_image",
+      "label":"Tagline Image"
+    }
+  ],
+  "max_blocks":2,
+  "blocks":[
+    {
+      "type":"button",
+      "name":"Button",
+      "settings":[
+        {
+          "type":"text",
+          "id":"text",
+          "label":"Button Text"
+        },
+        {
+          "type":"url",
+          "id":"url",
+          "label":"Button URL"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Hero",
+    "category": "Content"
+  }]
+}
+{% endschema %}

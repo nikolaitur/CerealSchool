@@ -1,0 +1,73 @@
+<footer id="footer">
+	<div class="enclose">
+		<div class="inn">
+			<div class="copyright">{{ section.settings.copy }}</div>
+			<div class="navi"><a href="#privacy">Privacy Policy</a><a href="#terms">Terms of Service</a></div>
+			<div class="powered">{{ section.settings.power }}</div>
+		</div>
+	</div>
+</footer>
+
+<div class="poplayer"></div>
+
+<div class="popup" id="privacy">
+	<a class="popclose">x</a>
+	<div class="content">
+      <h2>{{ section.settings.privacy_head }}</h2>
+  	  {{ section.settings.privacy_content }}
+  	</div>
+</div>
+
+<div class="popup" id="terms">
+	<a class="popclose">x</a>
+	<div class="content">
+      <h2>{{ section.settings.terms_head }}</h2>
+  	  {{ section.settings.terms_content }}
+  	</div>
+</div>
+
+
+
+{% schema %}
+  {
+    "name": "Sales footer",
+    "settings": [
+  {
+   	"type": "text",
+  	"id":"copy",
+	"label":"Copyright"
+  },
+  {
+   	"type": "text",
+  	"id":"power",
+	"label":"Powered by"
+  },
+  {
+    "type": "text",
+    "id":"terms_head",
+    "label":"Terms Heading"
+    },
+    {
+    "type": "textarea",
+    "id":"terms_content",
+    "label":"Terms Content"
+    },
+	{
+    "type": "text",
+    "id":"privacy_head",
+    "label":"Privacy Heading"
+    },
+    {
+    "type": "textarea",
+    "id":"privacy_content",
+    "label":"Privacy Content"
+    }
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

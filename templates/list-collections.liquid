@@ -1,0 +1,46 @@
+<div class="collection-header">
+  <div class="collection-header__image">
+    <div class="collection-header__title">
+      <div class="container">
+        <h1>Shop by Collection</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="content content--no-sidebar" role="main">
+  <div class="container">
+    {% include 'page-utility' %}
+
+    <div class="page-main">
+      {%- paginate collections by 96 -%}
+        <div class="page-content">
+          <div class="products row row--gutters">
+            {% for collection in collections %}
+              <article class="column column--xs-6 column--md-4 product product-{{ forloop.index }}">
+                <div class="product__content">
+                  <a href="{{ collection.url }}" class="product__image-wrapper" title="{{ collection.title | strip_html | escape }}">
+                    <img class="product__image" src="{{ collection.products.first.featured_image.src | product_img_url: 'large' }}" alt="{{ collection.featured_image.alt | escape }}">
+                  </a>
+                  <header class="product__header clearfix{% if settings.product_header_centered %} center{% endif %}">
+                    <h2 class="product__title">
+                      <a href="{{ collection.url }}" title="{{ collection.title | strip_html | escape }}" itemscope="url">{{ collection.title }}</a>
+                    </h2>
+                    <span class="product__meta">
+                      <span class="product__meta-pricing">
+                        <span class="product__price">{{ collection.products_count }} products</span>
+                      </span>
+                    </span>
+                  </header>
+                </div>
+              </article>
+            {% endfor %}
+          </div>
+        </div>
+        {% if paginate.pages > 1 %}
+          {% include 'pagination' %}
+        {% endif %}
+      {%- endpaginate -%}
+    </div>
+  </div>
+</main>

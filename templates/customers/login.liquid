@@ -1,0 +1,145 @@
+<main class="content content--no-sidear">
+  {% comment %} <div class="container">
+    {% include 'page-utility' %}
+  </div> {% endcomment %}
+  <div class="container--slim">
+    <div class="page-main row row--gutters">
+      <div class="column column--xs-12">
+        <p class="center">
+          Need to manage your subscription?<br>
+          Text “modify order” to <a href="sms://+19294159866?&amp;body=modify%20order">+1(929) 415-9866</a>.
+        </p>
+      </div>
+      <div class="column column--xs-12 column--md-6">
+        <div id="customer-login-form">
+          <div class="page-header">
+            <h3>Login to your account</h3>
+          </div>
+          {% form 'customer_login' %}
+            <input type="hidden" name="checkout_url" id="redirect-url" value="" />
+            {{ form.errors | default_errors }}
+            <div class="form__fieldrow">
+              <label for="customer_email_login" class="login">Email Address</label><br>
+              <input type="email" value="" name="customer[email]" id="customer_email_login" size="30" />
+            </div>
+            {% if form.password_needed %}
+              <div class="form__fieldrow">
+                <label for="customer_password" class="login">Password</label><br>
+                <input type="password" value="" name="customer[password]" id="customer_password" class="password" size="30" /><br>
+                <a href="#" id="forgot-password" class="form__note" title="Forgot Password?">Forgot password?</a>
+              </div>
+            {% endif %}
+            <div class="form__actions">
+              <input class="btn" type="submit" value="Sign In" />
+              <span class="form__note">or <a href="{{ shop.url }}" title="{{ shop.name }}">continue shopping</a></span>
+            </div>
+          {% endform %}
+        </div>
+        <div id="recover-password-form" style="display:none">
+          <div class="page-header">
+            <h3>Forgot Password</h3>
+          </div>
+          <p>We will send you an email to reset your password.</p>
+          {% form 'recover_customer_password' %}
+            {{ form.errors | default_errors }}
+            <div class="form__fieldrow">
+              <label for="email" >Email Address</label><br>
+              <input type="email" value="" size="30" name="email" id="recover-email" />
+            </div>
+            <div class="form__actions">
+              <input class="btn" type="submit" value="Submit" />
+              <span class="form__note">or <a id="forgot-password-cancel" href="#" title="Cancel">Cancel</a></span>
+            </div>
+          {% endform %}
+        </div>
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            (function($){
+
+              $('#forgot-password').on('click', function(e){
+                console.log('test', e);
+                $('#recover-password-form').show();
+                $('#customer-login-form').hide();
+              });
+
+              $('#forgot-password-cancel').on('click', function(){
+                $('#recover-password-form').hide();
+                $('#customer-login-form').show();
+              });
+
+
+              $.extend({
+                getUrlVars: function(){
+                  var vars = [], hash;
+                  var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                  for(var i = 0; i < hashes.length; i++)
+                  {
+                    hash = hashes[i].split('=');
+                    vars.push(hash[0]);
+                    vars[hash[0]] = hash[1];
+                  }
+                  return vars;
+                },
+                getUrlVar: function(name){
+                  return $.getUrlVars()[name];
+                }
+              });
+
+              if (window.location.href.indexOf("next") > -1) {
+                var redirect = $.getUrlVar('next');
+                if (window.location.href.indexOf("view") > -1) {
+                  var view = $.getUrlVar('view');
+                  $('#redirect-url').val(redirect+"?view="+view);
+                }
+                else if (window.location.hash == '#recover') {
+                  $('#forgot-password').trigger('click');
+                }
+                else {
+                  $('#redirect-url').val(redirect);
+                }
+
+              }
+            })(jQuery);
+
+          });
+        </script>
+      </div>
+      <div class="column column--xs-12 column--md-5 column--md-offset-1">
+        {% if shop.checkout.guest_login %}
+          <div id="guest-form" class="textile">
+            <h3>Guest Login</h3>
+            {% form 'guest_login' %}
+            <div class="form__fieldrow">
+              <input class="btn" type="submit" value="Guest Checkout" />
+            </div>
+            {% endform %}
+            <br>
+            <script>
+              // This script below removes the guest login form if we're redirecting to the wishlist page
+              document.addEventListener('DOMContentLoaded', function() {
+                (function($){
+                  function getUrlParameter(name) {
+                    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+                    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+                    var results = regex.exec(location.search);
+                    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+                  };
+
+                  var checkout_url = getUrlParameter('checkout_url');
+
+                  if ( checkout_url === '/apps/rebase/lists/' || checkout_url === '/apps/rebase/lists'){
+                    $('#guest-form').remove();
+                  }
+                })(jQuery);
+              });
+            </script>
+          </div>
+        {% endif %}
+
+        <h3>Create New Account</h3>
+        <p>Register your account for a faster checkout process.</p>
+        <a href="/account/register" title="Register Today" class="btn">Create Account</a>
+      </div>
+    </div>
+  </div>
+</main>

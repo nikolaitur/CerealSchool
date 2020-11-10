@@ -1,0 +1,33 @@
+{% layout 'theme.advertorial' %}
+
+{% section 'advertorial-header' %}
+
+<div class="main-content">
+	<div class="enclose">
+      {% section 'advertorial-headings' %}
+      
+      <div class="inner-content">
+		<div class="main-contentlf">
+          	<div class="content-sec1">
+        		{% section 'advertorial-featured' %}
+              	{% section 'advertorial-comments' %}
+          	</div>
+          	{% section 'advertorial-lastbatch' %}
+            {% section 'advertorial-situation' %}
+          	<div class="batch2">{% section 'advertorial-lastbatch' %}</div>
+            {% section 'advertorial-about-it' %}
+        </div>
+        
+        <div class="main-contentrt">
+        	{% section 'advertorial-main-sidebar' %}
+        </div>
+      </div>
+      
+      
+  	</div>
+</div>
+  
+
+{% section 'advertorial-pre-footer' %}
+
+{% section 'advertorial-sidebar-footer' %}

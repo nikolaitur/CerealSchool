@@ -1,0 +1,76 @@
+<section class="section section--faq faq faq--{{ section.id }}" {{ section.shopify_attribtes }}>
+  <div class="section__header">
+    {% if section.settings.title != blank %}
+      <h2>{{ section.settings.title }}</h2>
+    {% endif %}
+  </div>
+
+  <div class="section__content">
+    <div class="container--slim">
+      <div class="faqs">
+        {% for block in section.blocks %}
+          <div class="faq-item">
+            <h2 class="faq-item__title">
+              {{ block.settings.title }}
+              <span class="faq-item__icon"></span>
+            </h2>
+            <div class="faq-item__content">
+              {{ block.settings.answer }}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      document.addEventListener('DOMContentLoaded', function() {
+        $(document).on('click', '.faq-item__title', function() {
+          var _this = $(this);
+          if ( _this.parent().hasClass('faq-item--open') ) {
+            _this.next().stop().slideUp();
+            _this.parent().removeClass('faq-item--open')
+          } else {
+            $('.faq-item__content').stop().slideUp();
+            _this.next().stop().slideDown();
+
+            $('.faq-item').removeClass('faq-item--open');
+            _this.parent().addClass('faq-item--open');
+          }
+        });
+      });
+    })();
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+    {
+      "type":"text",
+      "id":"title",
+      "label":"Heading"
+    }
+  ],
+  "blocks": [
+      {
+        "type":"faq",
+        "name":"FAQ",
+        "settings":[
+          {
+            "type":"text",
+            "id":"title",
+            "label":"FAQ Title"
+          },
+          {
+            "type":"richtext",
+            "id":"answer",
+            "label":"FAQ Answer"
+          }
+        ]
+      }
+    ]
+}
+{% endschema %}

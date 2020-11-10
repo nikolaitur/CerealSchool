@@ -1,0 +1,57 @@
+{%- comment -%}this is in optimize now
+<style>
+  @keyframes flickerAnimation {
+    0%   { opacity:1; }
+    50%  { opacity:0; }
+    100% { opacity:1; }
+  }
+  @-o-keyframes flickerAnimation{
+    0%   { opacity:1; }
+    50%  { opacity:0; }
+    100% { opacity:1; }
+  }
+  @-moz-keyframes flickerAnimation{
+    0%   { opacity:1; }
+    50%  { opacity:0; }
+    100% { opacity:1; }
+  }
+  @-webkit-keyframes flickerAnimation{
+    0%   { opacity:1; }
+    50%  { opacity:0; }
+    100% { opacity:1; }
+  }
+  #sold-recently-emoji {
+    -webkit-animation: flickerAnimation 1s infinite;
+    -moz-animation: flickerAnimation 1s infinite;
+    -o-animation: flickerAnimation 1s infinite;
+      animation: flickerAnimation 1s infinite;
+    margin-right: .25rem;
+  }
+  .product-header__reviews,
+  .product-header__sold-recently {
+    display: inline-block;
+  }
+  .product-header__sold-recently {
+    border-left: 1px solid;
+    margin-left: .5rem;
+    padding-left: .5rem;
+  }
+</style>
+<div class="product-header__sold-recently">
+  <span id="sold-recently-emoji">🔥</span><span id="sold-recently-text"></span>
+</div>
+<script type="text/javascript">
+(function() {
+  document.addEventListener('DOMContentLoaded', function() {
+    var soldRecently = localStorage.getItem('sold_recently') || (function(){ 
+      var num = Math.floor(Math.random() * (220 - 150 + 1) + 150);
+      localStorage.setItem('sold_recently', num);
+      return num;
+    })();
+
+    $('#sold-recently-text').html(soldRecently + " sold in the last 22 hours");
+    $('.product-header__sold-recently').removeClass('visually-hidden');
+  });
+})();
+</script>
+{%- endcomment -%}

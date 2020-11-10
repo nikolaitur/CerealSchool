@@ -1,0 +1,74 @@
+<div class="main-footer">
+	<div class="enclose">
+		<div class="inner-mnfoot">
+			<div class="copy-text"><p>{{section.settings.copyright-text}}</p></div>
+			<div class="logo-ft">
+				<figure><img src="{{section.settings.footer-logo | img_url:'master'}}" alt="image" /></figure>
+			</div>
+			<div class="privacy-terms">
+				<ul>
+					<li><a data-fancybox="privacy" data-src="#privacy" href="javascript:;">Privacy Policy<span>| </span></a></li>
+					<li><a data-fancybox="terms" data-src="#terms" href="javascript:;"> Terms &amp; Conditions</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="terms" class="popcomn" style="max-width:800px; display:none;">
+      <h1>{{ section.settings.terms_head }}</h1>
+  	  {{ section.settings.terms_content }}
+</div>
+
+<div id="privacy" class="popcomn" style="max-width:800px; display:none;">
+      <h1>{{ section.settings.privacy_head }}</h1>
+  	  {{ section.settings.privacy_content }}
+</div> 
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" /> 
+
+{% schema %}
+  {
+    "name": "Advertorial Footer",
+    "settings": [
+     {
+   		"type": "image_picker",
+   		"id":"footer-logo",
+		"label":"Footer Logo"
+	},
+    {
+   		"type": "text",
+   		"id":"copyright-text",
+		"label":"Copy Right"
+	},
+	{
+    "type": "text",
+    "id":"terms_head",
+    "label":"Terms Heading"
+    },
+    {
+    "type": "textarea",
+    "id":"terms_content",
+    "label":"Terms Content"
+    },
+	{
+    "type": "text",
+    "id":"privacy_head",
+    "label":"Privacy Heading"
+    },
+    {
+    "type": "textarea",
+    "id":"privacy_content",
+    "label":"Privacy Content"
+    }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

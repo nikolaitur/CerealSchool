@@ -1,0 +1,149 @@
+<style>
+  .fifty-fifty--{{ section.id }} { background-color: {{ section.settings.bg_color }}; }
+  .fifty-fifty--{{ section.id }} .fifty-fifty__text h2,
+  .fifty-fifty--{{ section.id }} .fifty-fifty__text p { color: {{section.settings.text_color }}; }
+</style>
+<section class="section section--fifty-fifty fifty-fifty {{ section.settings.padding }} fifty-fifty--{{ section.id }}" {{ section.shopify_attributes }} >
+  <div class="section__content fifty-fifty__item fifty-fifty__item--image-width-half fifty-fifty__item--image-position-{{ section.settings.image_location }} {{ section.settings.container_width }}" {{ section.shopify_attributes }}>
+    <div class="fifty-fifty__text{% if section.settings.offset_text %} fifty-fifty__text--offset{% endif %}">
+      <h2>{{ section.settings.title }}</h2>
+      {{ section.settings.content }}
+      <div class="fifty-fifty__actions">
+        {% if section.settings.button_text != blank %}
+          <a class="{{ section.settings.button_style }}" href="{{ section.settings.button_url }}">{{ section.settings.button_text }}</a>
+        {% endif %}
+        {% if section.settings.button_text_2 != blank %}
+          <a class="{{ section.settings.button_style }}" href="{{ section.settings.button_url_2 }}">{{ section.settings.button_text_2 }}</a>
+        {% endif %}
+      </div>
+    </div>
+    <figure class="fifty-fifty__image fifty-fifty__image--{{ section.settings.image_focal_point }} lazy" data-bg="{{ section.settings.image | img_url: '1600x' }}">
+      <figcaption class="visually-hidden">{{ sections.settings.title}}</figcaption>
+    </figure>
+    {% if section.settings.accent_image != blank %}
+      <img class="fifty-fifty__accent-image fifty-fifty__accent-image--{{ section.settings.accent_image_position }} lazy" data-src="{{ section.settings.accent_image | img_url: '400x' }}" />
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "50/50",
+  "settings": [
+    {
+      "type":"header",
+      "content":"Design Settings"
+    },
+    {
+      "type":"select",
+      "id":"container_width",
+      "label":"Container Width",
+      "options":[
+        {"value":"container--full", "label":"Full Width"},
+        {"value":"container", "label":"Contained"}
+      ],
+      "default":"container"
+    },
+    {
+      "type":"color",
+      "id":"bg_color",
+      "label":"Container Background Color",
+      "default":"#fff"
+    },
+    {
+      "type":"color",
+      "id":"text_color",
+      "label":"Text Color",
+      "default":"#252525"
+    },
+    {
+      "type":"radio",
+      "id":"image_location",
+      "label":"Image Side",
+      "options":[
+        {"label":"Left", "value":"left"},
+        {"label":"Right", "value":"right"}
+      ],
+      "default":"left"
+    },
+    {
+      "type":"checkbox",
+      "id":"offset_text",
+      "label":"Offset Text?",
+      "info":"Will cause text to slighty overlay left positioned image."
+    },
+    {
+      "type":"select",
+      "id":"button_style",
+      "label":"Button Style",
+      "options":[
+        {"label":"Red","value":"btn"},
+        {"label":"Blue","value":"btn btn--alt"},
+        {"label":"Text Only","value":"btn btn--no-style"}
+      ]
+    },
+    {
+      "type":"header",
+      "content":"Content Settings"
+    },
+    {
+      "type":"image_picker",
+      "id":"image",
+      "label":"Image"
+    },
+    {
+      "type":"text",
+      "id":"title",
+      "label":"Heading"
+    },
+    {
+      "type":"richtext",
+      "id":"content",
+      "label":"Text Content"
+    },
+    {
+      "type":"text",
+      "id":"button_text",
+      "label":"Button Text",
+      "info":"Leave blank to hide"
+    },
+    {
+      "type":"url",
+      "id":"button_url",
+      "label":"Button URL"
+    },
+    {
+      "type":"text",
+      "id":"button_text_2",
+      "label":"Button 2 Text",
+      "info":"Leave blank to hide"
+    },
+    {
+      "type":"url",
+      "id":"button_url_2",
+      "label":"Button 2 URL"
+    },
+    {
+      "type":"image_picker",
+      "id":"accent_image",
+      "label":"Accent Image"
+    },
+    {
+      "type":"select",
+      "id":"accent_image_position",
+      "label":"Accent Image Position",
+      "options":[
+        {"label":"Top Left","value":"top-left"},
+        {"label":"Top Right","value":"top-right"},
+        {"label":"Bottom Left","value":"bottom-left"},
+        {"label":"Bottom Right","value":"bottom-right"}
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "50/50",
+    "category": "Content"
+  }]
+}
+{% endschema %}
+

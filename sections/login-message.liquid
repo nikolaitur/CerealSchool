@@ -1,0 +1,28 @@
+{% if section.settings.title != blank or section.settings.text != blank %}
+  <div class="register-help-text login-help-text">
+    {% if section.settings.title != blank %}
+      <h3 class="h6">{{ section.settings.title }}</h3>
+    {% endif %}
+    {{ section.settings.text }}
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Login Help Text",
+  "settings": [
+    {
+      "type":"text",
+      "id":"title",
+      "label":"Heading",
+      "default":"Help"
+    },
+    {
+      "type":"richtext",
+      "id":"text",
+      "label":"Help Text"
+    }
+  ]
+}
+{% endschema %}
+

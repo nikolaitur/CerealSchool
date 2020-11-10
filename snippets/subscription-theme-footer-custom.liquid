@@ -1,0 +1,21 @@
+<!-- Subscriptions Powered by ReCharge Payments: Begin Liquid Code -->
+<!--
+	Subscription Cart Footer
+	http://rechargepayments.com: v2
+	Updated: 2017/06/12
+-->
+{% if template != 'cart' %}
+  <script>
+    function reChargeGetCookie(name) {
+      return (document.cookie.match('(^|; )' + name + '=([^;]*)')||0)[2];
+    }
+    function reChargeBuildCheckoutURL() {
+      // Build the Checkout URL
+      var myshopify_domain = '{{ shop.permanent_domain }}';
+      var token = reChargeGetCookie('cart');
+      
+      return checkout_url;
+    }
+  </script>
+{% endif %}
+<!-- Subscriptions Powered by ReCharge Payments: End Liquid Code -->

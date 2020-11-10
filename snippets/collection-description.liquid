@@ -1,0 +1,7 @@
+<div class="collection-description">
+  <a href="#" class="back-to-top">{% include 'icon', handle: 'chevron-down' %}</a>
+  {% if collection.description != blank %}
+    <h3 class="h6">{{ collection.title }}</h3>
+    {{ collection.description }}
+  {% endif %}
+</div>

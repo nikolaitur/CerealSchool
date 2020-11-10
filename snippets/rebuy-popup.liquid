@@ -1,0 +1,181 @@
+{% raw %}
+<div id="c-rp" v-bind:class="{ showPopup: showPopup }">
+    <div class="c-rp--box" v-if="data.length > 0">
+        <div>
+                <p class="rp-title">Upgrade to 24 Bags and Save 20%</p>
+                <p class="rp-description">82% of customers have taken advantage of this deal.</p>
+                <button v-on:click="upgrade()">Upgrade!</button>
+                <button v-on:click="closePopup()">No Thanks</button>
+        </div>
+    </div>
+</div>
+{% endraw %}
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+
+<style>
+  #c-rp {
+	 background-color: rgba(0, 0, 0, 0.4);
+	 position: fixed;
+	 width: 100%;
+	 height: 100%;
+	 z-index: 2147483638;
+	 display: none;
+	 justify-content: center;
+	 align-items: center;
+	 max-height: 100vh;
+}
+
+  
+  #c-rp select::-ms-expand {	display: none; }
+  #c-rp select{
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  
+ #c-rp .c-rp--box {
+	 max-width: 971px;
+     max-height:  100%;
+   	 overflow: scroll;
+	 background-color: white;
+	 position: relative;
+	 padding: 40px;
+	 cursor: pointer;
+}
+ #c-rp .c-rp--box h1 {
+	text-align: center;
+    font-size: 40px;
+}
+ #c-rp .c-rp--box select {
+	 max-width: 350px;
+	 color: black;
+}
+ #c-rp .c-rp--box button {
+	 max-width: 350px;
+	 background-color: #ff595a;
+   border-color: #ff595a;
+   color: white;
+	 outline: none;
+	 padding: 15px 20px;
+	 width: 100%;
+	 margin: 0;
+	 cursor: pointer;
+	 text-align: center;
+	 text-shadow: none;
+	 font-weight: bold;
+	 font-size: 14px;
+	 display: inline-block;
+	 -webkit-appearance: none;
+	 -webkit-font-smoothing: antialiased;
+	 margin-top: 10px;
+   font-size: 17px;
+    text-transform: inherit;
+    border-radius: 4px;
+    letter-spacing: 0;
+    font-weight: 600;
+   font-family: Futura,sans-serif;
+   margin: 0 auto;
+   margin-top: 10px;
+   display: block;
+}
+}
+ #c-rp .c-rp--box p {
+	 font-size: 22px;
+	 text-align: center;
+}
+ #c-rp .c-rp--box p span {
+	 font-weight: bold;
+}
+ #c-rp .c-rp--box .rp-price {
+	 margin: 5px 0px;
+	 font-size: 28px;
+	 font-weight: bold;
+}
+ #c-rp .c-rp--box .rp-price span:first-of-type {
+}
+ #c-rp .c-rp--box .rp-price span:last-of-type {
+	 text-decoration: line-through;
+}
+ #c-rp .c-rp--box .rp-price span {
+	 margin: 0px 5px;
+}
+ #c-rp .c-rp--box .rp-description {
+	 text-align: center;
+	 font-size: 20px;
+}
+ #c-rp .c-rp--box .rp-title {
+    text-align: center;
+    color: #272b60;
+   	font-size: 24px;
+    font-weight: bold;
+}
+ #c-rp .c-rp--box .rp-stars {
+	 filter: invert(92%) sepia(17%) saturate(7498%) hue-rotate(1deg) brightness(102%) contrast(114%);
+	 margin-bottom: 10px;
+}
+ #c-rp .c-rp--box p:nth-of-type(4) {
+	 color: #aa3535;
+}
+ #c-rp .c-rp--box button:nth-of-type(2) {
+	 background-color: white;
+	 color: #272b60;
+	 border: 2px solid #272b60;
+}
+ .flex {
+	 display: flex;
+	 margin-top: 30px;
+}
+ .flex > div {
+	 width: 50%;
+	 display: flex;
+	 flex-direction: column;
+	 align-items: center;
+     padding: 10px;
+}
+ .flex .rp-image-container {
+	 justify-content: center;
+}
+ .flex .rp-image-container img {
+	 max-height: 350px;
+	 height: auto;
+	 align-self: center;
+}
+ .showPopup {
+	 display: flex !important;
+}
+ @media only screen and (max-width: 700px) {
+	 #c-rp .c-rp--box {
+		 width: 100%;
+		 padding: 20px 10px;
+	}
+	 #c-rp .c-rp--box .flex {
+		 flex-direction: column;
+		 align-items: center;
+	}
+	 #c-rp .c-rp--box .flex > div {
+		 width: 90%;
+		 justify-content: center;
+	}
+	 #c-rp .c-rp--box h2 {
+		 font-size: 24px;
+		 line-height: 1.5em;
+	}
+	 #c-rp .c-rp--box p {
+		 font-size: 18px;
+	}
+	 #c-rp .c-rp--box .rp-price {
+		 font-size: 24px;
+	}
+	 #c-rp .c-rp--box .rp-description {
+		 font-size: 16px;
+	}
+	 #c-rp .c-rp--box .rp-image-container {
+		 margin-bottom: 30px;
+	}
+	 #c-rp .c-rp--box .rp-image-container img {
+		 margin-right: 0px;
+		 max-height: 150px;
+	}
+}
+ 
+</style>

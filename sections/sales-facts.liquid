@@ -1,0 +1,75 @@
+<div class="facts-sec" id="ingredients">
+	<div class="enclose">
+		<div class="facts-slider">
+          {% for block in section.blocks %}
+          	<div class="item">
+				<div class="figure">
+					<img src="{{ block.settings.fea_img | img_url : 'master' }}" alt="image">
+				</div>
+				<div class="content">
+					<h5>Nutritional Facts</h5>
+					<h2>{{ block.settings.heading }}</h2>
+					<p>{{ block.settings.ingredients }}</p>
+					<p class="btns"><a data-fancybox="{{ block.settings.link }}" data-src="#{{ block.settings.link }}" href="javascript:;">View Nutrition Facts <img src="{{ 'icon-arrow.png' | asset_url }}" alt="image"></a></p>
+				</div>
+                             	
+                <div id="{{ block.settings.link }}" class="popcomn" style="max-width:400px; display:none;">
+                    <div align="center"><img src="{{ block.settings.facts_img | img_url:'master'  }}"></div>
+              </div>
+			</div>
+          {% endfor %}
+		</div>
+		<div class="btns"><a href="#" class="buybtn big">{{ settings.sales-btn-text2 }} <img src="{{ 'icon-hand.png' | asset_url }}" alt="image"></a></div>		
+	</div>
+</div>
+
+
+
+
+{% schema %}
+  {
+    "name": "Sales Facts",
+    "settings": [
+  
+],
+"blocks":[
+{
+"type":"Facts",
+"name":"Facts",
+"settings":[
+{
+"type":"image_picker",
+"id":"fea_img",
+"label":"Featured Image"
+},
+{
+"type":"text",
+"id":"heading",
+"label":"Heading"
+},
+{
+"type":"text",
+"id":"ingredients",
+"label":"Ingredients"
+},
+{
+"type":"text",
+"id":"link",
+"label":"Link"
+},
+{
+"type":"image_picker",
+"id":"facts_img",
+"label":"Featured Image"
+}
+]
+}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

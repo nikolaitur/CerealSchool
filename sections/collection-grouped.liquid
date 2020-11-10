@@ -1,0 +1,88 @@
+<div class="collection-main">
+  <div class="row row--gutters products">
+    {% if collection.products.size < 1 %}
+      <p class="no-products column--xs-12">Sorry, nothing is available at the moment.</p>
+    {% else %}
+      {% for block in section.blocks %}
+        {% if block.type == 'collection_group' %}
+          {% assign block_collections = block.settings.collections | replace: ' ', '' | split: ',' %}
+          {% assign block_tags = block.settings.tags | replace: ' ', '' | split: ',' %}
+
+          {% if block_collections contains collection.handle %}
+            <div class="collection-group column column--xs-12">
+              <h2 class="collection-group__title">{{ block.settings.title }}</h2>
+              <div class="collection-group__products row row--gutters">
+                {% for prod in collection.products %}
+                  {% assign show_prod = true %}
+
+                  {% comment %}If current_tags are out of stock, hide it{% endcomment %}
+                  {% for tag in current_tags %}
+                    {% for variant in prod.variants %}
+                      {% if variant.option1 == tag and variant.available == false %}{% assign show_prod = false %}{% break %}{% endif %}
+                      {% if variant.option2 == tag and variant.available == false%}{% assign show_prod = false %}{% break %}{% endif %}
+                      {% if variant.option3 == tag and variant.available == false%}{% assign show_prod = false %}{% break %}{% endif %}
+                    {% endfor %}
+                  {% endfor %}
+
+                  {% comment %}If product has no tags, hide it{% endcomment %}
+                  {% unless prod.tags.size > 0 %}{% assign show_prod = false %}{% endunless %}
+
+                  {% comment %}If product has tags, but is not in designated block_tags, hide it{% endcomment %}
+                  {% for tag in prod.tags %}
+                    {% unless block_tags contains tag %}
+                      {% assign show_prod = false %}
+                    {% else %}
+                      {% assign show_prod = true %}
+                      {% break %}
+                    {% endunless %}
+                  {% endfor %}
+
+                  {% if show_prod %}
+                    {% include 'product-loop', classes: "column--xs-6 column--md-4", blocks: section.blocks %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  </div>
+  <div class="product-loading">
+    <img alt="loading indicator" class="spinner" src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNDQgNDQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE1LjU0MiAxLjQ4N0EyMS41MDcgMjEuNTA3IDAgMDAuNSAyMmMwIDExLjg3NCA5LjYyNiAyMS41IDIxLjUgMjEuNSA5Ljg0NyAwIDE4LjM2NC02LjY3NSAyMC44MDktMTYuMDcyYTEuNSAxLjUgMCAwMC0yLjkwNC0uNzU2QzM3LjgwMyAzNC43NTUgMzAuNDczIDQwLjUgMjIgNDAuNSAxMS43ODMgNDAuNSAzLjUgMzIuMjE3IDMuNSAyMmMwLTguMTM3IDUuMy0xNS4yNDcgMTIuOTQyLTE3LjY1YTEuNSAxLjUgMCAxMC0uOS0yLjg2M3oiIGZpbGw9IiM5MTlFQUIiLz48L3N2Zz4K">
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Collection Grouped",
+    "settings":[],
+    "blocks": [
+      {
+        "type":"collection_group",
+        "name":"Collection Group",
+        "settings":[
+          {
+            "type":"textarea",
+            "id":"collections",
+            "label":"Collections",
+            "info":"Comma separated list of collection handles this group applies to"
+          },
+          {
+            "type":"text",
+            "id":"title",
+            "label":"Group Heading"
+          },
+          {
+            "type":"textarea",
+            "id":"tags",
+            "label":"Group Tags",
+            "info":"Comma separated list of product tags to include in group"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+

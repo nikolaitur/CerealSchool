@@ -1,0 +1,51 @@
+<div class="faq-sec">
+	<div class="enclose">
+		<h2>{{ section.settings.heading }}</h2>
+		<div class="faq-items">
+          {% for block in section.blocks %}
+          	<div class="item">
+				<h4><span></span>{{ block.settings.faq_head }}</h4>
+				<div class="ans">{{ block.settings.faq_text }}</div>
+			</div>
+          {% endfor %}
+		</div>
+		<div class="btns"><a href="#" class="buybtn big">{{ settings.sales-btn-text2 }} <img src="{{ 'icon-hand.png' | asset_url }}" alt="image"></a></div>
+	</div>
+</div>
+
+{% schema %}
+  {
+    "name": "Sales faq",
+    "settings": [
+  {
+   	"type": "text",
+  	"id":"heading",
+	"label":"Heading"
+  }
+],
+"blocks":[
+{
+"type":"Featured",
+"name":"Featured",
+"settings":[
+{
+"type":"text",
+"id":"faq_head",
+"label":"FAQ Heading"
+},
+{
+"type":"text",
+"id":"faq_text",
+"label":"FAQ Content"
+}
+]
+}
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

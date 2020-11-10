@@ -1,0 +1,17 @@
+{% paginate collection.products by 99 %}
+  <div class="collection-main">
+    <div class="row row--gutters products{% if alternate == true %} products--alternate{% endif %}">
+      {% if collection.products.size < 1 %}
+        <p class="no-products column--xs-12">Sorry, nothing is available at the moment.</p>
+      {% else %}
+        {% for prod in collection.products %}
+          {% include 'product-loop', classes: "column--xs-6 column--md-4" %}
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div class="product-loading">
+      <img alt="loading indicator" class="spinner" src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNDQgNDQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE1LjU0MiAxLjQ4N0EyMS41MDcgMjEuNTA3IDAgMDAuNSAyMmMwIDExLjg3NCA5LjYyNiAyMS41IDIxLjUgMjEuNSA5Ljg0NyAwIDE4LjM2NC02LjY3NSAyMC44MDktMTYuMDcyYTEuNSAxLjUgMCAwMC0yLjkwNC0uNzU2QzM3LjgwMyAzNC43NTUgMzAuNDczIDQwLjUgMjIgNDAuNSAxMS43ODMgNDAuNSAzLjUgMzIuMjE3IDMuNSAyMmMwLTguMTM3IDUuMy0xNS4yNDcgMTIuOTQyLTE3LjY1YTEuNSAxLjUgMCAxMC0uOS0yLjg2M3oiIGZpbGw9IiM5MTlFQUIiLz48L3N2Zz4K">
+    </div>
+    {% include 'pagination' %}
+  </div>
+{% endpaginate %}

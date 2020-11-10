@@ -1,0 +1,52 @@
+<main class="content content--no-sidebar" role="main">
+  <div class="container--slim">
+    <div class="page-main">
+      <div class="page-header">
+        <h1>Search</h1>
+      </div>
+      <div class="page-content" id="search-results">
+        <form id="search-form--page" class="form form--compact clearfix" action="/search" method="get">
+          <div class="form__fieldrow form__fieldrow--inline">
+            <input class="form__field" type="text" name="q" value="{{search.terms | escape}}" size="25" />
+            <div class="form__field form__field--select">
+              <select name="type">
+                <option value="all">Filter By</option>
+                <option value="article">Articles</option>
+                <option value="product">Products</option>
+                <option value="page">Pages</option>
+              </select>
+              {% include 'icon', handle: 'chevron-down' %}
+            </div>
+            <button type="submit" class="form__field btn btn--small">Search</button>
+          </div>
+        </form>
+        {% if search.performed %}
+          <p>Search results for "{{search.terms}}":</p>
+          {%- paginate search.results by 12 -%}
+            {% if search.results == empty %}
+              <p>Sorry, your search for "{{search.terms | escape}}" did not return any results.</p>
+            {% else %}
+              {% for item in search.results %}
+                <div class="search-result search-result--{{ item.object_type }}">
+                  {% if item.image or item.featured_image %}
+                    {% assign image = item.image %}{% if item.featured_image %}{% assign image = item.featured_image %}{% endif %}
+                    <div class="search-result__image">
+                      <img class="lazy" data-src="{{ image | img_url: '400x400', crop: 'center' }}" />
+                    </div>
+                  {% endif %}
+                  <div class="search-results__content">
+                    <h3 class="h5">{{ item.title | link_to: item.url }}</h3>
+                    <p>{{ item.content | strip_html | truncatewords: 40 | highlight: search.terms }}</p>
+                  </div>
+                </div>
+              {% endfor %}
+            {% endif %}
+            {% if paginate.pages > 1 %}
+              {% include 'pagination' %}
+            {% endif %}
+          {%- endpaginate -%}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</main>

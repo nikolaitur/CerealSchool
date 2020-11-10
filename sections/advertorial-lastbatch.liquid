@@ -1,0 +1,25 @@
+<div class="last-batch">
+  <h2>{{ section.settings.last-bacth-heading}}</h2>
+    <div class="last-butn">
+        <a href="{{settings.sales-page-link}}">{{settings.sales-btn-text}}</a>
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Advertorial Last Batch",
+    "settings": [
+  {
+   		"type": "text",
+   		"id":"last-bacth-heading",
+		"label":"Last Batch Heading"
+	}   
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

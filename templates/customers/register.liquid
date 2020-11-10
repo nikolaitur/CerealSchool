@@ -1,0 +1,47 @@
+<main class="content content--no-sidebar">
+  <div class="container--slim">
+    <div class="page-main row">
+      <div class="column column--xs-12">
+        <div class="page-header">
+          <h1>Register</h1>
+        </div>
+        <div class="page-content">
+          {% form 'create_customer' %}
+            {{ form.errors | default_errors }}
+            <div class="form__fieldrow" id="first_name">
+              <label for="first_name">First Name</label><br>
+              <input type="text" value="{{form.first_name}}" name="customer[first_name]" id="first_name" class="large" size="30" />
+            </div>
+            <div class="form__fieldrow" id="last_name">
+              <label for="last_name">Last Name</label><br>
+              <input type="text" value="{{form.last_name}}" name="customer[last_name]" id="last_name" class="large" size="30" />
+            </div>
+            <div class="form__fieldrow" id="email">
+              <label for="email">Email Address</label><br>
+              <input type="email" value="{{form.email}}" name="customer[email]" id="email" class="large" size="30" />
+            </div>
+            <div class="form__fieldrow" id="password">
+              <label for="password">Password</label><br>
+              <input type="password" value="" name="customer[password]" id="password" class="large password" size="30" />
+            </div>
+            <div class="form__fieldrow" id="accepts_marketing">
+
+            <div class="form__field--checkbox">
+              <label for="marketing">
+                  Yes, sign me up for emails to get exclusive offers
+                  <input type="checkbox" name="customer[accepts_marketing]" checked="checked" value="true" id="marketing" />
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+            </div>
+            <div class="form__actions">
+              <input id="register-btn" class="btn" type="submit" value="Register" />
+              <span class="note">or <a href="{{ shop.url }}" title="{{ shop.name }}">return to store</a></span>
+            </div>
+          <br/><br/>
+          {% endform %}
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

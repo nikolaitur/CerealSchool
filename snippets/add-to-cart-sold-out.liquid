@@ -1,0 +1,70 @@
+{% assign form_class = product.type | handleize %}
+
+<!-- sold out -->
+{% form 'product', product, id: 'add-to-cart-form', class: form_class, data-productid: product.id, data-cart-submit: true %}
+
+  <div class="product-option-row product-option-row--flavor">
+    <div class="option-name"><p>{{ section.settings.flavor_sold_out_label }}</p></div>
+    <div class="product-options product-options--flavors">
+      {% for block in section.blocks %}
+        {% if block.type == 'flavor' %}
+          <div class="product-option product-option--flavor{% if block.settings.sold_out %} product-option--sold-out{% endif %}">
+            <div class="product-option__wrapper">
+              <!-- {{ block.settings.sold_out}}-->
+              <input type="checkbox" name="single-option-select-flavor" id="swatch-2-{{ block.settings.title | handle }}" value="{{ block.settings.title }}" class="single-option-select visually-hidden" data-type="flavor"{% if block.settings.sold_out %} disabled{% endif %} />
+              <label for="swatch-2-{{ block.settings.title | handle }}" class="product-option__label product-option__label--swatch">
+                <div class="product-option__swatch">
+                  <img class="lazy" data-src="{{ block.settings.swatch_image | img_url: '200x200', crop: 'center' }}" alt="{{ block.settings.title }}" />
+                  <span class="product-option__swatch-selected"></span>
+                </div>
+                <span class="product-option__title">
+                  {{ block.settings.title }}
+                </span>
+                {% if block.settings.new %}
+                  <span class="product-option__new-flag">Brand New</span>
+                {% endif %}
+              </label>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  {% comment %} Main variant drop down (hidden)
+  {% if product.variants.size <= 1 %}
+  <input name="id" id="product-select" type="hidden" value="{{ product.variants.first.id }}" data-productid="{{product.id}}" />
+  {% else %}
+  <select name="id" id="product-select" data-productid="{{product.id}}">
+      {% for variant in product.variants %}
+      {% if variant.available %}
+      <option {% if variant == current_variant %} selected="selected" {% endif %} value="{{ variant.id }}">{{ variant.title }}</option>
+      {% else %}
+      <option disabled="disabled">{{ variant.title }} - Sold Out</option>
+      {% endif %}
+      {% endfor %}
+    </select>
+    {% endif %}
+    
+{% endcomment %}
+    <div class="product-option-row product-option-row--bundle sold-out">
+        <div class="option-name">{{section.settings.all_flavors_sold_out_text}}</div>
+    </div>
+
+    <div class="product-action{% if is_alternate_template %} product-action--alternate{% endif %}">
+        {% comment %}We're not letting them edit quantity here, but we still need to send 1 to the form{% endcomment %}
+        <input type="hidden" name="quantity" value="1" />
+        {% if product.tags contains 'SkipCart' %}
+        <input type="hidden" name="properties[skip_cart]" value="true" />
+        {% endif %}
+        <button name="add" id="notify-me" type="button" class="btn btn--block">
+            {% assign sold_out_text = section.settings.sold_out_text %}
+            {% assign click_to_be_notified_text = section.settings.click_to_be_notified_text | replace: 'Click', '' %}
+            <span id="sold-out-text" class="minicart-add-to-cart-text" data-sold-out-text="Sold Out" data-add-to-cart-text="{{ sold_out_text }}">{{ sold_out_text }}</span>
+            <span class="minicart-add-to-cart-text click-tap">Click</span>
+            <span class="sr-only">or</span>
+            <span class="minicart-add-to-cart-text click-tap">Tap</span>
+            <span id="click-to-be-notified-text" class="click-to-be-notified-text minicart-add-to-cart-text" data-sold-out-text="Sold Out" data-add-to-cart-text="{{ click_to_be_notified_text }}">{{ click_to_be_notified_text }}</span>
+        </button>
+    </div>
+{% endform %}
