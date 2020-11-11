@@ -97,6 +97,10 @@ body{
   -o-animation:flickerAnimation 1s infinite;
   animation:flickerAnimation 1s infinite;
 }	
+@keyframes flickerAnimation{0%{opacity:1}50%{opacity:0}100%{opacity:1}}
+@-o-keyframes flickerAnimation{0%{opacity:1}50%{opacity:0}100%{opacity:1}}
+@-moz-keyframes flickerAnimation{0%{opacity:1}50%{opacity:0}100%{opacity:1}}
+@-webkit-keyframes flickerAnimation{0%{opacity:1}50%{opacity:0}100%{opacity:1}}
 
 body{
 	font-family: 'Proxima Nova';
@@ -265,7 +269,7 @@ h4{
 	background-image: url(icon-next.png);
 }
 .pro-nav{
-	padding: 0 22%;
+	/*padding: 0 22%;*/
 }
 .pro-nav .item{
 	padding: 0 10px;
@@ -372,6 +376,14 @@ h4{
 	align-items: center;
 	justify-content: space-between;
 	padding: 0 10%;
+}
+
+.icons-mobile {
+	display: none;
+}
+
+.seen-sec .figure .icon {
+	width: 20%;
 }
 
 .customer-sec{
@@ -581,11 +593,19 @@ h4{
 	padding-top: 65px;
 	padding-bottom: 50px;
 }
+#text1, #text2{
+    border: none;
+    width: 28px;
+    color: #152b5a;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Proxima Nova';
+}
 .probundle-sec .inn .content .review{
 	margin-bottom: 15px;
 	display: flex;
 	align-items: center;
-	font-size: 15px;
+	font-size: 14px;
 	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 2px;
@@ -683,6 +703,7 @@ h4{
 	font-size: 17px;
 	font-weight: 700;
 	text-align: center;
+    padding-top: 10px;
 }
 .probundle-sec .inn .content p{
 	margin-bottom: 15px;
@@ -731,9 +752,9 @@ h4{
 	font-weight: 400;
 	display: none;
 }
-.faq-items .item:first-child .ans{
+/*.faq-items .item:first-child .ans{
 	display: block;
-}
+}*/
 .faq-items .item h4{
 	position: relative;
 	font-size: 18px;
@@ -768,6 +789,12 @@ h4{
 }
 .flavors input[type="checkbox"]{
     opacity: 0;
+}
+.mob-testi, .pro-info .testi p br{
+  display:none;
+}
+.fancybox-slide--html{
+  cursor:pointer;
 }
 
 /*Popup*/
@@ -813,6 +840,16 @@ h4{
 	.enclose{
 		width:1024px;
 	}
+.pro-info .review {
+    font-size: 12px;
+}
+.probundle-sec .inn .content .review {
+    font-size: 12px;
+    letter-spacing: 0;
+}  
+#text1, #text2  {
+    font-size: 12px;
+}
 }
 @media screen and (max-width: 1170px) {
 	.enclose{
@@ -850,6 +887,14 @@ h4{
 	}
 }
 @media screen and (max-width: 1023px) {
+	.icons-mobile {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+	}
+	.figure .icon {
+		display: none;
+	}
 	.enclose{
 		width:768px;
 	}
@@ -874,10 +919,6 @@ h4{
 		max-width: 80%;
 		height: auto;
 		margin: 0 auto;
-	}
-	.seen-sec .figure img {
-		max-width: 15%;
-		min-width: 15%;
 	}
 	.work-items .item {
 		max-width: calc(33.33% - 10px);
@@ -914,12 +955,15 @@ h4{
 		justify-content: space-between;
 		flex-wrap: wrap;
 		height:auto;
-		padding:20px 0;
+		padding:20px 0 0;
 	}
+.tagline {
+    padding: 15px 0;
+}
 	.top-bar .inn p {
 		color: #152b5a;
 		font-weight: 700;
-		margin-bottom: 20px;
+		margin-bottom: 15px;
 	}
 	h1{
 		font-size:36px;
@@ -929,6 +973,7 @@ h4{
 	}
 	.pro-slider {
 		padding: 0 24px;
+        margin-bottom: 15px;
 	}
 	.pro-nav {
 		padding: 0;
@@ -939,6 +984,24 @@ h4{
 		flex-wrap:wrap;
 		line-height:2;
 	}
+  .pro-info .review,.probundle-sec .inn .content .review{ 
+        display: block;
+        letter-spacing: 0;
+		text-align: center;
+  }
+.mob-testi{
+  display:block;
+}
+.pro-info .testi{
+  display:none;
+}  
+.pro-info .price {
+    padding: 15px 0;
+    font-size: 15px;
+}  
+.pro-info .price span.discount {
+    padding: 0 15px;
+}  
 	.pro-info h2 {
 		font-size: 22px;
 	}
@@ -979,5 +1042,58 @@ h4{
 		flex-direction:column;
 		justify-content:space-around;
 	}
+.seen-sec h2 {
+    margin-bottom: 20px;
+}
+.seen-sec {
+    padding: 25px 0;
+}  
+.hero_sec {
+    padding-bottom: 0;
+}
+.customer-sec {
+    padding-top: 20px;
+} 
+.customer-sec h2 {
+    margin-bottom: 20px;
+} 
+.facts-slider .item .content .btns {
+    margin-top: 25px;
+}
+.facts-slider .item .content .btns a {
+    letter-spacing: 1px;
+    font-size: 15px;
+} 
+.facts-sec .btns .buybtn {
+    margin: 15px auto auto;
+}
+.customer-reviews{
+    padding: 0;
+    margin: 0;
+}
+.customer-reviews .slick-arrow{
+  display: none !important;
+}
+.probundle-sec .inn .content{
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+.probundle-sec {
+    padding: 20px 0;
+} 
+.tbar{
+  display:none;
+}
+#text1, #text2 {
+    border: none;
+    font-size: 15px;
+}
+.pro-info .review, .probundle-sec .inn .content .review {
+    font-size: 15px;
+} 
+.pro-info .testi p br{
+  display:block;
+}
 }
 

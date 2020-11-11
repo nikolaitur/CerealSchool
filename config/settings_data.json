@@ -611,7 +611,8 @@
       },
       "product-template": {
         "type": "product-template",
-        "settings": {}
+        "settings": {
+        }
       },
       "product-icons-highlights-cereal": {
         "type": "product-icons-highlights-cereal",
@@ -1242,7 +1243,7 @@
           "add_to_cart_text": "Add to Cart",
           "sold_out_text": "Sold Out",
           "click_to_be_notified_text": "Click To Be Notified",
-          "disclaimer": "<p><strong>30 days risk-free!<\/strong> Love it or a full refund.<br\/>Cancel subscriptions at anytime<\/p>",
+          "disclaimer": "<p><strong>30 Day Money Back Guarantee!<\/strong><br\/>Cancel subscriptions at anytime<\/p>",
           "all_flavors_sold_out_text": "<p>Starts at $1.69 per bag<\/p>",
           "all_flavors_sold_out": false,
           "bundle_label": "1. Select Bundle:",
@@ -1612,11 +1613,13 @@
           "1594233124905",
           "1594233229682"
         ],
-        "settings": {}
+        "settings": {
+        }
       },
       "blog-template": {
         "type": "blog-template",
-        "settings": {}
+        "settings": {
+        }
       },
       "page-our-story": {
         "type": "page-our-story",
@@ -1686,7 +1689,8 @@
           "1595522835763",
           "1595523007573"
         ],
-        "settings": {}
+        "settings": {
+        }
       },
       "checkout-toggles": {
         "type": "checkout-toggles",

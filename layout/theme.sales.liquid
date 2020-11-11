@@ -10,7 +10,8 @@
   {% render 'shogun-head' %}
   
   <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-</head>
+<script src="{{ 'bundle.product1.js' | asset_url }}" defer></script>
+  </head>
 
 <body id="{% if template contains 'gift_card' %}gift-card-id{% else %}{{ page_title | truncatewords: 3 | handle }}-id{% endif %}" class="{{ bodyClasses | split: ' ' | uniq | join: ' ' }}">
   {% render 'google-tag-manager', tag: 'body' %}
@@ -25,10 +26,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />   
 <script type="text/javascript">
 $(document).ready(function(){
-	$('.pro-items').slick({asNavFor: '.pro-nav'});
+	$('.pro-items').slick({asNavFor: '.pro-nav', slidesToShow:1,  slidesToScroll:1});
 	
 	$('.pro-nav').slick({
-		arrows:false, slidesToShow:4,  slidesToScroll:1, asNavFor:'.pro-items', focusOnSelect:true, infinite: false
+		arrows:false, slidesToShow:4,  slidesToScroll:1, asNavFor:'.pro-items', focusOnSelect:true, infinite: true
 	});
 	
 	$('.customer-reviews').slick({
@@ -63,7 +64,7 @@ $(document).ready(function(){
 		]
 	});
 	
-	$('.faq-items .item:first-child h4').addClass('active');
+	//$('.faq-items .item:first-child h4').addClass('active');
 	
 	$('.faq-items .item h4').click(function(){
 		$('.faq-items .item .ans').slideUp(200);
@@ -86,13 +87,13 @@ $(document).ready(function(){
 		return false;
 	});
 	
-	$('.poplayer').click(function(){
+	$('.poplayer2').click(function(){
 		$(this).hide();
 		$('.popup').hide();
 	});
 	
 	$('.popclose').click(function(){
-		$('.poplayer').hide();
+		$('.poplayer2').hide();
 		$('.popup').hide();
 		return false;
 	});
@@ -106,7 +107,19 @@ $(document).ready(function(){
 	});
 });
 </script>  
-  
+<script>
+function DecimalGenerate() {
+    var min = 150,
+        max = 220,
+        NumberResult = Math.floor(Math.random() * (max - min) + min);
+
+    $('#text1, #text2').val((NumberResult));
+};  
+
+$( document ).ready(function() {
+DecimalGenerate();
+});  
+</script>
   
   </body>
 </html>

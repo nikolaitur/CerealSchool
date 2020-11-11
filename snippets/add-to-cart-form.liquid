@@ -7,35 +7,16 @@
     </div>
     <button class="btn btn--block" disabled>Sold Out</button>
   {% else %}
-    <div class="product-option-row product-option-row--bundle{% if displayPricesInBag %} product-option-row--alternate{% endif %}">
+    <div class="product-option-row product-option-row--bundle">
       <div class="option-name">{{ section.settings.bundle_label }}</div>
       <div class="product-options product-options--bundles">
-
-        <div style="display: none">
-          {% for variant in product.variants %}
-            {% assign once_price =  variant.price %}
-            {% assign subs_price =  variant.metafields.subscriptions.discount_variant_price | replace: ".", "" %}
-            "{{ variant.id }}"
-            "once":	"<span>Only</span> <span>{{ once_price | money }}</span> per bag",
-            "subs":	"<span>Only</span> <span>{{ subs_price | money }}</span> per bag"
-          {% endfor %}
-        </div>
-        
         {% for block in section.blocks %}
           {% if block.type == 'bundle' %}
             <div class="product-option product-option--bundle{% if block.settings.default == true %} product-option--selected{% endif %}{% if block.settings.sold_out %} product-option--sold-out{% endif %}">
               <div class="product-option__wrapper">
                 <input type="radio" name="single-option-select-bundle" id="swatch-1-{{ block.settings.value }}" value="{{ block.settings.value }}" class="single-option-select visually-hidden" data-type="bundle" data-flavor-limit="{{ block.settings.flavor_limit }}"{% if block.settings.default == true %} checked{% endif %}{% if block.settings.sold_out %} disabled{% endif %} />
                 <label for="swatch-1-{{ block.settings.value }}" class="product-option__label">
-                  {% if displayPricesInBag %}
-                    <div class="bundleMeta">
-                      <div class="bundleTitle">{{ block.settings.title }}</div>
-                      <div class="bundlePrice"><span class="per-bag--once"></span></div>
-                      <div class="bundlePrice"><span class="per-bag--subs"></span></div>
-                    </div>
-                  {% else %}
-                    {{ block.settings.title }}
-                  {% endif %}
+                  {{ block.settings.title }}
                   <span class="product-option__label-icon"></span>
                 </label>
               </div>
@@ -89,7 +70,7 @@
   {% endif %}
 
   {% if product.available %}
-    <div class="product-option-row product-option-row--bundle">
+    <div class="product-option-row product-option-row--bundle subs">
       {% if is_alternate_template == true %}
         {% include 'subscription-product-alternate' %}
       {% else %}
@@ -98,12 +79,17 @@
     </div>
   {% endif %}
 
-  {% if is_free_gift_template %}
+  {% if is_free_gift_template and product_type == "puffs" %}
   <div class="product-option-row product-option-row--free-gift">
-    <input type="checkbox" name="properties[free_gift]" value="true" checked />
-    <label for="properties[free_gift]">Get My Free Mystery Gift (Today Only)</label>
+    <input type="checkbox" name="properties[free_puffs_gift]" value="true" checked />
+    <label for="properties[free_puffs_gift]">Get My Free Mystery Gift (Today Only)</label>
   </div>
   {% endif %}
+
+<div style="display:none;" class="note">
+  <p><strong>Delivered Monthly</strong></p>
+  <p>You’re in control: Text reminder 3 days before every shipment. Cancel or switch flavors anytime.</p>
+</div>
 
   <div class="product-action{% if is_alternate_template %} product-action--alternate{% endif %}">
     {% comment %}We're not letting them edit quantity here, but we still need to send 1 to the form{% endcomment %}
@@ -124,8 +110,6 @@
   {% endif %}
 {% endform %}
 
-{%- comment -%}
-
 <!-- {{collections}} -->
 {% for product in collections['Products'].products %}
 <!-- {{product.title}} -->
@@ -143,4 +127,3 @@
   });
 </script>
 {% endif %}
-{%- endcomment -%}

@@ -2,9 +2,14 @@
 	<div class="enclose">
 		<h2>{{ section.settings.heading }}</h2>
 		<div class="figure">
-          {% for block in section.blocks %}
-          	<img src="{{ block.settings.fea_img | img_url : 'master' }}" alt="image">
-          {% endfor %}
+			<div class="icons-mobile">
+				<img src="{{ section.settings.img | img_url : 'master' }}" alt="image">
+			</div>
+			{% for block in section.blocks %}
+				<div class="icon">
+					<img src="{{ block.settings.fea_img | img_url : 'master' }}" alt="image">
+				</div>
+			{% endfor %}
 		</div>
 	</div>
 </div>
@@ -17,20 +22,25 @@
    	"type": "text",
   	"id":"heading",
 	"label":"Heading"
-  }
+  },
+	{
+		"type":"image_picker",
+		"id":"img",
+		"label":"Icons for mobile"
+	}
 ],
 "blocks":[
-{
-"type":"Featured",
-"name":"Featured",
-"settings":[
-{
-"type":"image_picker",
-"id":"fea_img",
-"label":"Featured Image"
-}
-]
-}
+	{
+	"type":"Featured",
+	"name":"Featured",
+	"settings": [
+			{
+				"type":"image_picker",
+				"id":"fea_img",
+				"label":"Featured Image"
+			}
+		]
+	}
 ]
   }
 {% endschema %}
